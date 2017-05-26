@@ -1,0 +1,39 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 14
+VisualStudioVersion = 14.0.25420.1
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{44DDE98D-5571-47FA-BEC4-4BDA58881F63}"
+	ProjectSection(SolutionItems) = preProject
+		.gitignore = .gitignore
+	EndProjectSection
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Cosella.Contracts", "Cosella.Contracts\Cosella.Contracts.csproj", "{2FF471C8-1D7B-459C-AE69-083B6269ECC9}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Cosella.Services.Authenticator", "Cosella.Services.Authenticator\Cosella.Services.Authenticator.csproj", "{EA9B981C-9D01-4564-BBD9-878BBCE0B331}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Cosella.Services.Core", "Cosella.Services.Core\Cosella.Services.Core.csproj", "{C99C794B-61C5-4E6E-A459-DD2EE9C72DEB}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{2FF471C8-1D7B-459C-AE69-083B6269ECC9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2FF471C8-1D7B-459C-AE69-083B6269ECC9}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2FF471C8-1D7B-459C-AE69-083B6269ECC9}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2FF471C8-1D7B-459C-AE69-083B6269ECC9}.Release|Any CPU.Build.0 = Release|Any CPU
+		{EA9B981C-9D01-4564-BBD9-878BBCE0B331}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{EA9B981C-9D01-4564-BBD9-878BBCE0B331}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{EA9B981C-9D01-4564-BBD9-878BBCE0B331}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{EA9B981C-9D01-4564-BBD9-878BBCE0B331}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C99C794B-61C5-4E6E-A459-DD2EE9C72DEB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C99C794B-61C5-4E6E-A459-DD2EE9C72DEB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C99C794B-61C5-4E6E-A459-DD2EE9C72DEB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C99C794B-61C5-4E6E-A459-DD2EE9C72DEB}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal

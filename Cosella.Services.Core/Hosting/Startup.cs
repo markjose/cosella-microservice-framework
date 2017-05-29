@@ -1,4 +1,5 @@
-﻿using Ninject;
+﻿using Cosella.Services.Core.Swagger;
+using Ninject;
 using Ninject.Web.Common.OwinHost;
 using Ninject.Web.WebApi.OwinHost;
 using Owin;
@@ -24,7 +25,7 @@ namespace Cosella.Services.Core.Hosting
             config.MapHttpAttributeRoutes();
             config.Formatters.Remove(config.Formatters.XmlFormatter);
             config.Formatters.Add(config.Formatters.JsonFormatter);
-            config.EnableSystemDiagnosticsTracing();
+            //config.EnableSystemDiagnosticsTracing();
 
             config
                 .EnableSwagger(swaggerConfig =>
@@ -32,6 +33,8 @@ namespace Cosella.Services.Core.Hosting
                     swaggerConfig.SingleApiVersion(
                         $"v{serviceConfiguration.RestApiVersion}",
                         $"{serviceConfiguration.ServiceName} API");
+
+                    swaggerConfig.OperationFilter<RolesOperationFilter>();
                 })
                 .EnableSwaggerUi();
 

@@ -1,4 +1,6 @@
-﻿using log4net;
+﻿using Cosella.Services.Core.Configuration;
+using Cosella.Services.Core.Interfaces;
+using log4net;
 using Microsoft.Owin.Hosting;
 using Ninject;
 using System;
@@ -20,6 +22,7 @@ namespace Cosella.Services.Core.Hosting
             _kernel.Bind<Startup>().To<Startup>().InSingletonScope();
             _kernel.Bind<HostedServiceConfiguration>().ToMethod(context => configuration).InSingletonScope();
             _kernel.Bind<ILog>().ToMethod(context => log).InSingletonScope();
+            _kernel.Bind<IConfigurator>().To<JsonFileConfigurator>().InSingletonScope();
         }
 
         internal static HostedService Create(HostedServiceConfiguration configuration)

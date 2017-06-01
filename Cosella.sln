@@ -14,6 +14,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Cosella.Services.Authentica
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Cosella.Services.Core", "Cosella.Services.Core\Cosella.Services.Core.csproj", "{C99C794B-61C5-4E6E-A459-DD2EE9C72DEB}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Cosella.Services.Gateway", "Cosella.Services.Gateway\Cosella.Services.Gateway.csproj", "{907B778C-298B-4FD3-9963-692EBFE89A9A}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -32,6 +34,10 @@ Global
 		{C99C794B-61C5-4E6E-A459-DD2EE9C72DEB}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{C99C794B-61C5-4E6E-A459-DD2EE9C72DEB}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{C99C794B-61C5-4E6E-A459-DD2EE9C72DEB}.Release|Any CPU.Build.0 = Release|Any CPU
+		{907B778C-298B-4FD3-9963-692EBFE89A9A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{907B778C-298B-4FD3-9963-692EBFE89A9A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{907B778C-298B-4FD3-9963-692EBFE89A9A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{907B778C-298B-4FD3-9963-692EBFE89A9A}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

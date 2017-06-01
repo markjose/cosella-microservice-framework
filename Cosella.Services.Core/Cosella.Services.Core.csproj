@@ -136,13 +136,31 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Communications\ApiClientBase.cs" />
+    <Compile Include="Communications\ApiClientResponse.cs" />
+    <Compile Include="Communications\ConsulException.cs" />
+    <Compile Include="Communications\CosellaApiClient.cs" />
+    <Compile Include="Communications\ConsulApiClient.cs" />
+    <Compile Include="Communications\ConsulServiceDiscovery.cs" />
     <Compile Include="Configuration\JsonFileConfigurator.cs" />
     <Compile Include="Controllers\StatusController.cs" />
     <Compile Include="Hosting\HostedService.cs" />
     <Compile Include="Hosting\RolesAttribute.cs" />
+    <Compile Include="Interfaces\IApiClient.cs" />
     <Compile Include="Interfaces\IConfigurator.cs" />
+    <Compile Include="Interfaces\IServiceDiscovery.cs" />
+    <Compile Include="Interfaces\IServiceInfo.cs" />
+    <Compile Include="Interfaces\IServiceInstanceInfo.cs" />
+    <Compile Include="Interfaces\IServiceRegistration.cs" />
     <Compile Include="MicroService.cs" />
     <Compile Include="Hosting\HostedServiceConfiguration.cs" />
+    <Compile Include="Models\ConsulHealthCheck.cs" />
+    <Compile Include="Models\ConsulRegistrationRequest.cs" />
+    <Compile Include="Models\ConsulServiceInfo.cs" />
+    <Compile Include="Models\ConsulServices.cs" />
+    <Compile Include="Models\MicroServiceStatus.cs" />
+    <Compile Include="Models\ServiceInfo.cs" />
+    <Compile Include="Models\ServiceRegistration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Hosting\Startup.cs" />
     <Compile Include="Swagger\RolesOperationFilter.cs" />

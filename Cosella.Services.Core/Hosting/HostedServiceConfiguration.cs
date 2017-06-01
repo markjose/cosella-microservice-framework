@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Web.Http;
-
-namespace Cosella.Services.Core.Hosting
+﻿namespace Cosella.Services.Core.Hosting
 {
     public class HostedServiceConfiguration
     {
@@ -13,8 +9,9 @@ namespace Cosella.Services.Core.Hosting
         public string ConfigurationService { get; set; }
 
         // Configuration Overrides
-        public int RestApiPort { get; set; } = 5000;
 
+        public int RestApiPort { get; set; } = 0;
         public int RestApiVersion { get; set; } = 1;
+        public string RestApiHostname { get; set; } = "";
     }
 }

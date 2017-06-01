@@ -26,7 +26,7 @@
 
         [Route("")]
         [HttpGet]
-        [Roles(new[] { "superUser:users:read" })]
+        [Roles(new[] { "super:users:read" })]
         public IHttpActionResult GetAll()
         {
             return Ok();

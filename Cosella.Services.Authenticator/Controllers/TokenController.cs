@@ -1,6 +1,7 @@
 ﻿namespace Cosella.Services.Authenticator.Controllers
 {
     using Contracts;
+    using Core.Communications;
     using Core.Interfaces;
     using JWT;
     using JWT.Algorithms;
@@ -15,6 +16,7 @@
     public class TokenController : ApiController
     {
         private ILog _log;
+        private IServiceDiscovery _discovery;
         private IConfigurator _configurator;
         private IJsonSerializer _serializer;
         private IBase64UrlEncoder _urlEncoder;
@@ -22,9 +24,10 @@
         private IDateTimeProvider _provider;
         private IJwtValidator _validator;
 
-        public TokenController(ILog log, IConfigurator configurator)
+        public TokenController(ILog log, IConfigurator configurator, IServiceDiscovery discovery)
         {
             _log = log;
+            _discovery = discovery;
             _configurator = configurator;
 
             _serializer = new JsonNetSerializer();
@@ -38,6 +41,13 @@
         [HttpPost]
         public IHttpActionResult GetToken([FromBody] TokenRequest request)
         {
+            var authenticator = new CosellaApiClient("Authenticator", _discovery);
+            var authenticationResult = authenticator.Post<string>("authenticate", new
+            {
+                Username = request.Username,
+                Password = request.Password
+            });
+
             var payload = new Dictionary<string, object>
             {
                 { "claim1", 0 },

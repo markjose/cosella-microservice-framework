@@ -51,7 +51,7 @@ namespace Cosella.Services.Core
                 {
                     ServiceConfigurator<HostedService> hostedService = service;
                     hostedService.ConstructUsing(() => HostedService.Create(_configuration));
-                    hostedService.WhenStarted(s => s.Start());
+                    hostedService.WhenStarted((s, hostControl) => s.Start(hostControl));
                     hostedService.WhenStopped(s => s.Stopped());
                     hostedService.WhenPaused(s => s.Paused());
                     hostedService.WhenContinued(s => s.Continued());
@@ -59,6 +59,10 @@ namespace Cosella.Services.Core
                 });
             });
 
+#if DEBUG
+            // Wait for a key if debugging
+            Console.ReadKey();
+#endif
             return exitCode;
         }
     }

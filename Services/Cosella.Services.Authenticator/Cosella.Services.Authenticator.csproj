@@ -4,11 +4,11 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{907B778C-298B-4FD3-9963-692EBFE89A9A}</ProjectGuid>
+    <ProjectGuid>{EA9B981C-9D01-4564-BBD9-878BBCE0B331}</ProjectGuid>
     <OutputType>Exe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Cosella.Services.Gateway</RootNamespace>
-    <AssemblyName>Cosella.Services.Gateway</AssemblyName>
+    <RootNamespace>Cosella.Services.Authenticator</RootNamespace>
+    <AssemblyName>Cosella.Services.Authenticator</AssemblyName>
     <TargetFrameworkVersion>v4.6.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
@@ -49,10 +49,6 @@
       <HintPath>..\packages\Newtonsoft.Json.10.0.2\lib\net45\Newtonsoft.Json.dll</HintPath>
       <Private>True</Private>
     </Reference>
-    <Reference Include="Ninject, Version=3.2.0.0, Culture=neutral, PublicKeyToken=c7192dc5380945e7, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\Framework\Cosella.Services.Core\bin\Debug\Ninject.dll</HintPath>
-    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Net.Http.Formatting, Version=5.2.3.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
@@ -75,26 +71,24 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Controllers\ServicesController.cs" />
-    <Compile Include="Controllers\DefaultController.cs" />
-    <Compile Include="DataManagers\ServiceDataManager.cs" />
-    <Compile Include="GatewayModule.cs" />
-    <Compile Include="Interfaces\IServiceDataManager.cs" />
-    <Compile Include="Models\ServiceApiDescriptor.cs" />
+    <Compile Include="Controllers\TokenController.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
+    <None Include="Config.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Framework\Cosella.Contracts\Cosella.Contracts.csproj">
-      <Project>{2FF471C8-1D7B-459C-AE69-083B6269ECC9}</Project>
+    <ProjectReference Include="..\..\Framework\Cosella.Contracts\Cosella.Contracts.csproj">
+      <Project>{2ff471c8-1d7b-459c-ae69-083b6269ecc9}</Project>
       <Name>Cosella.Contracts</Name>
     </ProjectReference>
-    <ProjectReference Include="..\Framework\Cosella.Services.Core\Cosella.Services.Core.csproj">
-      <Project>{c99c794b-61c5-4e6e-a459-dd2ee9c72deb}</Project>
+    <ProjectReference Include="..\..\Framework\Cosella.Services.Core\Cosella.Services.Core.csproj">
+      <Project>{C99C794B-61C5-4E6E-A459-DD2EE9C72DEB}</Project>
       <Name>Cosella.Services.Core</Name>
     </ProjectReference>
   </ItemGroup>

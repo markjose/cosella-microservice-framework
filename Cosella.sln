@@ -8,13 +8,21 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 		.gitignore = .gitignore
 	EndProjectSection
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Cosella.Contracts", "Cosella.Contracts\Cosella.Contracts.csproj", "{2FF471C8-1D7B-459C-AE69-083B6269ECC9}"
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Services", "Services", "{1BC517EF-95A2-43DB-9590-4FEB2A923CE1}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Cosella.Services.Authenticator", "Cosella.Services.Authenticator\Cosella.Services.Authenticator.csproj", "{EA9B981C-9D01-4564-BBD9-878BBCE0B331}"
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Framework", "Framework", "{F55E876C-702F-4F12-9DDB-539AD7AEB2E2}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Cosella.Services.Core", "Cosella.Services.Core\Cosella.Services.Core.csproj", "{C99C794B-61C5-4E6E-A459-DD2EE9C72DEB}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Cosella.Contracts", "Framework\Cosella.Contracts\Cosella.Contracts.csproj", "{2FF471C8-1D7B-459C-AE69-083B6269ECC9}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Cosella.Services.Gateway", "Cosella.Services.Gateway\Cosella.Services.Gateway.csproj", "{907B778C-298B-4FD3-9963-692EBFE89A9A}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Cosella.Services.Core", "Framework\Cosella.Services.Core\Cosella.Services.Core.csproj", "{C99C794B-61C5-4E6E-A459-DD2EE9C72DEB}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Cosella.Services.Authenticator", "Services\Cosella.Services.Authenticator\Cosella.Services.Authenticator.csproj", "{EA9B981C-9D01-4564-BBD9-878BBCE0B331}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Cosella.Services.User", "Services\Cosella.Services.User\Cosella.Services.User.csproj", "{67D44727-B43F-4372-8320-C4B677BBBD8F}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Cosella.Services.Extensions", "Framework\Cosella.Services.Extensions\Cosella.Services.Extensions.csproj", "{6322CE84-7DBD-42A3-880A-39F49FAED543}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Cosella.Services.Gateway", "Services\Cosella.Services.Gateway\Cosella.Services.Gateway.csproj", "{04CCE304-CDBE-492A-A819-8500453AC28B}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -26,20 +34,36 @@ Global
 		{2FF471C8-1D7B-459C-AE69-083B6269ECC9}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{2FF471C8-1D7B-459C-AE69-083B6269ECC9}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{2FF471C8-1D7B-459C-AE69-083B6269ECC9}.Release|Any CPU.Build.0 = Release|Any CPU
-		{EA9B981C-9D01-4564-BBD9-878BBCE0B331}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{EA9B981C-9D01-4564-BBD9-878BBCE0B331}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{EA9B981C-9D01-4564-BBD9-878BBCE0B331}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{EA9B981C-9D01-4564-BBD9-878BBCE0B331}.Release|Any CPU.Build.0 = Release|Any CPU
 		{C99C794B-61C5-4E6E-A459-DD2EE9C72DEB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{C99C794B-61C5-4E6E-A459-DD2EE9C72DEB}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{C99C794B-61C5-4E6E-A459-DD2EE9C72DEB}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{C99C794B-61C5-4E6E-A459-DD2EE9C72DEB}.Release|Any CPU.Build.0 = Release|Any CPU
-		{907B778C-298B-4FD3-9963-692EBFE89A9A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{907B778C-298B-4FD3-9963-692EBFE89A9A}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{907B778C-298B-4FD3-9963-692EBFE89A9A}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{907B778C-298B-4FD3-9963-692EBFE89A9A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{EA9B981C-9D01-4564-BBD9-878BBCE0B331}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{EA9B981C-9D01-4564-BBD9-878BBCE0B331}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{EA9B981C-9D01-4564-BBD9-878BBCE0B331}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{EA9B981C-9D01-4564-BBD9-878BBCE0B331}.Release|Any CPU.Build.0 = Release|Any CPU
+		{67D44727-B43F-4372-8320-C4B677BBBD8F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{67D44727-B43F-4372-8320-C4B677BBBD8F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{67D44727-B43F-4372-8320-C4B677BBBD8F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{67D44727-B43F-4372-8320-C4B677BBBD8F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6322CE84-7DBD-42A3-880A-39F49FAED543}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6322CE84-7DBD-42A3-880A-39F49FAED543}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6322CE84-7DBD-42A3-880A-39F49FAED543}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6322CE84-7DBD-42A3-880A-39F49FAED543}.Release|Any CPU.Build.0 = Release|Any CPU
+		{04CCE304-CDBE-492A-A819-8500453AC28B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{04CCE304-CDBE-492A-A819-8500453AC28B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{04CCE304-CDBE-492A-A819-8500453AC28B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{04CCE304-CDBE-492A-A819-8500453AC28B}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{2FF471C8-1D7B-459C-AE69-083B6269ECC9} = {F55E876C-702F-4F12-9DDB-539AD7AEB2E2}
+		{C99C794B-61C5-4E6E-A459-DD2EE9C72DEB} = {F55E876C-702F-4F12-9DDB-539AD7AEB2E2}
+		{EA9B981C-9D01-4564-BBD9-878BBCE0B331} = {1BC517EF-95A2-43DB-9590-4FEB2A923CE1}
+		{67D44727-B43F-4372-8320-C4B677BBBD8F} = {1BC517EF-95A2-43DB-9590-4FEB2A923CE1}
+		{6322CE84-7DBD-42A3-880A-39F49FAED543} = {F55E876C-702F-4F12-9DDB-539AD7AEB2E2}
+		{04CCE304-CDBE-492A-A819-8500453AC28B} = {1BC517EF-95A2-43DB-9590-4FEB2A923CE1}
 	EndGlobalSection
 EndGlobal

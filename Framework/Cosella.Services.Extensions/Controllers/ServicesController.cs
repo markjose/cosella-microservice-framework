@@ -1,4 +1,4 @@
-﻿namespace Cosella.Services.Gateway.Controllers
+﻿namespace Cosella.Services.Extensions.Controllers
 {
     using log4net;
     using System;

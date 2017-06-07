@@ -4,11 +4,11 @@ using System.Runtime.InteropServices;
 // General Information about an assembly is controlled through the following
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
-[assembly: AssemblyTitle("Cosella.Services.Gateway")]
+[assembly: AssemblyTitle("Cosella.Services.Core")]
 [assembly: AssemblyDescription("")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("")]
-[assembly: AssemblyProduct("Cosella.Services.Gateway")]
+[assembly: AssemblyProduct("Cosella.Services.Core")]
 [assembly: AssemblyCopyright("Copyright ©  2017")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
@@ -19,7 +19,7 @@ using System.Runtime.InteropServices;
 [assembly: ComVisible(false)]
 
 // The following GUID is for the ID of the typelib if this project is exposed to COM
-[assembly: Guid("ea9b981c-9d01-4564-bbd9-878bbce0b331")]
+[assembly: Guid("c99c794b-61c5-4e6e-a459-dd2ee9c72deb")]
 
 // Version information for an assembly consists of the following four values:
 //

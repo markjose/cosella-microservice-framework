@@ -1,11 +1,11 @@
-﻿using Cosella.Services.Core.Hosting;
-using Swashbuckle.Swagger;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web.Http.Description;
-
-namespace Cosella.Services.Core.Integrations.Swagger
+﻿namespace Cosella.Services.Core.Integrations.Swagger
 {
+    using Attributes;
+    using Swashbuckle.Swagger;
+    using System.Collections.Generic;
+    using System.Linq;
+    using System.Web.Http.Description;
+
     internal class RolesOperationFilter : IOperationFilter
     {
         public void Apply(Operation operation, SchemaRegistry schemaRegistry, ApiDescription apiDescription)

@@ -147,7 +147,7 @@
     <Compile Include="Configuration\JsonFileConfigurator.cs" />
     <Compile Include="Controllers\StatusController.cs" />
     <Compile Include="Hosting\HostedService.cs" />
-    <Compile Include="Hosting\RolesAttribute.cs" />
+    <Compile Include="Attributes\RolesAttribute.cs" />
     <Compile Include="ApiClient\IApiClient.cs" />
     <Compile Include="Configuration\IConfigurator.cs" />
     <Compile Include="ServiceDiscovery\IServiceDiscovery.cs" />

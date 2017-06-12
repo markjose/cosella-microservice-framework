@@ -11,6 +11,8 @@ namespace Cosella.Services.Core
         private HostedServiceConfiguration _configuration;
         private HostedServiceConfiguration _defaultConfiguration;
 
+        public HostedServiceConfiguration Configuration { get { return _configuration; } }
+
         public MicroService(HostedServiceConfiguration configuration)
         {
             _configuration = configuration;
@@ -25,19 +27,17 @@ namespace Cosella.Services.Core
             };
         }
 
-        public static int Run(Action<HostedServiceConfiguration> configurator)
-        {
-            var configuration = new HostedServiceConfiguration();
-            configurator(configuration);
-
-            var microservice = new MicroService(configuration);
-            return microservice.Run();
-        }
-
-        private int Run()
+        public static MicroService Create(Action<HostedServiceConfiguration> configurator)
         {
             log4net.Config.XmlConfigurator.Configure();
 
+            var configuration = new HostedServiceConfiguration();
+            configurator(configuration);
+            return new MicroService(configuration);
+        }
+
+        public int Run()
+        {
             int exitCode = (int)HostFactory.Run(config =>
             {
                 config.UseLog4Net();

@@ -1,0 +1,89 @@
+import React, { Component } from 'react';
+import Paper from 'material-ui/Paper';
+import FlatButton from 'material-ui/FlatButton';
+import Avatar from 'material-ui/Avatar';
+import { GridTile } from 'material-ui/GridList';
+import { Card, CardActions, CardHeader, CardText } from 'material-ui/Card';
+import Done from 'material-ui/svg-icons/action/done';
+import Close from 'material-ui/svg-icons/navigation/close';
+
+import './microservice-tile.css';
+
+export class MicroserviceTile extends Component {
+  
+  constructor(props) {
+    super(props);
+    this.state = {
+        ...props
+    };
+  }
+
+  handleManage(serviceName) {
+    const { onManage } = this.state;
+    if(onManage) {
+        onManage(serviceName);
+    }
+  }
+
+  handleExplore(serviceName) {
+    const { onExplore } = this.state;
+    if(onExplore) {
+        onExplore(serviceName);
+    }
+  }
+
+  render() {
+    const styles = {
+        good: { color: '#690' },
+        bad: { color: '#900' },
+        paper: { margin: '1em' },
+        badge: { background: '#900', top: 15, right: 15 }
+    };
+    const { serviceName, serviceDescription, serviceInstances } = this.state;
+
+    const passingServices = (serviceInstances || []).filter(instance => instance.Health === 'passing');
+    const criticalServices = (serviceInstances || []).filter(instance => instance.Health === 'critical');
+
+    const avatar = (
+        <Avatar size={40}>{serviceName[0].toUpperCase()}</Avatar>
+    );
+
+    const instances = [
+            ...passingServices, 
+            ...criticalServices
+        ].map(instance => {
+            const icon = instance.Health === 'passing' ? <Done style={styles.good} /> : <Close style={styles.bad} />;
+            const classNames = `microservice-tile-instance ${instance.Health}`;
+            return (
+                <div className={classNames} key={instance.InstanceName} >
+                    <div>{instance.InstanceName}</div>
+                    <div><small>@</small></div>
+                    <div>{instance.NodeId}</div>
+                    {icon}
+                </div>
+            );
+        });
+
+    return (
+        <GridTile>
+            <Paper style={styles.paper} zDepth={3}>
+                <Card expanded={this.state.expanded} onExpandChange={this.handleExpandChange}>
+                    <CardHeader
+                        title={serviceName}
+                        subtitle={serviceDescription}
+                        avatar={avatar}
+                        actAsExpander={true}
+                        showExpandableButton={true} />
+                    <CardText expandable={true}>
+                        {instances}
+                    </CardText>
+                    <CardActions>
+                        <FlatButton label="Manage" onTouchTap={() => this.handleManage(serviceName)} />
+                        <FlatButton label="Explore" onTouchTap={() => this.handleExplore(serviceName)} />
+                    </CardActions>
+                </Card>
+            </Paper>
+        </GridTile>
+    );
+  }
+}

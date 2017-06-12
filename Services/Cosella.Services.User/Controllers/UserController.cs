@@ -1,8 +1,8 @@
 ﻿namespace Cosella.Services.User.Controllers
 {
     using Contracts;
+    using Core.Attributes;
     using Core.Configuration;
-    using Core.Hosting;
     using log4net;
     using System.Net;
     using System.Web.Http;

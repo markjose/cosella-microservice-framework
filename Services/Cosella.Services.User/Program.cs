@@ -6,14 +6,16 @@
     {
         private static int Main(string[] args)
         {
-            return MicroService.Run(config =>
-            {
-                config.ServiceName = "User";
-                config.ServiceDisplayName = "Cosella User";
-                config.ServiceDescription = "User and Role service for Cosella framework";
+            return MicroService
+                .Create(config =>
+                {
+                    config.ServiceName = "User";
+                    config.ServiceDisplayName = "Cosella User";
+                    config.ServiceDescription = "User and Role service for Cosella framework";
 
-                config.RestApiPort = 5002;
-            });
+                    config.RestApiPort = 5002;
+                })
+                .Run();
         }
     }
 }

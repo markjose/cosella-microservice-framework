@@ -1,0 +1,394 @@
+[
+    {
+        "ServiceName": "Authenticator",
+        "Version": 1,
+        "Instances": [
+            {
+                "Health": "passing",
+                "InstanceName": "Authenticator20170613191950951",
+                "NodeId": "MarksLaptop"
+            }
+        ],
+        "Descriptor": {
+            "swagger": "2.0",
+            "info": {
+                "version": "v1",
+                "title": "Authenticator API"
+            },
+            "host": "192.168.1.66:5001",
+            "schemes": [
+                "http"
+            ],
+            "paths": {
+                "/status": {
+                    "get": {
+                        "tags": [
+                            "Status"
+                        ],
+                        "operationId": "Status_GetStatus",
+                        "consumes": [],
+                        "produces": [
+                            "application/json",
+                            "text/json"
+                        ],
+                        "parameters": [
+                            {
+                                "name": "instanceId",
+                                "in": "query",
+                                "required": false,
+                                "type": "string"
+                            }
+                        ],
+                        "responses": {
+                            "200": {
+                                "description": "OK",
+                                "schema": {
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                },
+                "/api/v1/token": {
+                    "post": {
+                        "tags": [
+                            "Token"
+                        ],
+                        "operationId": "Token_GetToken",
+                        "consumes": [
+                            "application/json",
+                            "text/json",
+                            "application/x-www-form-urlencoded"
+                        ],
+                        "produces": [
+                            "application/json",
+                            "text/json"
+                        ],
+                        "parameters": [
+                            {
+                                "name": "request",
+                                "in": "body",
+                                "required": true,
+                                "schema": {
+                                    "$ref": "#/definitions/TokenRequest"
+                                }
+                            }
+                        ],
+                        "responses": {
+                            "200": {
+                                "description": "OK",
+                                "schema": {
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                },
+                "/api/v1/token/verify/{token}": {
+                    "get": {
+                        "tags": [
+                            "Token"
+                        ],
+                        "operationId": "Token_VerifyToken",
+                        "consumes": [],
+                        "produces": [
+                            "application/json",
+                            "text/json"
+                        ],
+                        "parameters": [
+                            {
+                                "name": "token",
+                                "in": "path",
+                                "required": true,
+                                "type": "string"
+                            }
+                        ],
+                        "responses": {
+                            "200": {
+                                "description": "OK",
+                                "schema": {
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                },
+                "/api/v1/token/refresh/{token}": {
+                    "get": {
+                        "tags": [
+                            "Token"
+                        ],
+                        "operationId": "Token_RefreshToken",
+                        "consumes": [],
+                        "produces": [
+                            "application/json",
+                            "text/json"
+                        ],
+                        "parameters": [
+                            {
+                                "name": "token",
+                                "in": "path",
+                                "required": true,
+                                "type": "string"
+                            }
+                        ],
+                        "responses": {
+                            "200": {
+                                "description": "OK",
+                                "schema": {
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "definitions": {
+                "TokenRequest": {
+                    "type": "object",
+                    "properties": {
+                        "Username": {
+                            "type": "string"
+                        },
+                        "Password": {
+                            "type": "string"
+                        }
+                    }
+                }
+            }
+        }
+    },
+    {
+        "ServiceName": "Gateway",
+        "Version": 1,
+        "Instances": [
+            {
+                "Health": "passing",
+                "InstanceName": "Gateway20170613191951921",
+                "NodeId": "MarksLaptop"
+            }
+        ],
+        "Descriptor": {
+            "swagger": "2.0",
+            "info": {
+                "version": "v1",
+                "title": "Gateway API"
+            },
+            "host": "192.168.1.66:5000",
+            "schemes": [
+                "http"
+            ],
+            "paths": {
+                "/": {
+                    "get": {
+                        "tags": [
+                            "Default"
+                        ],
+                        "operationId": "Default_Get",
+                        "consumes": [],
+                        "produces": [
+                            "application/json",
+                            "text/json"
+                        ],
+                        "responses": {
+                            "200": {
+                                "description": "OK",
+                                "schema": {
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                },
+                "/services": {
+                    "get": {
+                        "tags": [
+                            "Services"
+                        ],
+                        "operationId": "Services_List",
+                        "consumes": [],
+                        "produces": [
+                            "application/json",
+                            "text/json"
+                        ],
+                        "parameters": [
+                            {
+                                "name": "includeDescriptors",
+                                "in": "query",
+                                "required": true,
+                                "type": "boolean"
+                            }
+                        ],
+                        "responses": {
+                            "200": {
+                                "description": "OK",
+                                "schema": {
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                },
+                "/status": {
+                    "get": {
+                        "tags": [
+                            "Status"
+                        ],
+                        "operationId": "Status_GetStatus",
+                        "consumes": [],
+                        "produces": [
+                            "application/json",
+                            "text/json"
+                        ],
+                        "parameters": [
+                            {
+                                "name": "instanceId",
+                                "in": "query",
+                                "required": false,
+                                "type": "string"
+                            }
+                        ],
+                        "responses": {
+                            "200": {
+                                "description": "OK",
+                                "schema": {
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "definitions": {}
+        }
+    },
+    {
+        "ServiceName": "User",
+        "Version": 1,
+        "Instances": [
+            {
+                "Health": "passing",
+                "InstanceName": "User20170613191951687",
+                "NodeId": "MarksLaptop"
+            }
+        ],
+        "Descriptor": {
+            "swagger": "2.0",
+            "info": {
+                "version": "v1",
+                "title": "User API"
+            },
+            "host": "192.168.1.66:5002",
+            "schemes": [
+                "http"
+            ],
+            "paths": {
+                "/status": {
+                    "get": {
+                        "tags": [
+                            "Status"
+                        ],
+                        "operationId": "Status_GetStatus",
+                        "consumes": [],
+                        "produces": [
+                            "application/json",
+                            "text/json"
+                        ],
+                        "parameters": [
+                            {
+                                "name": "instanceId",
+                                "in": "query",
+                                "required": false,
+                                "type": "string"
+                            }
+                        ],
+                        "responses": {
+                            "200": {
+                                "description": "OK",
+                                "schema": {
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                },
+                "/api/v1/users": {
+                    "get": {
+                        "tags": [
+                            "User"
+                        ],
+                        "operationId": "User_GetAll",
+                        "consumes": [],
+                        "produces": [
+                            "application/json",
+                            "text/json"
+                        ],
+                        "responses": {
+                            "200": {
+                                "description": "OK",
+                                "schema": {
+                                    "type": "object"
+                                }
+                            }
+                        },
+                        "security": [
+                            {
+                                "cosellaRoles": [
+                                    "super:users:read"
+                                ]
+                            }
+                        ]
+                    }
+                },
+                "/api/v1/users/authenticate": {
+                    "post": {
+                        "tags": [
+                            "User"
+                        ],
+                        "operationId": "User_Authenticate",
+                        "consumes": [
+                            "application/json",
+                            "text/json",
+                            "application/x-www-form-urlencoded"
+                        ],
+                        "produces": [
+                            "application/json",
+                            "text/json"
+                        ],
+                        "parameters": [
+                            {
+                                "name": "request",
+                                "in": "body",
+                                "required": true,
+                                "schema": {
+                                    "$ref": "#/definitions/AuthenticationRequest"
+                                }
+                            }
+                        ],
+                        "responses": {
+                            "200": {
+                                "description": "OK",
+                                "schema": {
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "definitions": {
+                "AuthenticationRequest": {
+                    "type": "object",
+                    "properties": {
+                        "Password": {
+                            "type": "string"
+                        },
+                        "Username": {
+                            "type": "string"
+                        }
+                    }
+                }
+            }
+        }
+    }
+]

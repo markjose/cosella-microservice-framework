@@ -74,8 +74,9 @@ namespace Cosella.Services.Core.Hosting
                         _registration = _discovery.RegisterService(registrationTask);
                         return true;
                     }
-                    catch (Exception)
+                    catch (Exception ex)
                     {
+                        _log.Debug($"Failed to start the API {ex.Message}");
                         _log.Warn($"Failed to start the API host on port {configuration.RestApiPort}");
                         _log.Info($"Retrying...({retries}/{MaxRetries})");
                         configuration.RestApiPort = 0;

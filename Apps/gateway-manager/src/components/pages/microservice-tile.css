@@ -1,0 +1,16 @@
+.microservice-tile-instance {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    border-bottom: solid 1px #eee;
+    padding: 0.2em;
+    margin: 0;
+}
+
+.microservice-tile-instance.critical {
+    color: #900;
+}
+
+.microservice-tile-instance.passing {
+    color: #690;
+}

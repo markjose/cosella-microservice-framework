@@ -34,6 +34,18 @@
       <HintPath>..\..\packages\log4net.2.0.8\lib\net45-full\log4net.dll</HintPath>
       <Private>True</Private>
     </Reference>
+    <Reference Include="Microsoft.Owin.Host.HttpListener, Version=3.1.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\Microsoft.Owin.Host.HttpListener.3.1.0\lib\net45\Microsoft.Owin.Host.HttpListener.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Newtonsoft.Json, Version=10.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\Newtonsoft.Json.10.0.2\lib\net45\Newtonsoft.Json.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Ninject, Version=3.2.0.0, Culture=neutral, PublicKeyToken=c7192dc5380945e7, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\Ninject.3.2.2.0\lib\net45-full\Ninject.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Web.Http">
@@ -47,7 +59,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="GatewayExtension.cs" />
+    <Compile Include="GatewayExtensions.cs" />
     <Compile Include="Controllers\DefaultController.cs" />
     <Compile Include="Controllers\ServicesController.cs" />
     <Compile Include="DataManagers\ServiceDataManager.cs" />
@@ -57,6 +69,10 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\Cosella.Contracts\Cosella.Contracts.csproj">
+      <Project>{2ff471c8-1d7b-459c-ae69-083b6269ecc9}</Project>
+      <Name>Cosella.Contracts</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Cosella.Services.Core\Cosella.Services.Core.csproj">
       <Project>{C99C794B-61C5-4E6E-A459-DD2EE9C72DEB}</Project>
       <Name>Cosella.Services.Core</Name>

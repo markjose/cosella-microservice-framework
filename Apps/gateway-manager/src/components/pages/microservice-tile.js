@@ -11,21 +11,40 @@ import './microservice-tile.css';
 
 export class MicroserviceTile extends Component {
   
-  constructor(props) {
-    super(props);
-    this.state = {
-        ...props
-    };
+  state = {
+    expanded: true
   }
 
-  handleManage(serviceName) {
+  assignProps(props) {
+      this.setState({
+        ...this.state,
+        ...props
+      });
+  }
+
+  componentWillMount() {
+      this.assignProps(this.props);
+  }
+
+  componentWillReceiveProps(props) {
+      this.assignProps(props);
+  }
+
+  handleExpandChange = (expanded) => {
+    this.setState({
+        ...this.state,
+        expanded
+    });
+  };
+
+  handleManage = (serviceName) => {
     const { onManage } = this.state;
     if(onManage) {
         onManage(serviceName);
     }
   }
 
-  handleExplore(serviceName) {
+  handleExplore = (serviceName) => {
     const { onExplore } = this.state;
     if(onExplore) {
         onExplore(serviceName);
@@ -78,7 +97,7 @@ export class MicroserviceTile extends Component {
                         {instances}
                     </CardText>
                     <CardActions>
-                        <FlatButton label="Manage" onTouchTap={() => this.handleManage(serviceName)} />
+                        <FlatButton label="Manage" onTouchTap={() => this.handleManage(serviceName)} disabled={true} />
                         <FlatButton label="Explore" onTouchTap={() => this.handleExplore(serviceName)} />
                     </CardActions>
                 </Card>

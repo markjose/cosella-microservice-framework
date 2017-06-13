@@ -1,0 +1,35 @@
+.microservice-explorer {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+.microservice-explorer .sidebar {
+    flex: 1;
+    padding: 1em;
+}
+
+.microservice-explorer .sidebar-header {
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    align-items: center;
+}
+
+.microservice-explorer .content {
+    flex: 5;
+}
+
+.microservice-explorer .endpoint-metadata {
+    display: flex;
+    flex-direction: row;
+}
+
+.microservice-explorer .endpoint-metadata .params {
+    flex: 1;
+    margin-right: 2em;
+}
+
+.microservice-explorer .endpoint-metadata .response {
+    flex: 2;
+}

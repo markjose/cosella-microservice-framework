@@ -30,7 +30,7 @@
 
             var groupedServices = services
                 .SelectMany(service => service.Instances)
-                .Where(service => service.Version > 0)
+                .Where(instance => instance.Version > 0)
                 .GroupBy(service => new
                 {
                     ServiceName = service.ServiceName,
@@ -40,11 +40,16 @@
             var descriptors = new Dictionary<string, string>();
             if (includeServiceDescriptor)
             {
-                var descriptorTasks = groupedServices.Select(group => CreateWebRequest(group.First()));
+                var descriptorTasks = groupedServices
+                    .Select(group => CreateWebRequest(group
+                        .Where(instance => instance.Health == "passing")
+                        .First()));
+
                 await Task.WhenAll(descriptorTasks);
 
                 descriptors = descriptorTasks
                     .Select(task => task.Result)
+                    .Where(descriptor => descriptor != null)
                     .ToDictionary(descriptor => $"{descriptor.ServiceName}-{descriptor.Version}", descriptor => descriptor.Schema);
             }
 
@@ -85,16 +90,23 @@
                     Schema = ""
                 };
 
-                HttpWebRequest request = (HttpWebRequest)WebRequest.Create(instanceInfo.MetadataUri);
-                HttpWebResponse response = (HttpWebResponse)request.GetResponse();
+                try
+                {
+                    HttpWebRequest request = (HttpWebRequest)WebRequest.Create(instanceInfo.MetadataUri);
+                    HttpWebResponse response = (HttpWebResponse)request.GetResponse();
 
-                Stream receiveStream = response.GetResponseStream();
-                TextReader reader = new StreamReader(receiveStream, Encoding.UTF8);
+                    Stream receiveStream = response.GetResponseStream();
+                    TextReader reader = new StreamReader(receiveStream, Encoding.UTF8);
 
-                descriptor.Schema = reader.ReadToEnd();
+                    descriptor.Schema = reader.ReadToEnd();
 
-                response.Close();
-                reader.Close();
+                    response.Close();
+                    reader.Close();
+                }
+                catch (WebException)
+                {
+                    return null;
+                }
 
                 return descriptor;
             });

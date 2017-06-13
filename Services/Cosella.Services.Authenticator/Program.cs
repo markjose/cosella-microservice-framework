@@ -12,8 +12,6 @@
                     config.ServiceName = "Authenticator";
                     config.ServiceDisplayName = "Cosella Authenticator";
                     config.ServiceDescription = "Token and App authentication service for Cosella framework";
-
-                    config.RestApiPort = 5001;
                 })
                 .Run();
         }

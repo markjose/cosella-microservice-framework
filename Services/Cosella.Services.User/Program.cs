@@ -12,8 +12,6 @@
                     config.ServiceName = "User";
                     config.ServiceDisplayName = "Cosella User";
                     config.ServiceDescription = "User and Role service for Cosella framework";
-
-                    config.RestApiPort = 5002;
                 })
                 .Run();
         }

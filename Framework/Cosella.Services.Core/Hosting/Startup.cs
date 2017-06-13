@@ -1,4 +1,5 @@
 ﻿using Cosella.Services.Core.Integrations.Swagger;
+using Microsoft.Owin.Cors;
 using Ninject;
 using Ninject.Web.Common.OwinHost;
 using Ninject.Web.WebApi.OwinHost;
@@ -21,6 +22,8 @@ namespace Cosella.Services.Core.Hosting
         {
             var serviceConfiguration = _kernel.Get<HostedServiceConfiguration>();
             var config = new HttpConfiguration();
+
+            app.UseCors(CorsOptions.AllowAll);
 
             config.MapHttpAttributeRoutes();
             config.Formatters.Remove(config.Formatters.XmlFormatter);

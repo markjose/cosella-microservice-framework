@@ -24,35 +24,6 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Cosella.Services.Extensions
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Cosella.Services.Gateway", "Services\Cosella.Services.Gateway\Cosella.Services.Gateway.csproj", "{04CCE304-CDBE-492A-A819-8500453AC28B}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Brand", "Brand", "{33F65570-B692-4CEF-8717-45EE4EF80757}"
-	ProjectSection(SolutionItems) = preProject
-		Brand\cosella.ai = Brand\cosella.ai
-		Brand\cosella.svg = Brand\cosella.svg
-	EndProjectSection
-EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Apps", "Apps", "{35590790-9A40-43BC-BBDD-D1580C3937DB}"
-EndProject
-Project("{E24C65DC-7377-472B-9ABA-BC803B73C61A}") = "gateway-manager", "Apps\gateway-manager\", "{432F5601-F162-4A14-8789-638006E87178}"
-	ProjectSection(WebsiteProperties) = preProject
-		TargetFrameworkMoniker = ".NETFramework,Version%3Dv4.0"
-		Debug.AspNetCompiler.VirtualPath = "/localhost_50591"
-		Debug.AspNetCompiler.PhysicalPath = "Apps\gateway-manager\"
-		Debug.AspNetCompiler.TargetPath = "PrecompiledWeb\localhost_50591\"
-		Debug.AspNetCompiler.Updateable = "true"
-		Debug.AspNetCompiler.ForceOverwrite = "true"
-		Debug.AspNetCompiler.FixedNames = "false"
-		Debug.AspNetCompiler.Debug = "True"
-		Release.AspNetCompiler.VirtualPath = "/localhost_50591"
-		Release.AspNetCompiler.PhysicalPath = "Apps\gateway-manager\"
-		Release.AspNetCompiler.TargetPath = "PrecompiledWeb\localhost_50591\"
-		Release.AspNetCompiler.Updateable = "true"
-		Release.AspNetCompiler.ForceOverwrite = "true"
-		Release.AspNetCompiler.FixedNames = "false"
-		Release.AspNetCompiler.Debug = "False"
-		VWDPort = "50591"
-		SlnRelativePath = "Apps\gateway-manager\"
-	EndProjectSection
-EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -83,10 +54,6 @@ Global
 		{04CCE304-CDBE-492A-A819-8500453AC28B}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{04CCE304-CDBE-492A-A819-8500453AC28B}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{04CCE304-CDBE-492A-A819-8500453AC28B}.Release|Any CPU.Build.0 = Release|Any CPU
-		{432F5601-F162-4A14-8789-638006E87178}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{432F5601-F162-4A14-8789-638006E87178}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{432F5601-F162-4A14-8789-638006E87178}.Release|Any CPU.ActiveCfg = Debug|Any CPU
-		{432F5601-F162-4A14-8789-638006E87178}.Release|Any CPU.Build.0 = Debug|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -98,6 +65,5 @@ Global
 		{67D44727-B43F-4372-8320-C4B677BBBD8F} = {1BC517EF-95A2-43DB-9590-4FEB2A923CE1}
 		{6322CE84-7DBD-42A3-880A-39F49FAED543} = {F55E876C-702F-4F12-9DDB-539AD7AEB2E2}
 		{04CCE304-CDBE-492A-A819-8500453AC28B} = {1BC517EF-95A2-43DB-9590-4FEB2A923CE1}
-		{432F5601-F162-4A14-8789-638006E87178} = {35590790-9A40-43BC-BBDD-D1580C3937DB}
 	EndGlobalSection
 EndGlobal

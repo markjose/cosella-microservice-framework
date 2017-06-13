@@ -2,13 +2,31 @@ import React, { Component } from 'react';
 import { GridList } from 'material-ui/GridList';
 import { MicroserviceTile, MicroserviceExplorer } from '.';
 import { services } from '../../services';
+import FloatingActionButton from 'material-ui/FloatingActionButton';
+import Refresh from 'material-ui/svg-icons/navigation/refresh';
 
 import './microservice-list.css';
 
 export class MicroserviceList extends Component {
   
     state = {
-        exploring: null
+        exploring: null,
+        microservices: []
+    }
+
+    componentDidMount() {
+        this.reloadServices();
+    }
+
+    reloadServices() {
+        services
+            .list()
+            .then(microservices => {
+                this.setState({
+                    ...this.state,
+                    microservices
+                });
+            });
     }
 
     startExploring(service) {
@@ -18,13 +36,23 @@ export class MicroserviceList extends Component {
         });
     }
 
+    stopExploring(service) {
+        this.setState({
+            ...this.state,
+            exploring: null
+        });
+    }
+
     render() {
-        const { exploring } = this.state;
-        const microservices = services.list();
+        const { exploring, microservices } = this.state;
+
+        const styles = {
+            floatingButton: { float: 'right', margin: '1em' }
+        };
 
         let output = null;
         if(exploring) {
-            output = <MicroserviceExplorer service={exploring} />
+            output = <MicroserviceExplorer service={exploring} onCancel={() => this.stopExploring()} />
         }
         else {
             const tiles = microservices.map((service, key) => <MicroserviceTile
@@ -36,9 +64,19 @@ export class MicroserviceList extends Component {
             />);
 
             output = (
-                <GridList cols={4} cellHeight="auto">
-                    {tiles}
-                </GridList>
+                <div>
+                    <FloatingActionButton 
+                        style={styles.floatingButton}
+                        zDepth={3}
+                        secondary={true}
+                        onTouchTap={() => this.reloadServices()}>
+                        <Refresh />
+                    </FloatingActionButton>
+
+                    <GridList cols={4} cellHeight="auto">
+                        {tiles}
+                    </GridList>
+                </div>
             );
         }
         return (

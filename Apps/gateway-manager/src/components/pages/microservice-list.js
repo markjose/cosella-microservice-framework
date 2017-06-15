@@ -26,6 +26,10 @@ export class MicroserviceList extends Component {
                     ...this.state,
                     microservices
                 });
+            })
+            .catch(error => {
+                console.warn(error);
+                setTimeout(() => this.reloadServices(), 2000);
             });
     }
 
@@ -57,9 +61,7 @@ export class MicroserviceList extends Component {
         else {
             const tiles = microservices.map((service, key) => <MicroserviceTile
                 key={key}
-                serviceName={service.ServiceName}
-                serviceDescription={''}
-                serviceInstances={service.Instances}
+                service={service}
                 onExplore={serviceName => this.startExploring(service)}
             />);
 

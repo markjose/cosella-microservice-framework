@@ -58,13 +58,13 @@ export class MicroserviceTile extends Component {
         paper: { margin: '1em' },
         badge: { background: '#900', top: 15, right: 15 }
     };
-    const { serviceName, serviceDescription, serviceInstances } = this.state;
+    const { service } = this.state;
 
-    const passingServices = (serviceInstances || []).filter(instance => instance.Health === 'passing');
-    const criticalServices = (serviceInstances || []).filter(instance => instance.Health === 'critical');
+    const passingServices = (service.Instances || []).filter(instance => instance.Health === 'passing');
+    const criticalServices = (service.Instances || []).filter(instance => instance.Health === 'critical');
 
     const avatar = (
-        <Avatar size={40}>{serviceName[0].toUpperCase()}</Avatar>
+        <Avatar size={40}>{service.ServiceName[0].toUpperCase()}</Avatar>
     );
 
     const instances = [
@@ -83,13 +83,15 @@ export class MicroserviceTile extends Component {
             );
         });
 
+    const hasDescriptor = service.Descriptor !== null;
+
     return (
         <GridTile>
             <Paper style={styles.paper} zDepth={3}>
                 <Card expanded={this.state.expanded} onExpandChange={this.handleExpandChange}>
                     <CardHeader
-                        title={serviceName}
-                        subtitle={serviceDescription}
+                        title={service.ServiceName}
+                        subtitle={service.ServiceDescription}
                         avatar={avatar}
                         actAsExpander={true}
                         showExpandableButton={true} />
@@ -97,8 +99,8 @@ export class MicroserviceTile extends Component {
                         {instances}
                     </CardText>
                     <CardActions>
-                        <FlatButton label="Manage" onTouchTap={() => this.handleManage(serviceName)} disabled={true} />
-                        <FlatButton label="Explore" onTouchTap={() => this.handleExplore(serviceName)} />
+                        <FlatButton label="Manage" onTouchTap={() => this.handleManage(service.ServiceName)} disabled={true} />
+                        <FlatButton label="Explore" onTouchTap={() => this.handleExplore(service.ServiceName)} disabled={!hasDescriptor} />
                     </CardActions>
                 </Card>
             </Paper>

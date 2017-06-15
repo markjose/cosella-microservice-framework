@@ -158,8 +158,6 @@
     <Compile Include="Attributes\RolesAttribute.cs" />
     <Compile Include="ApiClient\IApiClient.cs" />
     <Compile Include="Configuration\IConfigurator.cs" />
-    <Compile Include="Logging\ILog.cs" />
-    <Compile Include="Logging\Logger.cs" />
     <Compile Include="ServiceDiscovery\IServiceDiscovery.cs" />
     <Compile Include="ServiceDiscovery\IServiceInfo.cs" />
     <Compile Include="ServiceDiscovery\IServiceInstanceInfo.cs" />

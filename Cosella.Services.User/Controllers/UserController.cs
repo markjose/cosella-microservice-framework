@@ -3,11 +3,11 @@
     using Framework.Contracts;
     using Framework.Core.Attributes;
     using Framework.Core.Configuration;
-    using Framework.Core.Logging;
+    using log4net;
     using System.Net;
     using System.Web.Http;
 
-    [RoutePrefix("api/v1/users")]
+    [RoutePrefix("users")]
     public class UserController : ApiController
     {
         private ILog _log;

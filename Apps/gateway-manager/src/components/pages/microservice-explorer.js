@@ -5,16 +5,20 @@ import Menu from 'material-ui/Menu';
 import MenuItem from 'material-ui/MenuItem';
 import IconButton from 'material-ui/IconButton';
 import RaisedButton from 'material-ui/RaisedButton';
-import TextField from 'material-ui/TextField';
 import ChevronLeft from 'material-ui/svg-icons/navigation/chevron-left';
 import { Toolbar, ToolbarGroup, ToolbarTitle } from 'material-ui/Toolbar';
 import { Card, CardText } from 'material-ui/Card';
+import { MicroserviceParam } from '.';
 
 import './microservice-explorer.css';
 
 export class MicroserviceExplorer extends Component {
   
     state = {
+        requestUrl: "",
+        requestBody: {},
+        responseCode: 0,
+        responseBody: {}
     }
 
     assignProps(props) {
@@ -31,7 +35,8 @@ export class MicroserviceExplorer extends Component {
             service,
             onCancel,
             paths,
-            pathKey: paths[0].key
+            pathKey: paths[0].key,
+            requestUrl: paths[0].path
         });
     }
 
@@ -43,10 +48,11 @@ export class MicroserviceExplorer extends Component {
         this.assignProps(props);
     }
 
-    changePath(event, pathKey) {
+    changePath(event, path) {
         this.setState({
             ...this.state,
-            pathKey
+            pathKey: path.key,
+            requestUrl: path.path
         });
     }
 
@@ -58,33 +64,40 @@ export class MicroserviceExplorer extends Component {
     }
 
     render() {
-        const { service, paths, pathKey } = this.state;
+        const {
+            service,
+            paths,
+            pathKey,
+            requestUrl,
+            requestBody,
+            responseCode,
+            responseBody
+        } = this.state;
+
         const styles = {
             paper: { margin: '1em', padding: '1em 2em' },
             card: { minHeight: '200px' }
         };
 
         const pathComponents = (
-            <Menu onChange={(event, key) => this.changePath(event, key)}>
-            {paths.map(path => (
-                <MenuItem 
-                    key={path.key}
-                    value={path.key}
-                    primaryText={`${path.method.toUpperCase()} ${path.path}`} />
-            ))}
+            <Menu onChange={(event, path) => this.changePath(event, path)}>
+            {paths
+                .sort((a, b) => a.path.localeCompare(b.path))
+                .map(path => (
+                    <MenuItem 
+                        key={path.key}
+                        value={path}
+                        primaryText={path.path}
+                        secondaryText={path.method.toUpperCase()} />
+                ))}
             </Menu>
         );
 
         const path = paths.filter(path => path.key === pathKey)[0];
         const endpoint = service.Descriptor.paths[path.path][path.method];
 
-        const parameters = (endpoint.parameters || []).map(parameter => (
-            <TextField
-                key={parameter.name}
-                hintText={parameter.required ? 'Required' : 'Optional'}
-                floatingLabelText={parameter.name}
-                fullWidth={true}
-                />
+        const parameters = (endpoint.parameters || []).map((parameter, key) => (
+            <MicroserviceParam key={key} meta={parameter} definitions={service.Descriptor.definitions} />
         ));
 
         const content = (
@@ -104,12 +117,18 @@ export class MicroserviceExplorer extends Component {
                         <h2>Parameters</h2>
                         {parameters}    
                     </div>    
+                    <div className="request">
+                        <h2>Request</h2>
+                        <p>URL: {requestUrl}</p>
+                        <Card style={styles.card}>
+                            <CardText>{JSON.stringify(requestBody,null,2)}</CardText>
+                        </Card>
+                    </div> 
                     <div className="response">
                         <h2>Response</h2>
+                        <p>StatusCode: {responseCode}</p>
                         <Card style={styles.card}>
-                            <CardText>
-                                {'{}'}
-                            </CardText>
+                            <CardText>{JSON.stringify(responseBody,null,2)}</CardText>
                         </Card>
                     </div> 
                 </div>
@@ -127,7 +146,7 @@ export class MicroserviceExplorer extends Component {
                     </div>
                     <Divider />
                     <h1>{service.ServiceName}</h1>
-                    <h3>Version {service.Version}</h3>
+                    <h3>REST Version {service.Version}</h3>
                     <p>{service.Description}</p>
                     <Divider />
                     {pathComponents}

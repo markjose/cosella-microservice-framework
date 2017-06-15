@@ -11,7 +11,7 @@
     using System.Text;
     using Models;
     using Newtonsoft.Json;
-    using Core.Logging;
+    using log4net;
 
     public class ServiceDataManager : IServiceDataManager
     {

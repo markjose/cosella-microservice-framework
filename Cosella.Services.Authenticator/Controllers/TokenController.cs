@@ -4,19 +4,19 @@
     using Framework.Core;
     using Framework.Core.ApiClient;
     using Framework.Core.Configuration;
-    using Framework.Core.Logging;
     using Framework.Core.ServiceDiscovery;
 
     using JWT;
     using JWT.Algorithms;
     using JWT.Serializers;
+    using log4net;
     using Newtonsoft.Json;
     using System;
     using System.Collections.Generic;
     using System.Net;
     using System.Web.Http;
 
-    [RoutePrefix("api/v1/token")]
+    [RoutePrefix("token")]
     public class TokenController : ApiController
     {
         private ILog _log;

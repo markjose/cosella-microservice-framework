@@ -30,6 +30,11 @@
     margin-right: 2em;
 }
 
+.microservice-explorer .endpoint-metadata .request {
+    flex: 1;
+    margin-right: 2em;
+}
+
 .microservice-explorer .endpoint-metadata .response {
-    flex: 2;
+    flex: 1;
 }

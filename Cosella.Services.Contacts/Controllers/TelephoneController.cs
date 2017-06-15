@@ -1,10 +1,10 @@
 ﻿namespace Cosella.Services.Contacts.Controllers
 {
     using Framework.Core.Attributes;
-    using Framework.Core.Logging;
+    using log4net;
     using System.Web.Http;
 
-    [RoutePrefix("api/v1/phones")]
+    [RoutePrefix("phones")]
     public class TelephoneController : ApiController
     {
         private ILog _log;

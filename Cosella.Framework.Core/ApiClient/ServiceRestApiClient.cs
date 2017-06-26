@@ -3,13 +3,13 @@
     using ApiClient;
     using ServiceDiscovery;
 
-    public class CosellaApiClient : ApiClientBase
+    public class ServiceRestApiClient : ApiClientBase
     {
         private IServiceInstanceInfo _service;
         private IServiceDiscovery _discovery;
         private string _serviceName;
 
-        private CosellaApiClient(string serviceName, IServiceDiscovery discovery) : base("")
+        private ServiceRestApiClient(string serviceName, IServiceDiscovery discovery) : base("")
         {
             _serviceName = serviceName;
             _discovery = discovery;
@@ -26,9 +26,9 @@
             return false;
         }
 
-        public static CosellaApiClient Create(string serviceName, IServiceDiscovery discovery)
+        public static ServiceRestApiClient Create(string serviceName, IServiceDiscovery discovery)
         {
-            var client = new CosellaApiClient(serviceName, discovery);
+            var client = new ServiceRestApiClient(serviceName, discovery);
             return client.Init() ? client : null;
         }
     }

@@ -149,7 +149,7 @@
     <Compile Include="ApiClient\ApiClientException.cs" />
     <Compile Include="Integrations\Consul\ConsulServiceChecks.cs" />
     <Compile Include="Integrations\Consul\ConsulServiceCheckInfo.cs" />
-    <Compile Include="CosellaApiClient.cs" />
+    <Compile Include="ApiClient\ServiceRestApiClient.cs" />
     <Compile Include="Integrations\Consul\ConsulApiClient.cs" />
     <Compile Include="Integrations\Consul\ConsulServiceDiscovery.cs" />
     <Compile Include="Configuration\JsonFileConfigurator.cs" />
@@ -158,6 +158,7 @@
     <Compile Include="Attributes\RolesAttribute.cs" />
     <Compile Include="ApiClient\IApiClient.cs" />
     <Compile Include="Configuration\IConfigurator.cs" />
+    <Compile Include="Integrations\Log4Net\Log4NetAppenders.cs" />
     <Compile Include="ServiceDiscovery\IServiceDiscovery.cs" />
     <Compile Include="ServiceDiscovery\IServiceInfo.cs" />
     <Compile Include="ServiceDiscovery\IServiceInstanceInfo.cs" />

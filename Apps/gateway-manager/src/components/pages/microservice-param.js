@@ -26,10 +26,31 @@ export class MicroserviceParam extends Component {
         this.assignProps(props);
     }
 
+    onChange(ev) {
+        const { onChange } = this.state;
+        const currentValue = ev.target.value;
+
+        this.setState({
+            ...this.state,
+            meta: {
+                ...this.state.meta,
+                value: currentValue
+            }
+        })
+
+        if(onChange) {
+            onChange(currentValue);
+        }
+    }
+
     renderString() {
         const { meta } = this.state;
         return (
             <TextField
+                type="text"
+                id={meta.name}
+                value={meta.value}
+                onChange={ev => this.onChange(ev)}
                 hintText={meta.required ? 'Required' : 'Optional'}
                 floatingLabelText={meta.name}
                 fullWidth={true}
@@ -41,7 +62,13 @@ export class MicroserviceParam extends Component {
     renderBoolean() {
         const { meta } = this.state;
         return (
-            <Toggle label={meta.name} defaultToggled={false} />
+            <Toggle
+                key={meta.name}
+                id={meta.name}
+                onChange={(ev, newValue) => this.onChange(newValue)}
+                label={meta.name}
+                defaultToggled={false}
+            />
         );
     }
 
@@ -74,8 +101,6 @@ export class MicroserviceParam extends Component {
 
     render() {
         const { meta } = this.state;
-        const styles = {
-        };
 
         let output = (
             <pre>{JSON.stringify(meta, null, 2)}</pre>

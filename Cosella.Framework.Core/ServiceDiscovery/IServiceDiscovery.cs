@@ -15,6 +15,8 @@ namespace Cosella.Framework.Core.ServiceDiscovery
 
         Task<IServiceInstanceInfo> FindServiceByName(string serviceName);
 
+        Task<IServiceInstanceInfo> FindServiceByInstanceName(string instanceName);
+
         Task<IServiceInfo[]> ListServices();
     }
 }

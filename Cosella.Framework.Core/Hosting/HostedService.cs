@@ -6,6 +6,7 @@ using Microsoft.Owin.Hosting;
 using Ninject;
 using System;
 using System.Reflection;
+using System.Threading;
 using System.Threading.Tasks;
 using Topshelf;
 
@@ -20,10 +21,16 @@ namespace Cosella.Framework.Core.Hosting
         private IServiceRegistration _registration;
 
         private const int MaxRetries = 10;
+        private const int RetryPeriodInSeconds = 1;
+        private const int RegistrationCheckPeriodInSeconds = 10;
+
+        private readonly CancellationTokenSource _cancellationTokenSource;
 
         private HostedService(HostedServiceConfiguration configuration)
         {
             var entryAssembly = Assembly.GetEntryAssembly();
+
+            _cancellationTokenSource = new CancellationTokenSource();
 
             // Create instance name
             configuration.ServiceInstanceName = $"{configuration.ServiceName}{DateTime.UtcNow.ToString("yyyyMMddHHmmssfff")}";
@@ -72,13 +79,15 @@ namespace Cosella.Framework.Core.Hosting
                         _log.Info($"Started API at {apiUri}");
 
                         _registration = _discovery.RegisterService(registrationTask);
+                        MonitorServiceRegistration(_cancellationTokenSource.Token);
+
                         return true;
                     }
                     catch (Exception ex)
                     {
                         _log.Debug($"Failed to start the API {ex.Message}");
                         _log.Warn($"Failed to start the API host on port {configuration.RestApiPort}");
-                        _log.Info($"Retrying...({retries}/{MaxRetries})");
+                        _log.Info($"Retrying...({MaxRetries - retries}/{MaxRetries})");
                         configuration.RestApiPort = 0;
                         retries--;
                     }
@@ -88,7 +97,7 @@ namespace Cosella.Framework.Core.Hosting
                     retries = 0;
                 }
 
-                Task.Delay(1000).Wait();
+                Task.Delay(RetryPeriodInSeconds * 1000).Wait();
             }
 
             _discovery.DeregisterService(_registration);
@@ -98,6 +107,7 @@ namespace Cosella.Framework.Core.Hosting
 
         internal bool Stopped()
         {
+            _cancellationTokenSource.Cancel();
             _discovery.DeregisterService(_registration);
             if (_app != null)
             {
@@ -119,6 +129,24 @@ namespace Cosella.Framework.Core.Hosting
         internal bool Shutdown()
         {
             return false;
+        }
+
+        private async void MonitorServiceRegistration(CancellationToken _cancellationToken)
+        {
+            Task.Delay(RegistrationCheckPeriodInSeconds * 1000).Wait();
+
+            while (!_cancellationToken.IsCancellationRequested)
+            {
+                if (_registration != null)
+                {
+                    var serviceInstanceInfo = await _discovery.FindServiceByInstanceName(_registration.InstanceName);
+                    if (serviceInstanceInfo == null)
+                    {
+                        _registration = _discovery.RegisterService();
+                    }
+                }
+                Task.Delay(RegistrationCheckPeriodInSeconds * 1000).Wait();
+            }
         }
     }
 }

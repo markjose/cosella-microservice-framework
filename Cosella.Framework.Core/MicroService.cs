@@ -1,4 +1,5 @@
 ﻿using Cosella.Framework.Core.Hosting;
+using Cosella.Framework.Core.Integrations.Log4Net;
 using System;
 using System.Reflection;
 using Topshelf;
@@ -27,12 +28,19 @@ namespace Cosella.Framework.Core
             };
         }
 
+        private static void ConfigureLog4Net(HostedServiceConfiguration configuration)
+        {
+            log4net.Config.BasicConfigurator.Configure(
+                Log4NetAppenders.GetConsoleAppender(),
+                Log4NetAppenders.GetFileAppender(configuration)
+            );
+        }
+
         public static MicroService Create(Action<HostedServiceConfiguration> configurator)
         {
-            log4net.Config.XmlConfigurator.Configure();
-
             var configuration = new HostedServiceConfiguration();
             configurator(configuration);
+            ConfigureLog4Net(configuration);
             return new MicroService(configuration);
         }
 

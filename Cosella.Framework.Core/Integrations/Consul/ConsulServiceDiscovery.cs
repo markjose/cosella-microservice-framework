@@ -101,7 +101,7 @@ namespace Cosella.Framework.Core.Integrations.Consul
                 },
                 Check = new ConsulHealthCheck()
                 {
-                    DeregisterCriticalServiceAfter = "15m",
+                    DeregisterCriticalServiceAfter = "5m",
                     Http = $"http://{_configuration.RestApiHostname}:{_configuration.RestApiPort}/status?instanceId={_configuration.ServiceInstanceName}",
                     Interval = "10s"
                 }
@@ -214,13 +214,39 @@ namespace Cosella.Framework.Core.Integrations.Consul
 
         public async Task<IServiceInstanceInfo> FindServiceByName(string serviceName)
         {
-            var services = await ListServices();
+            try
+            {
+                var services = await ListServices();
 
-            return services
-                .Where(service => service.ServiceName.Equals(serviceName, StringComparison.InvariantCultureIgnoreCase))
-                .SelectMany(service => service.Instances)
-                .Where(instance => instance.Health.Equals("passing", StringComparison.InvariantCultureIgnoreCase))
-                .FirstOrDefault();
+                return services
+                    .Where(service => service.ServiceName.Equals(serviceName, StringComparison.InvariantCultureIgnoreCase))
+                    .SelectMany(service => service.Instances)
+                    .Where(instance => instance.Health.Equals("passing", StringComparison.InvariantCultureIgnoreCase))
+                    .FirstOrDefault();
+            }
+            catch (ApiClientException ex)
+            {
+                _log.Error(ex.Message);
+                return null;
+            }
+        }
+
+        public async Task<IServiceInstanceInfo> FindServiceByInstanceName(string instanceName)
+        {
+            try
+            {
+                var services = await ListServices();
+
+                return services
+                    .SelectMany(service => service.Instances)
+                    .Where(instance => instance.InstanceName.Equals(instanceName, StringComparison.InvariantCultureIgnoreCase))
+                    .FirstOrDefault();
+            }
+            catch (ApiClientException ex)
+            {
+                _log.Error(ex.Message);
+                return null;
+            }
         }
     }
 }

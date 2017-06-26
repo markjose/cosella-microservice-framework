@@ -17,6 +17,7 @@ export class MicroserviceExplorer extends Component {
     state = {
         requestUrl: "",
         requestBody: {},
+        requestQuery: {},
         responseCode: 0,
         responseBody: {}
     }
@@ -56,6 +57,17 @@ export class MicroserviceExplorer extends Component {
         });
     }
 
+    onChange(parameter, newValue) {
+        if(parameter && parameter.in && parameter.in === 'query') {
+            const requestQuery = { ...this.state.requestQuery };
+            requestQuery[parameter.name] = newValue;
+            this.setState({
+                ...this.state,
+                requestQuery
+            })
+        }
+    }
+
     onCancel() {
         const { onCancel } =  this.state;
         if(onCancel) {
@@ -69,6 +81,7 @@ export class MicroserviceExplorer extends Component {
             paths,
             pathKey,
             requestUrl,
+            requestQuery,
             requestBody,
             responseCode,
             responseBody
@@ -78,6 +91,13 @@ export class MicroserviceExplorer extends Component {
             paper: { margin: '1em', padding: '1em 2em' },
             card: { minHeight: '200px' }
         };
+
+        const queryKeys = Object.keys(requestQuery)
+            .filter(key => requestQuery[key] !== null && requestQuery[key].toString().length > 0);
+
+        const queryParams = queryKeys.length ?
+            queryKeys.reduce((prev, curr) => prev + `${curr}=${requestQuery[curr]}`, "?") :
+            "";
 
         const pathComponents = (
             <Menu onChange={(event, path) => this.changePath(event, path)}>
@@ -97,7 +117,12 @@ export class MicroserviceExplorer extends Component {
         const endpoint = service.Descriptor.paths[path.path][path.method];
 
         const parameters = (endpoint.parameters || []).map((parameter, key) => (
-            <MicroserviceParam key={key} meta={parameter} definitions={service.Descriptor.definitions} />
+            <MicroserviceParam
+                key={key}
+                meta={parameter}
+                definitions={service.Descriptor.definitions}
+                onChange={newValue => this.onChange(parameter, newValue)}
+            />
         ));
 
         const content = (
@@ -119,7 +144,7 @@ export class MicroserviceExplorer extends Component {
                     </div>    
                     <div className="request">
                         <h2>Request</h2>
-                        <p>URL: {requestUrl}</p>
+                        <p>URL: {requestUrl}{queryParams}</p>
                         <Card style={styles.card}>
                             <CardText>{JSON.stringify(requestBody,null,2)}</CardText>
                         </Card>

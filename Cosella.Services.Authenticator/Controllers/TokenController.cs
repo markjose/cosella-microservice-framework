@@ -45,7 +45,7 @@
         [HttpPost]
         public IHttpActionResult GetToken([FromBody] TokenRequest request)
         {
-            var userService = CosellaApiClient.Create("User", _discovery);
+            var userService = ServiceRestApiClient.Create("User", _discovery);
             if (userService == null)
             {
                 return Content(HttpStatusCode.ServiceUnavailable, $"The User service could not be found.");

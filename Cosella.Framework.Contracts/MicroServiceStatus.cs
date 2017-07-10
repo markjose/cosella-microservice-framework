@@ -1,6 +1,6 @@
 ﻿using System.Reflection;
 
-namespace Cosella.Framework.Core.Controllers.Status
+namespace Cosella.Framework.Contracts
 {
     public class MicroServiceStatus
     {

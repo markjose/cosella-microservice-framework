@@ -40,14 +40,11 @@ namespace Cosella.Framework.Core.Hosting
             _log.Debug($"Service instance ID is '{configuration.ServiceInstanceName}'");
 
             _kernel = new StandardKernel();
-            _kernel.Load(Assembly.GetExecutingAssembly());
-            _kernel.Load(configuration.Modules.ToArray());
-
-            _kernel.Bind<Startup>().To<Startup>().InSingletonScope();
             _kernel.Bind<HostedServiceConfiguration>().ToMethod(context => configuration).InSingletonScope();
             _kernel.Bind<ILog>().ToMethod(context => _log).InSingletonScope();
-            _kernel.Bind<IConfigurator>().To<JsonFileConfigurator>().InSingletonScope();
-            _kernel.Bind<IServiceDiscovery>().To<ConsulServiceDiscovery>().InSingletonScope();
+
+            _kernel.Load(Assembly.GetExecutingAssembly());
+            _kernel.Load(configuration.Modules.ToArray());
 
             _discovery = _kernel.Get<IServiceDiscovery>();
         }
@@ -72,7 +69,7 @@ namespace Cosella.Framework.Core.Hosting
 
                 if (configuration.RestApiPort > 0)
                 {
-                    var apiUri = $"http://*:{configuration.RestApiPort}/";
+                    var apiUri = $"http://*:{configuration.RestApiPort}";
                     try
                     {
                         _app = WebApp.Start(apiUri, startup.Configuration);

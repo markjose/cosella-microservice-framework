@@ -4,7 +4,7 @@
     using Interfaces;
     using DataManagers;
 
-    public class GatewayModule : NinjectModule
+    public class ExtensionsModule : NinjectModule
     {
         public override void Load()
         {

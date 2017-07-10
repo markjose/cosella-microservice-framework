@@ -6,7 +6,7 @@
     {
         public static MicroService AddGateway(this MicroService microservice)
         {
-            microservice.Configuration.Modules.Add(new GatewayModule());
+            microservice.Configuration.Modules.Add(new ExtensionsModule());
             return microservice;
         }
     }

@@ -1,4 +1,6 @@
 ﻿using Cosella.Framework.Core.Integrations.Swagger;
+using Cosella.Framework.Core.VersionTracking;
+using log4net;
 using Microsoft.Owin.Cors;
 using Ninject;
 using Ninject.Web.Common.OwinHost;
@@ -6,6 +8,7 @@ using Ninject.Web.WebApi.OwinHost;
 using Owin;
 using Swashbuckle.Application;
 using System.Web.Http;
+using System.Web.Http.Dispatcher;
 
 namespace Cosella.Framework.Core.Hosting
 {
@@ -23,12 +26,9 @@ namespace Cosella.Framework.Core.Hosting
             var serviceConfiguration = _kernel.Get<HostedServiceConfiguration>();
             var config = new HttpConfiguration();
 
-            app.UseCors(CorsOptions.AllowAll);
-
-            config.MapHttpAttributeRoutes();
+            config.MapHttpAttributeRoutes(new RoutePrefixProvider(serviceConfiguration));
             config.Formatters.Remove(config.Formatters.XmlFormatter);
             config.Formatters.Add(config.Formatters.JsonFormatter);
-            //config.EnableSystemDiagnosticsTracing();
 
             config
                 .EnableSwagger(swaggerConfig =>
@@ -42,6 +42,8 @@ namespace Cosella.Framework.Core.Hosting
                 .EnableSwaggerUi();
 
             app
+                .UseCors(CorsOptions.AllowAll)
+                .UseVerionTracking(_kernel)
                 .UseNinjectMiddleware(() => _kernel)
                 .UseNinjectWebApi(config);
         }

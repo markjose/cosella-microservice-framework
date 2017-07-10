@@ -7,11 +7,11 @@
         private static int Main(string[] args)
         {
             return MicroService
-                .Create(config =>
+                .Create(test =>
                 {
-                    config.ServiceName = "User";
-                    config.ServiceDisplayName = "Cosella User";
-                    config.ServiceDescription = "User and Role service for Cosella framework";
+                    test.ServiceName = "User";
+                    test.ServiceDisplayName = "Cosella User";
+                    test.ServiceDescription = "User and Role service for Cosella framework";
                 })
                 .Run();
         }

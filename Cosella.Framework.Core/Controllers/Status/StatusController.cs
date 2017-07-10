@@ -1,13 +1,13 @@
-﻿using Cosella.Framework.Core.Controllers.Status;
+﻿using Cosella.Framework.Contracts;
 using Cosella.Framework.Core.Hosting;
 using log4net;
 using System.Net;
 using System.Web.Http;
 
-namespace Cosella.Framework.Core.Controllers
+namespace Cosella.Framework.Core.Controllers.Status
 {
     [RoutePrefix("status")]
-    public class StatusController : ApiController
+    public class StatusController : SystemRestApiController
     {
         private ILog _log;
         private HostedServiceConfiguration _config;

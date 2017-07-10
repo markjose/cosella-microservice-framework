@@ -147,13 +147,17 @@
     <Compile Include="ApiClient\ApiClientBase.cs" />
     <Compile Include="ApiClient\ApiClientResponse.cs" />
     <Compile Include="ApiClient\ApiClientException.cs" />
+    <Compile Include="Controllers\RoutePrefixProvider.cs" />
+    <Compile Include="Controllers\SystemRestApiController.cs" />
+    <Compile Include="Controllers\RestApiController.cs" />
+    <Compile Include="CoreModule.cs" />
     <Compile Include="Integrations\Consul\ConsulServiceChecks.cs" />
     <Compile Include="Integrations\Consul\ConsulServiceCheckInfo.cs" />
     <Compile Include="ApiClient\ServiceRestApiClient.cs" />
     <Compile Include="Integrations\Consul\ConsulApiClient.cs" />
     <Compile Include="Integrations\Consul\ConsulServiceDiscovery.cs" />
     <Compile Include="Configuration\JsonFileConfigurator.cs" />
-    <Compile Include="Controllers\StatusController.cs" />
+    <Compile Include="Controllers\Status\StatusController.cs" />
     <Compile Include="Hosting\HostedService.cs" />
     <Compile Include="Attributes\RolesAttribute.cs" />
     <Compile Include="ApiClient\IApiClient.cs" />
@@ -169,19 +173,25 @@
     <Compile Include="Integrations\Consul\ConsulRegistrationRequest.cs" />
     <Compile Include="Integrations\Consul\ConsulServiceInfo.cs" />
     <Compile Include="Integrations\Consul\ConsulServices.cs" />
-    <Compile Include="Controllers\Status\MicroServiceStatus.cs" />
     <Compile Include="ServiceDiscovery\ServiceInstanceInfo.cs" />
     <Compile Include="ServiceDiscovery\ServiceInfo.cs" />
     <Compile Include="ServiceDiscovery\ServiceRegistration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Hosting\Startup.cs" />
     <Compile Include="Integrations\Swagger\RolesOperationFilter.cs" />
+    <Compile Include="VersionTracking\VersionTrackingOwinExtensions.cs" />
+    <Compile Include="VersionTracking\RestApiVersionMiddleware.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="app.config" />
     <None Include="packages.config" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <ProjectReference Include="..\Cosella.Framework.Contracts\Cosella.Framework.Contracts.csproj">
+      <Project>{2FF471C8-1D7B-459C-AE69-083B6269ECC9}</Project>
+      <Name>Cosella.Framework.Contracts</Name>
+    </ProjectReference>
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it.
        Other similar extension points exist, see Microsoft.Common.targets.

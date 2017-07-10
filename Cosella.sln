@@ -26,6 +26,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Cosella.Services.User", "Co
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Cosella.Services.Contacts", "Cosella.Services.Contacts\Cosella.Services.Contacts.csproj", "{506C05AC-E7A5-4BE4-904C-DAC42561201B}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Cosella.Framework.PubSub", "Cosella.Framework.PubSub\Cosella.Framework.PubSub.csproj", "{C8633045-FD39-48ED-A6E4-440A28ED57AD}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -60,6 +62,10 @@ Global
 		{506C05AC-E7A5-4BE4-904C-DAC42561201B}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{506C05AC-E7A5-4BE4-904C-DAC42561201B}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{506C05AC-E7A5-4BE4-904C-DAC42561201B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C8633045-FD39-48ED-A6E4-440A28ED57AD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C8633045-FD39-48ED-A6E4-440A28ED57AD}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C8633045-FD39-48ED-A6E4-440A28ED57AD}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C8633045-FD39-48ED-A6E4-440A28ED57AD}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -72,5 +78,6 @@ Global
 		{04CCE304-CDBE-492A-A819-8500453AC28B} = {1BC517EF-95A2-43DB-9590-4FEB2A923CE1}
 		{67D44727-B43F-4372-8320-C4B677BBBD8F} = {1BC517EF-95A2-43DB-9590-4FEB2A923CE1}
 		{506C05AC-E7A5-4BE4-904C-DAC42561201B} = {1BC517EF-95A2-43DB-9590-4FEB2A923CE1}
+		{C8633045-FD39-48ED-A6E4-440A28ED57AD} = {F55E876C-702F-4F12-9DDB-539AD7AEB2E2}
 	EndGlobalSection
 EndGlobal

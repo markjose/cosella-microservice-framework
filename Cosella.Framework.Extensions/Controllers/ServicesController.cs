@@ -6,9 +6,10 @@
     using System.Threading.Tasks;
     using System.Web.Http;
     using Interfaces;
+    using Core.Controllers;
 
     [RoutePrefix("services")]
-    public class ServicesController : ApiController
+    public class ServicesController : RestApiController
     {
         private ILog _log;
         private IServiceDataManager _serviceDataManager;

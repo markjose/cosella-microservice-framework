@@ -4,6 +4,7 @@
     using Framework.Core;
     using Framework.Core.ApiClient;
     using Framework.Core.Configuration;
+    using Framework.Core.Controllers;
     using Framework.Core.ServiceDiscovery;
 
     using JWT;
@@ -17,7 +18,7 @@
     using System.Web.Http;
 
     [RoutePrefix("token")]
-    public class TokenController : ApiController
+    public class TokenController : RestApiController
     {
         private ILog _log;
         private IServiceDiscovery _discovery;

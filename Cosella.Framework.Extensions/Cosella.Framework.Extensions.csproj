@@ -68,7 +68,7 @@
     <Compile Include="Controllers\DefaultController.cs" />
     <Compile Include="Controllers\ServicesController.cs" />
     <Compile Include="DataManagers\ServiceDataManager.cs" />
-    <Compile Include="GatewayModule.cs" />
+    <Compile Include="ExtensionsModule.cs" />
     <Compile Include="Interfaces\IServiceDataManager.cs" />
     <Compile Include="Models\ServiceApiDescriptor.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

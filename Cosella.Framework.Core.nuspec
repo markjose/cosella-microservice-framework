@@ -1,0 +1,25 @@
+<?xml version="1.0"?>
+<package xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <metadata xmlns="http://schemas.microsoft.com/packaging/2010/07/nuspec.xsd">
+    <id>Cosella.Framework.Core</id>
+    <version>$version$</version>
+    <authors>$authors$</authors>
+    <owners>$owners$</owners>
+    <licenseUrl>https://github.com/markjose/cosella-microservice-framework/blob/master/LICENSE.md</licenseUrl>
+    <projectUrl>https://github.com/markjose/cosella-microservice-framework/wiki</projectUrl>
+    <iconUrl>https://github.com/markjose/cosella-microservice-framework/blob/master/ICON.png</iconUrl>
+    <requireLicenseAcceptance>false</requireLicenseAcceptance>
+    <description>$description$</description>
+    <tags>microservices micro service framework</tags>
+    <dependencies>
+      <dependency id="Cosella.Framework.Contracts" />
+      <dependency id="Cosella.Framework.Core" />
+      <dependency id="Cosella.Framework.Extensions" />
+      <dependency id="Cosella.Framework.PubSub" />
+    </dependencies>
+  </metadata>
+  <files>
+	  <file src=".\Cosella.Framework.*\**\*.dll" target="lib" />
+	  <file src=".\Cosella.Framework.*\**\*.pdb" target="pdb" />
+  </files>
+</package>

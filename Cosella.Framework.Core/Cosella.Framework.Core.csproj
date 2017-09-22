@@ -181,6 +181,7 @@
     <Compile Include="Integrations\Swagger\RolesOperationFilter.cs" />
     <Compile Include="VersionTracking\VersionTrackingOwinExtensions.cs" />
     <Compile Include="VersionTracking\RestApiVersionMiddleware.cs" />
+    <Compile Include="Workers\IInServiceWorker.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="app.config" />

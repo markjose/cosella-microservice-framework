@@ -1,10 +1,12 @@
 ﻿using Cosella.Framework.Core.Configuration;
 using Cosella.Framework.Core.Integrations.Consul;
 using Cosella.Framework.Core.ServiceDiscovery;
+using Cosella.Framework.Core.Workers;
 using log4net;
 using Microsoft.Owin.Hosting;
 using Ninject;
 using System;
+using System.Linq;
 using System.Reflection;
 using System.Threading;
 using System.Threading.Tasks;
@@ -19,6 +21,8 @@ namespace Cosella.Framework.Core.Hosting
         private IKernel _kernel;
         private IServiceDiscovery _discovery;
         private IServiceRegistration _registration;
+
+        private IInServiceWorker[] _inServiceWorkers;
 
         private const int MaxRetries = 10;
         private const int RetryPeriodInSeconds = 1;
@@ -78,6 +82,12 @@ namespace Cosella.Framework.Core.Hosting
                         _registration = _discovery.RegisterService(registrationTask);
                         MonitorServiceRegistration(_cancellationTokenSource.Token);
 
+                        _inServiceWorkers = _kernel.GetAll<IInServiceWorker>().ToArray();
+                        if (_inServiceWorkers.Any()) {
+                            _inServiceWorkers.ToList().ForEach(worker => worker.Start(_cancellationTokenSource.Token));
+                            _log.Info($"Startd {_inServiceWorkers.Count()} in service workers");
+                        }
+
                         return true;
                     }
                     catch (Exception ex)
@@ -105,6 +115,10 @@ namespace Cosella.Framework.Core.Hosting
         internal bool Stopped()
         {
             _cancellationTokenSource.Cancel();
+            if (_inServiceWorkers != null)
+            {
+                _inServiceWorkers.ToList().ForEach(worker => worker.Stop());
+            }
             _discovery.DeregisterService(_registration);
             if (_app != null)
             {

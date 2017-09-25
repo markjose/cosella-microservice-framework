@@ -1,5 +1,6 @@
 ﻿namespace Cosella.Services.Authenticator.Controllers
 {
+    using Cosella.Framework.Core.Logging;
     using Framework.Contracts;
     using Framework.Core;
     using Framework.Core.ApiClient;
@@ -10,7 +11,6 @@
     using JWT;
     using JWT.Algorithms;
     using JWT.Serializers;
-    using log4net;
     using Newtonsoft.Json;
     using System;
     using System.Collections.Generic;
@@ -20,7 +20,7 @@
     [RoutePrefix("token")]
     public class TokenController : RestApiController
     {
-        private ILog _log;
+        private ILogger _log;
         private IServiceDiscovery _discovery;
         private IConfigurator _configurator;
         private IJsonSerializer _serializer;
@@ -29,7 +29,7 @@
         private IDateTimeProvider _provider;
         private IJwtValidator _validator;
 
-        public TokenController(ILog log, IConfigurator configurator, IServiceDiscovery discovery)
+        public TokenController(ILogger log, IConfigurator configurator, IServiceDiscovery discovery)
         {
             _log = log;
             _discovery = discovery;

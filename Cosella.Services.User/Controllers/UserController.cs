@@ -1,20 +1,20 @@
 ﻿namespace Cosella.Services.User.Controllers
 {
+    using Cosella.Framework.Core.Logging;
     using Framework.Contracts;
     using Framework.Core.Attributes;
     using Framework.Core.Configuration;
     using Framework.Core.Controllers;
-    using log4net;
     using System.Net;
     using System.Web.Http;
 
     [RoutePrefix("users")]
     public class UserController : RestApiController
     {
-        private ILog _log;
+        private ILogger _log;
         private IConfigurator _configurator;
 
-        public UserController(ILog log, IConfigurator configurator)
+        public UserController(ILogger log, IConfigurator configurator)
         {
             _log = log;
             _configurator = configurator;

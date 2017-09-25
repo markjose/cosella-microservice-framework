@@ -1,4 +1,4 @@
-﻿using log4net;
+﻿using Cosella.Framework.Core.Logging;
 using Newtonsoft.Json;
 using System.Collections.Generic;
 using System.IO;
@@ -8,10 +8,10 @@ namespace Cosella.Framework.Core.Configuration
 {
     internal class JsonFileConfigurator : IConfigurator
     {
-        private readonly ILog _log;
+        private readonly ILogger _log;
         private readonly Dictionary<string, Dictionary<string, object>> _config;
 
-        public JsonFileConfigurator(ILog log)
+        public JsonFileConfigurator(ILogger log)
         {
             _log = log;
 

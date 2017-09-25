@@ -163,6 +163,10 @@
     <Compile Include="ApiClient\IApiClient.cs" />
     <Compile Include="Configuration\IConfigurator.cs" />
     <Compile Include="Integrations\Log4Net\Log4NetAppenders.cs" />
+    <Compile Include="Integrations\Log4Net\Log4NetLogger.cs" />
+    <Compile Include="Logging\LogMetric.cs" />
+    <Compile Include="Logging\ILogger.cs" />
+    <Compile Include="Logging\LogLevel.cs" />
     <Compile Include="ServiceDiscovery\IServiceDiscovery.cs" />
     <Compile Include="ServiceDiscovery\IServiceInfo.cs" />
     <Compile Include="ServiceDiscovery\IServiceInstanceInfo.cs" />

@@ -14,7 +14,7 @@ namespace Cosella.Framework.Core
 
         public HostedServiceConfiguration Configuration { get { return _configuration; } }
 
-        public MicroService(HostedServiceConfiguration configuration)
+        private MicroService(HostedServiceConfiguration configuration)
         {
             _configuration = configuration;
 
@@ -65,10 +65,11 @@ namespace Cosella.Framework.Core
                     hostedService.WhenContinued(s => s.Continued());
                     hostedService.WhenShutdown(s => s.Shutdown());
                 });
-            });
+            }); 
 
 #if DEBUG
             // Wait for a key if debugging
+            Console.WriteLine("press any key to exit");
             Console.ReadKey();
 #endif
             return exitCode;

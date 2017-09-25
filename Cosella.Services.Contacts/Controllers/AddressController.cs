@@ -1,19 +1,19 @@
 ﻿namespace Cosella.Services.Contacts.Controllers
 {
+    using Cosella.Framework.Core.Logging;
     using Framework.Core.Attributes;
     using Framework.Core.Controllers;
     using Interfaces;
-    using log4net;
     using Model;
     using System.Web.Http;
 
     [RoutePrefix("addresses")]
     public class AddressController : RestApiController
     {
-        private ILog _log;
+        private ILogger _log;
         private IAddressDataManager _addressManager;
 
-        public AddressController(ILog log, IAddressDataManager addressManager)
+        public AddressController(ILogger log, IAddressDataManager addressManager)
         {
             _log = log;
             _addressManager = addressManager;

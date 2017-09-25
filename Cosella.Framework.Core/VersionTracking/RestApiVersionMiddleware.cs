@@ -1,4 +1,4 @@
-﻿using log4net;
+﻿using Cosella.Framework.Core.Logging;
 using Microsoft.Owin;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
@@ -7,13 +7,13 @@ namespace Cosella.Framework.Core.VersionTracking
 {
     public class RestApiVersionMiddleware : OwinMiddleware
     {
-        private ILog _log;
+        private ILogger _log;
         private string _serviceName;
 
         public const string ApiVersionFieldName = "api_version";
         public const string ApiFromUriRegex = @"\/api\/v([a-zA-Z0-9]+)";
 
-        public RestApiVersionMiddleware(OwinMiddleware next, ILog log, string serviceName)
+        public RestApiVersionMiddleware(OwinMiddleware next, ILogger log, string serviceName)
             : base(next)
         {
             _log = log;

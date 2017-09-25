@@ -6,7 +6,7 @@ namespace Cosella.Framework.Core.ApiClient
     {
         private string _postData;
 
-        public string PostData { get { return _postData; } }
+        public string PostData => _postData;
 
         public ApiClientException(string message, Exception ex, string postData = "")
             : base(message, ex)

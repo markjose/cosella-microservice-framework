@@ -1,6 +1,6 @@
 ﻿using Cosella.Framework.Contracts;
 using Cosella.Framework.Core.Hosting;
-using log4net;
+using Cosella.Framework.Core.Logging;
 using System.Net;
 using System.Web.Http;
 
@@ -9,10 +9,10 @@ namespace Cosella.Framework.Core.Controllers.Status
     [RoutePrefix("status")]
     public class StatusController : SystemRestApiController
     {
-        private ILog _log;
+        private ILogger _log;
         private HostedServiceConfiguration _config;
 
-        public StatusController(ILog log, HostedServiceConfiguration config)
+        public StatusController(ILogger log, HostedServiceConfiguration config)
         {
             _log = log;
             _config = config;

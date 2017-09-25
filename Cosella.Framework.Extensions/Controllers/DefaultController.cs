@@ -2,16 +2,16 @@
 {
     using Core.Configuration;
     using Core.Controllers;
-    using log4net;
+    using Cosella.Framework.Core.Logging;
     using System.Web.Http;
 
     [RoutePrefix("")]
     public class DefaultController : RestApiController
     {
-        private ILog _log;
+        private ILogger _log;
         private IConfigurator _configurator;
 
-        public DefaultController(ILog log, IConfigurator configurator)
+        public DefaultController(ILogger log, IConfigurator configurator)
         {
             _log = log;
             _configurator = configurator;

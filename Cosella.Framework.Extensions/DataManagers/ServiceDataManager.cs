@@ -11,14 +11,14 @@
     using System.Text;
     using Models;
     using Newtonsoft.Json;
-    using log4net;
+    using Cosella.Framework.Core.Logging;
 
     public class ServiceDataManager : IServiceDataManager
     {
-        private ILog _log;
+        private ILogger _log;
         private IServiceDiscovery _discovery;
 
-        public ServiceDataManager(ILog log, IServiceDiscovery discovery)
+        public ServiceDataManager(ILogger log, IServiceDiscovery discovery)
         {
             _log = log;
             _discovery = discovery;

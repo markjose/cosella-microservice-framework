@@ -1,16 +1,16 @@
 ﻿namespace Cosella.Services.Contacts.Controllers
 {
+    using Cosella.Framework.Core.Logging;
     using Framework.Core.Attributes;
     using Framework.Core.Controllers;
-    using log4net;
     using System.Web.Http;
 
     [RoutePrefix("social")]
     public class SocialController : RestApiController
     {
-        private ILog _log;
+        private ILogger _log;
 
-        public SocialController(ILog log)
+        public SocialController(ILogger log)
         {
             _log = log;
         }

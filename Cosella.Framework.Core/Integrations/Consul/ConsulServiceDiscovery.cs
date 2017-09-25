@@ -1,8 +1,8 @@
 ﻿using Cosella.Framework.Core.ApiClient;
 using Cosella.Framework.Core.Configuration;
 using Cosella.Framework.Core.Hosting;
+using Cosella.Framework.Core.Logging;
 using Cosella.Framework.Core.ServiceDiscovery;
-using log4net;
 using System;
 using System.Collections.Generic;
 using System.Globalization;
@@ -18,11 +18,11 @@ namespace Cosella.Framework.Core.Integrations.Consul
     {
         public const int DefaultPortNumber = 5000;
 
-        private readonly ILog _log;
+        private readonly ILogger _log;
         private readonly HostedServiceConfiguration _configuration;
         private readonly IApiClient _client;
 
-        public ConsulServiceDiscovery(ILog log, HostedServiceConfiguration configuration)
+        public ConsulServiceDiscovery(ILogger log, HostedServiceConfiguration configuration)
         {
             _log = log;
             _configuration = configuration;

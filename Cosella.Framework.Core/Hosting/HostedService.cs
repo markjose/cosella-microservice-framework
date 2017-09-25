@@ -1,8 +1,6 @@
-﻿using Cosella.Framework.Core.Configuration;
-using Cosella.Framework.Core.Integrations.Consul;
+﻿using Cosella.Framework.Core.Logging;
 using Cosella.Framework.Core.ServiceDiscovery;
 using Cosella.Framework.Core.Workers;
-using log4net;
 using Microsoft.Owin.Hosting;
 using Ninject;
 using System;
@@ -17,7 +15,7 @@ namespace Cosella.Framework.Core.Hosting
     internal class HostedService
     {
         private IDisposable _app;
-        private ILog _log;
+        private ILogger _log;
         private IKernel _kernel;
         private IServiceDiscovery _discovery;
         private IServiceRegistration _registration;
@@ -32,25 +30,22 @@ namespace Cosella.Framework.Core.Hosting
 
         private HostedService(HostedServiceConfiguration configuration)
         {
-            var entryAssembly = Assembly.GetEntryAssembly();
-
             _cancellationTokenSource = new CancellationTokenSource();
 
             // Create instance name
             configuration.ServiceInstanceName = $"{configuration.ServiceName}{DateTime.UtcNow.ToString("yyyyMMddHHmmssfff")}";
 
-            // Create logger for this instance
-            _log = LogManager.GetLogger(entryAssembly, configuration.ServiceInstanceName);
-            _log.Debug($"Service instance ID is '{configuration.ServiceInstanceName}'");
-
             _kernel = new StandardKernel();
             _kernel.Bind<HostedServiceConfiguration>().ToMethod(context => configuration).InSingletonScope();
-            _kernel.Bind<ILog>().ToMethod(context => _log).InSingletonScope();
 
             _kernel.Load(Assembly.GetExecutingAssembly());
+            _kernel.Load(new CoreModule());
             _kernel.Load(configuration.Modules.ToArray());
 
+            _log = _kernel.Get<ILogger>();
+
             _discovery = _kernel.Get<IServiceDiscovery>();
+            _log.Debug($"Service instance ID is '{configuration.ServiceInstanceName}'");
         }
 
         internal static HostedService Create(HostedServiceConfiguration configuration)

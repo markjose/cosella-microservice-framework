@@ -1,6 +1,5 @@
 ﻿using Cosella.Framework.Core.Integrations.Swagger;
 using Cosella.Framework.Core.VersionTracking;
-using log4net;
 using Microsoft.Owin.Cors;
 using Ninject;
 using Ninject.Web.Common.OwinHost;
@@ -8,11 +7,10 @@ using Ninject.Web.WebApi.OwinHost;
 using Owin;
 using Swashbuckle.Application;
 using System.Web.Http;
-using System.Web.Http.Dispatcher;
 
 namespace Cosella.Framework.Core.Hosting
 {
-    public class Startup
+    internal class Startup
     {
         private IKernel _kernel;
 
@@ -21,7 +19,7 @@ namespace Cosella.Framework.Core.Hosting
             _kernel = kernel;
         }
 
-        public void Configuration(IAppBuilder app)
+        internal void Configuration(IAppBuilder app)
         {
             var serviceConfiguration = _kernel.Get<HostedServiceConfiguration>();
             var config = new HttpConfiguration();

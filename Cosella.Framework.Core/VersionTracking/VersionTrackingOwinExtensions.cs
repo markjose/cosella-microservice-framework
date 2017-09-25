@@ -1,5 +1,5 @@
 ﻿using Cosella.Framework.Core.Hosting;
-using log4net;
+using Cosella.Framework.Core.Logging;
 using Ninject;
 using Owin;
 
@@ -9,7 +9,7 @@ namespace Cosella.Framework.Core.VersionTracking
     {
         public static IAppBuilder UseVerionTracking(this IAppBuilder app, IKernel kernel)
         {
-            var log = kernel.Get<ILog>();
+            var log = kernel.Get<ILogger>();
             var serviceConfiguration = kernel.Get<HostedServiceConfiguration>();
 
             return app.Use<RestApiVersionMiddleware>(log, serviceConfiguration.ServiceName);

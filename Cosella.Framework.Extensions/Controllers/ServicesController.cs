@@ -1,20 +1,20 @@
 ﻿namespace Cosella.Framework.Extensions.Controllers
 {
-    using log4net;
     using System;
     using System.Net;
     using System.Threading.Tasks;
     using System.Web.Http;
     using Interfaces;
     using Core.Controllers;
+    using Cosella.Framework.Core.Logging;
 
     [RoutePrefix("services")]
     public class ServicesController : RestApiController
     {
-        private ILog _log;
+        private ILogger _log;
         private IServiceDataManager _serviceDataManager;
 
-        public ServicesController(ILog log, IServiceDataManager serviceDataManager)
+        public ServicesController(ILogger log, IServiceDataManager serviceDataManager)
         {
             _log = log;
             _serviceDataManager = serviceDataManager;

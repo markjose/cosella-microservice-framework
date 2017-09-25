@@ -17,6 +17,11 @@
 
         public int RestApiPort { get; set; } = 0;
         public int RestApiVersion { get; set; } = 1;
-        public string RestApiHostname { get; set; } = "";
+        public string RestApiHostname { get; set; } = "localhost";
+
+        // Service discovery
+
+        public bool DisableRegistration { get; set; } = false;
+        public bool DisableServiceDiscovery { get; set; } = false;
     }
 }

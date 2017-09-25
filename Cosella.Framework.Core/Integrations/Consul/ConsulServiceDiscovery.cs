@@ -52,6 +52,12 @@ namespace Cosella.Framework.Core.Integrations.Consul
 
         public Task<ApiClientResponse<string>> RegisterServiceDeferred()
         {
+            // We don't want to do any of this stuff is we've disabled service discovery or registration
+            if(_configuration.DisableRegistration || _configuration.DisableServiceDiscovery) 
+            {
+                return Task.FromResult(default(ApiClientResponse<string>));
+            }
+
             // Auto configure Hostname
             if (string.IsNullOrWhiteSpace(_configuration.RestApiHostname))
             {
@@ -110,11 +116,24 @@ namespace Cosella.Framework.Core.Integrations.Consul
 
         public IServiceRegistration RegisterService()
         {
+            // We don't want to do any of this stuff is we've disabled service discovery or registration
+            if(_configuration.DisableRegistration || _configuration.DisableServiceDiscovery) 
+            {
+                return null;
+            }
+
             return RegisterService(RegisterServiceDeferred());
         }
 
         public IServiceRegistration RegisterService(Task<ApiClientResponse<string>> registrationTask)
         {
+            // We don't want to do any of this stuff is we've disabled service discovery or registration
+            if(_configuration.DisableRegistration || _configuration.DisableServiceDiscovery) 
+            {
+                _log.Warn($"Registration disabled, not registered.");
+                return null;
+            }
+
             //Do registration
             try
             {
@@ -153,6 +172,13 @@ namespace Cosella.Framework.Core.Integrations.Consul
 
         public async Task<IServiceInfo[]> ListServices()
         {
+            // We don't want to do any of this stuff is we've disabled service discovery
+            if(_configuration.DisableServiceDiscovery) 
+            {
+                _log.Warn($"Service discovery is disabled.");
+                return new ServiceInfo[0];
+            }
+
             var servicesTask = _client.Get<ConsulServices>("/agent/services");
             var checksTask = _client.Get<ConsulServiceChecks>("/agent/checks");
 
@@ -214,6 +240,13 @@ namespace Cosella.Framework.Core.Integrations.Consul
 
         public async Task<IServiceInstanceInfo> FindServiceByName(string serviceName)
         {
+            // We don't want to do any of this stuff is we've disabled service discovery
+            if(_configuration.DisableServiceDiscovery) 
+            {
+                _log.Warn($"Service discovery is disabled.");
+                return default(ServiceInstanceInfo);
+            }
+
             try
             {
                 var services = await ListServices();
@@ -233,6 +266,13 @@ namespace Cosella.Framework.Core.Integrations.Consul
 
         public async Task<IServiceInstanceInfo> FindServiceByInstanceName(string instanceName)
         {
+            // We don't want to do any of this stuff is we've disabled service discovery
+            if(_configuration.DisableServiceDiscovery) 
+            {
+                _log.Warn($"Service discovery is disabled.");
+                return default(ServiceInstanceInfo);
+            }
+
             try
             {
                 var services = await ListServices();

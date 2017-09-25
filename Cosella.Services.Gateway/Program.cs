@@ -15,6 +15,9 @@
                     config.ServiceDescription = "API gateway for Cosella framework";
 
                     config.RestApiPort = 5000;
+
+                    config.DisableRegistration = true;
+                    config.DisableServiceDiscovery = true;
                 })
                 .AddGateway()
                 .Run();

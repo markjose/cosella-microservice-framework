@@ -73,7 +73,7 @@ namespace Cosella.Framework.Core.Hosting
 
                 if (configuration.RestApiPort > 0)
                 {
-                    var apiUri = $"http://*:{configuration.RestApiPort}";
+                    var apiUri = $"http://{configuration.RestApiHostname}:{configuration.RestApiPort}";
                     try
                     {
                         _app = WebApp.Start(apiUri, startup.Configuration);
@@ -93,7 +93,7 @@ namespace Cosella.Framework.Core.Hosting
                     catch (Exception ex)
                     {
                         _log.Debug($"Failed to start the API {ex.Message}");
-                        _log.Warn($"Failed to start the API host on port {configuration.RestApiPort}");
+                        _log.Warn($"Failed to start the API host on {apiUri}");
                         _log.Info($"Retrying...({MaxRetries - retries}/{MaxRetries})");
                         configuration.RestApiPort = 0;
                         retries--;

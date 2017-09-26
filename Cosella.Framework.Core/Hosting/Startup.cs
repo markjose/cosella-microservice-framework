@@ -1,6 +1,7 @@
 ﻿using Cosella.Framework.Core.Integrations.Swagger;
 using Cosella.Framework.Core.VersionTracking;
 using Microsoft.Owin.Cors;
+using Newtonsoft.Json.Serialization;
 using Ninject;
 using Ninject.Web.Common.OwinHost;
 using Ninject.Web.WebApi.OwinHost;
@@ -25,7 +26,10 @@ namespace Cosella.Framework.Core.Hosting
             var config = new HttpConfiguration();
 
             config.MapHttpAttributeRoutes(new RoutePrefixProvider(serviceConfiguration));
+
             config.Formatters.Remove(config.Formatters.XmlFormatter);
+            config.Formatters.JsonFormatter.SerializerSettings.ContractResolver = new CamelCasePropertyNamesContractResolver();
+            config.Formatters.JsonFormatter.UseDataContractJsonSerializer = false;
             config.Formatters.Add(config.Formatters.JsonFormatter);
 
             config

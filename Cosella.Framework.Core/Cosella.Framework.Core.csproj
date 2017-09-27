@@ -145,7 +145,6 @@
     <Compile Include="ApiClient\ApiClientBase.cs" />
     <Compile Include="ApiClient\ApiClientResponse.cs" />
     <Compile Include="ApiClient\ApiClientException.cs" />
-    <Compile Include="App_Start\SwaggerConfig.cs" />
     <Compile Include="Controllers\RoutePrefixProvider.cs" />
     <Compile Include="Controllers\SystemRestApiController.cs" />
     <Compile Include="Controllers\RestApiController.cs" />

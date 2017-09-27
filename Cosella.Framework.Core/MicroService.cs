@@ -67,11 +67,6 @@ namespace Cosella.Framework.Core
                 });
             }); 
 
-#if DEBUG
-            // Wait for a key if debugging
-            Console.WriteLine("press any key to exit");
-            Console.ReadKey();
-#endif
             return exitCode;
         }
     }

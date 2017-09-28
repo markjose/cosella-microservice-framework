@@ -33,7 +33,7 @@ namespace Cosella.Framework.Core.Integrations.Consul
         {
             if (registration != null)
             {
-                _log.Warn($"Deregistering service '{registration.InstanceName}' from discovery...");
+                _log.Warn($"De-registering service '{registration.InstanceName}' from discovery...");
 
                 var deregistrationTask = _client.Put<string>($"/agent/service/deregister/{registration.InstanceName}", null);
 

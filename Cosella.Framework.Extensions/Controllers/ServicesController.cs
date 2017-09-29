@@ -12,9 +12,9 @@
     public class ServicesController : RestApiController
     {
         private ILogger _log;
-        private IServiceDataManager _serviceDataManager;
+        private IServiceManager _serviceDataManager;
 
-        public ServicesController(ILogger log, IServiceDataManager serviceDataManager)
+        public ServicesController(ILogger log, IServiceManager serviceDataManager)
         {
             _log = log;
             _serviceDataManager = serviceDataManager;

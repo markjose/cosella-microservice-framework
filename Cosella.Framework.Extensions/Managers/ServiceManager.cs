@@ -13,12 +13,12 @@
     using Newtonsoft.Json;
     using Cosella.Framework.Core.Logging;
 
-    public class ServiceDataManager : IServiceDataManager
+    public class ServiceManager : IServiceManager
     {
         private ILogger _log;
         private IServiceDiscovery _discovery;
 
-        public ServiceDataManager(ILogger log, IServiceDiscovery discovery)
+        public ServiceManager(ILogger log, IServiceDiscovery discovery)
         {
             _log = log;
             _discovery = discovery;

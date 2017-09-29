@@ -1,5 +1,6 @@
 ﻿using Cosella.Framework.Core.Integrations.Swagger;
 using Cosella.Framework.Core.VersionTracking;
+using Microsoft.Owin;
 using Microsoft.Owin.Cors;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Serialization;
@@ -41,13 +42,20 @@ namespace Cosella.Framework.Core.Hosting
                         $"v{serviceConfiguration.RestApiVersion}",
                         $"{serviceConfiguration.ServiceName} API");
 
+                    swaggerConfig.ApiKey("apiKey")
+                        .Description("API Key Authentication")
+                        .Name("X-ApiKey")
+                        .In("header");
+
                     swaggerConfig.OperationFilter<RolesOperationFilter>();
                 })
-                .EnableSwaggerUi();
+                .EnableSwaggerUi(swaggerUiConfig => {
+                    swaggerUiConfig.EnableApiKeySupport("X-ApiKey", "header");
+                });
 
             app
                 .UseCors(CorsOptions.AllowAll)
-                .UseVerionTracking(_kernel)
+                .UseVersionTracking(_kernel)
                 .UseNinjectMiddleware(() => _kernel)
                 .UseNinjectWebApi(config);
         }

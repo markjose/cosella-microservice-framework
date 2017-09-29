@@ -1,6 +1,8 @@
 ﻿namespace Cosella.Framework.Core.Hosting
 {
     using Ninject.Modules;
+    using Microsoft.Owin;
+    using System;
     using System.Collections.Generic;
 
     public class HostedServiceConfiguration

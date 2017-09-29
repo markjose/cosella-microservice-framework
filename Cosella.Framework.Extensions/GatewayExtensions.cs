@@ -1,12 +1,13 @@
-﻿namespace Cosella.Framework.Extensions
-{
-    using Core;
+﻿using Cosella.Framework.Core;
+using System.Linq;
 
+namespace Cosella.Framework.Extensions
+{
     public static class GatewayExtensions
     {
         public static MicroService AddGateway(this MicroService microservice)
         {
-            microservice.Configuration.Modules.Add(new ExtensionsModule());
+            microservice.Configuration.Modules.Add(new GatewayExtensionsModule());
             return microservice;
         }
     }

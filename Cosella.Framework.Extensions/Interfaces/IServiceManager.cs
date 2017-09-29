@@ -3,7 +3,7 @@
     using Contracts;
     using System.Threading.Tasks;
 
-    public interface IServiceDataManager
+    public interface IServiceManager
     {
         Task<ServiceDescription[]> GetServiceDescriptions(bool includeServiceDescriptor = false);
     }

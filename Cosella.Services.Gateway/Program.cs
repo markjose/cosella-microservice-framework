@@ -1,5 +1,8 @@
 ﻿namespace Cosella.Services.Gateway
 {
+    using System;
+    using Cosella.Framework.Extensions.Enums;
+    using Cosella.Framework.Extensions.Models;
     using Framework.Core;
     using Framework.Extensions;
 
@@ -19,8 +22,26 @@
                     config.DisableRegistration = true;
                     config.DisableServiceDiscovery = true;
                 })
+                .AddAuthentication(config =>
+                {
+                    config.AuthenticationType = AuthenticationType.Jwt;
+                    config.OnAuthenticate = OnAuthenticate;
+
+                    config.Jwt.Secret = "nf42v97n24nn34589fcco3mjcfjv49vhcp93x9unv84bxv05jv0wm";
+                })
                 .AddGateway()
                 .Run();
+        }
+
+        private static AuthenticatedUser OnAuthenticate(string username, string password)
+        {
+            return username == "test" && password == "test"
+            ? new AuthenticatedUser
+            {
+                Username = "test",
+                Name = "Test User",
+                Roles = new[] { "_all_" }
+            } : null;
         }
     }
 }

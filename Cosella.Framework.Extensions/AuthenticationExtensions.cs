@@ -1,5 +1,5 @@
 ﻿using Cosella.Framework.Core;
-using Cosella.Framework.Extensions.Configuration;
+using Cosella.Framework.Core.Authentication;
 using System;
 
 namespace Cosella.Framework.Extensions

@@ -3,16 +3,16 @@ using Cosella.Framework.Core.Logging;
 using Ninject;
 using Owin;
 
-namespace Cosella.Framework.Core.VersionTracking
+namespace Cosella.Framework.Core.Authentication
 {
-    public static class VersionTrackingOwinExtensions
+    public static class AuthenticationOwinExtensions
     {
-        public static IAppBuilder UseVersionTracking(this IAppBuilder app, IKernel kernel)
+        public static IAppBuilder UseAuthentication(this IAppBuilder app, IKernel kernel)
         {
             var log = kernel.Get<ILogger>();
             var serviceConfiguration = kernel.Get<HostedServiceConfiguration>();
 
-            app.Use<RestApiVersionMiddleware>(log, serviceConfiguration.ServiceName);
+            app.Use<AuthenticationMiddleware>(log, serviceConfiguration.ServiceName);
 
             return app;
         }

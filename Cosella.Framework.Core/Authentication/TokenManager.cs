@@ -1,15 +1,11 @@
-﻿using Cosella.Framework.Extensions.Configuration;
-using Cosella.Framework.Extensions.Enums;
-using Cosella.Framework.Extensions.Interfaces;
-using Cosella.Framework.Extensions.Models;
-using JWT;
+﻿using JWT;
 using JWT.Algorithms;
 using JWT.Serializers;
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 
-namespace Cosella.Framework.Extensions.Managers
+namespace Cosella.Framework.Core.Authentication
 {
     internal class TokenManager : ITokenManager
     {
@@ -56,14 +52,30 @@ namespace Cosella.Framework.Extensions.Managers
 
         public void Verify(string token)
         {
-            if (_config.AuthenticationType == AuthenticationType.Jwt)
+            try
             {
-                IJwtDecoder decoder = new JwtDecoder(_serializer, _validator, _urlEncoder);
-                var json = decoder.Decode(token, _config.Jwt.Secret, verify: true);
-                ;            }
-            else
+                if (_config.AuthenticationType == AuthenticationType.Jwt)
+                {
+                    IJwtDecoder decoder = new JwtDecoder(_serializer, _validator, _urlEncoder);
+                    var json = decoder.Decode(token, _config.Jwt.Secret, verify: true);
+                    ;
+                }
+                else
+                {
+                    throw new TokenManagerException(true, "Token was invalid, corrupted or malformed");
+                }
+            }
+            catch (JsonReaderException)
             {
-                throw new ArgumentException();
+                throw new TokenManagerException(true, "Token was invalid, corrupted or malformed");
+            }
+            catch (TokenExpiredException)
+            {
+                throw new TokenManagerException(false, "Token has expired");
+            }
+            catch (SignatureVerificationException)
+            {
+                throw new TokenManagerException(false, "Token has invalid signature");
             }
         }
 

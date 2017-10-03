@@ -2,7 +2,7 @@
 using System.Web.Http;
 using System.Web.Http.Controllers;
 
-namespace Cosella.Framework.Core.Attributes
+namespace Cosella.Framework.Core.Authentication
 {
     public class RolesAttribute : AuthorizeAttribute
     {

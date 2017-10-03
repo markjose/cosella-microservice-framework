@@ -1,4 +1,4 @@
-﻿using Cosella.Framework.Core.Attributes;
+﻿using Cosella.Framework.Core.Authentication;
 using Cosella.Framework.Core.Controllers;
 using System.Web.Http;
 

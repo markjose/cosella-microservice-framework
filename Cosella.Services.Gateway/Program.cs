@@ -1,7 +1,6 @@
 ﻿namespace Cosella.Services.Gateway
 {
-    using System;
-    using Cosella.Framework.Extensions.Enums;
+    using Cosella.Framework.Core.Authentication;
     using Cosella.Framework.Extensions.Models;
     using Framework.Core;
     using Framework.Extensions;
@@ -33,7 +32,7 @@
                 .Run();
         }
 
-        private static AuthenticatedUser OnAuthenticate(string username, string password)
+        private static Framework.Core.Authentication.AuthenticatedUser OnAuthenticate(string username, string password)
         {
             return username == "test" && password == "test"
             ? new AuthenticatedUser

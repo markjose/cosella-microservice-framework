@@ -1,6 +1,4 @@
-﻿using Cosella.Framework.Extensions.Models;
-
-namespace Cosella.Framework.Extensions.Interfaces
+﻿namespace Cosella.Framework.Core.Authentication
 {
     public interface ITokenManager
     {

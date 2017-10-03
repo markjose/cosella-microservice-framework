@@ -1,8 +1,6 @@
 ﻿using System;
-using Cosella.Framework.Extensions.Enums;
-using Cosella.Framework.Extensions.Models;
 
-namespace Cosella.Framework.Extensions.Configuration
+namespace Cosella.Framework.Core.Authentication
 {
     public class AuthenticationConfiguration
     {

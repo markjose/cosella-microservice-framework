@@ -1,8 +1,8 @@
 ﻿namespace Cosella.Services.User.Controllers
 {
+    using Cosella.Framework.Core.Authentication;
     using Cosella.Framework.Core.Logging;
     using Framework.Contracts;
-    using Framework.Core.Attributes;
     using Framework.Core.Configuration;
     using Framework.Core.Controllers;
     using System.Net;

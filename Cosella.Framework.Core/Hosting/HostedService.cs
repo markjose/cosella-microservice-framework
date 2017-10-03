@@ -109,7 +109,7 @@ namespace Cosella.Framework.Core.Hosting
                     }
 
                     _discovery.DeregisterService(_registration);
-                    _log.Fatal($"Could not start API as the ports specified were invalid");
+                    _log.Fatal($"Could not start API due to one or more fatal errors");
                 }
                 catch (OperationCanceledException)
                 {

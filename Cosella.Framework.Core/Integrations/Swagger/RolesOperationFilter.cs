@@ -1,6 +1,6 @@
 ﻿namespace Cosella.Framework.Core.Integrations.Swagger
 {
-    using Attributes;
+    using Cosella.Framework.Core.Authentication;
     using Swashbuckle.Swagger;
     using System.Collections.Generic;
     using System.Linq;

@@ -1,4 +1,4 @@
-﻿namespace Cosella.Framework.Extensions.Enums
+﻿namespace Cosella.Framework.Core.Authentication
 {
     public enum AuthenticationType
     {

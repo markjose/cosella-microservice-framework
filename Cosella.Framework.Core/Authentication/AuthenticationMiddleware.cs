@@ -1,18 +1,26 @@
 ﻿using System.Threading.Tasks;
 using Microsoft.Owin;
 using System.Linq;
-using Cosella.Framework.Extensions.Interfaces;
+using Ninject;
+using Cosella.Framework.Core.Logging;
 
-namespace Cosella.Framework.Extensions.Middleware
+namespace Cosella.Framework.Core.Authentication
 {
     public class AuthenticationMiddleware : OwinMiddleware
     {
-        private readonly string[] tokenFieldNames = { "jwt", "token", "api_token", "api_key", "X-ApiKey" };
+        private readonly ILogger _log;
         private readonly ITokenManager _tokenManager;
+        private readonly string _serviceName;
 
-        public AuthenticationMiddleware(OwinMiddleware next, ITokenManager tokenManager) : base(next)
+
+        private readonly string[] tokenFieldNames = { "jwt", "token", "api_token", "api_key", "X-ApiKey" };
+
+        public AuthenticationMiddleware(OwinMiddleware next, IKernel kernel, string serviceName)
+            : base(next)
         {
-            _tokenManager = tokenManager;
+            _log = kernel.Get<ILogger>();
+            _tokenManager = kernel.Get<ITokenManager>();
+            _serviceName = serviceName;
         }
 
         public async override Task Invoke(IOwinContext context)
@@ -21,19 +29,19 @@ namespace Cosella.Framework.Extensions.Middleware
                 .Select(n => context.Request.Query.Get(n))
                 .FirstOrDefault(p => p != null);
 
-            if(token == null)
+            if (token == null)
             {
                 token = tokenFieldNames
                     .Select(n => context.Request.Headers.Get(n))
                     .FirstOrDefault(p => p != null);
             }
 
-            if(token != null)
+            if (token != null)
             {
                 var user = _tokenManager.Decode(token);
                 if (user != null)
                 {
-                   //var controller = context.
+                    //var controller = context.
 
 
                 }

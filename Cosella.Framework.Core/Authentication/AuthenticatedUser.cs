@@ -1,4 +1,4 @@
-﻿namespace Cosella.Framework.Extensions.Models
+﻿namespace Cosella.Framework.Core.Authentication
 {
     public class AuthenticatedUser
     {

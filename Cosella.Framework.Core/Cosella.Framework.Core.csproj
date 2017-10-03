@@ -30,6 +30,9 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="JWT, Version=3.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\JWT.3.0.3\lib\net462\JWT.dll</HintPath>
+    </Reference>
     <Reference Include="log4net, Version=2.0.8.0, Culture=neutral, PublicKeyToken=669e0ddf0bb1aa2a, processorArchitecture=MSIL">
       <HintPath>..\packages\log4net.2.0.8\lib\net45-full\log4net.dll</HintPath>
       <Private>True</Private>
@@ -145,6 +148,14 @@
     <Compile Include="ApiClient\ApiClientBase.cs" />
     <Compile Include="ApiClient\ApiClientResponse.cs" />
     <Compile Include="ApiClient\ApiClientException.cs" />
+    <Compile Include="Authentication\AuthenticatedUser.cs" />
+    <Compile Include="Authentication\AuthenticationConfiguration.cs" />
+    <Compile Include="Authentication\AuthenticationMiddleware.cs" />
+    <Compile Include="Authentication\AuthenticationType.cs" />
+    <Compile Include="Authentication\ITokenManager.cs" />
+    <Compile Include="Authentication\TokenManager.cs" />
+    <Compile Include="Authentication\AuthenticationOwinExtensions.cs" />
+    <Compile Include="Authentication\TokenManagerException.cs" />
     <Compile Include="Controllers\RoutePrefixProvider.cs" />
     <Compile Include="Controllers\SystemRestApiController.cs" />
     <Compile Include="Controllers\RestApiController.cs" />
@@ -157,7 +168,7 @@
     <Compile Include="Configuration\JsonFileConfigurator.cs" />
     <Compile Include="Controllers\Status\StatusController.cs" />
     <Compile Include="Hosting\HostedService.cs" />
-    <Compile Include="Attributes\RolesAttribute.cs" />
+    <Compile Include="Authentication\RolesAttribute.cs" />
     <Compile Include="ApiClient\IApiClient.cs" />
     <Compile Include="Configuration\IConfigurator.cs" />
     <Compile Include="Integrations\Log4Net\Log4NetAppenders.cs" />

@@ -30,9 +30,6 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="JWT, Version=3.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\JWT.3.0.3\lib\net462\JWT.dll</HintPath>
-    </Reference>
     <Reference Include="log4net, Version=2.0.8.0, Culture=neutral, PublicKeyToken=669e0ddf0bb1aa2a, processorArchitecture=MSIL">
       <HintPath>..\packages\log4net.2.0.8\lib\net45-full\log4net.dll</HintPath>
     </Reference>
@@ -123,11 +120,6 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AuthenticationExtensions.cs" />
-    <Compile Include="Configuration\AuthenticationConfiguration.cs" />
-    <Compile Include="Middleware\AuthenticationMiddleware.cs" />
-    <Compile Include="Models\AuthenticatedUser.cs" />
-    <Compile Include="Enums\AuthenticationType.cs" />
-    <Compile Include="Managers\TokenManager.cs" />
     <Compile Include="GatewayExtensions.cs" />
     <Compile Include="Controllers\DefaultController.cs" />
     <Compile Include="Controllers\ServicesController.cs" />
@@ -135,7 +127,6 @@
     <Compile Include="AuthenticationExtensionsModule.cs" />
     <Compile Include="GatewayExtensionsModule.cs" />
     <Compile Include="Interfaces\IServiceManager.cs" />
-    <Compile Include="Interfaces\ITokenManager.cs" />
     <Compile Include="Models\ServiceApiDescriptor.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Controllers\AuthController.cs" />

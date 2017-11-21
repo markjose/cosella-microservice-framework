@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 14
-VisualStudioVersion = 14.0.25420.1
+# Visual Studio 15
+VisualStudioVersion = 15.0.27004.2009
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{44DDE98D-5571-47FA-BEC4-4BDA58881F63}"
 	ProjectSection(SolutionItems) = preProject
@@ -28,6 +28,8 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Cosella.Services.Contacts", "Cosella.Services.Contacts\Cosella.Services.Contacts.csproj", "{506C05AC-E7A5-4BE4-904C-DAC42561201B}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Cosella.Framework.PubSub", "Cosella.Framework.PubSub\Cosella.Framework.PubSub.csproj", "{C8633045-FD39-48ED-A6E4-440A28ED57AD}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Cosella.Services.Example", "Cosella.Services.Example\Cosella.Services.Example.csproj", "{9DF4BEB9-9129-4034-8EB9-23A17E9A5EA3}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -67,6 +69,10 @@ Global
 		{C8633045-FD39-48ED-A6E4-440A28ED57AD}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{C8633045-FD39-48ED-A6E4-440A28ED57AD}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{C8633045-FD39-48ED-A6E4-440A28ED57AD}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9DF4BEB9-9129-4034-8EB9-23A17E9A5EA3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9DF4BEB9-9129-4034-8EB9-23A17E9A5EA3}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9DF4BEB9-9129-4034-8EB9-23A17E9A5EA3}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9DF4BEB9-9129-4034-8EB9-23A17E9A5EA3}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -80,5 +86,9 @@ Global
 		{67D44727-B43F-4372-8320-C4B677BBBD8F} = {1BC517EF-95A2-43DB-9590-4FEB2A923CE1}
 		{506C05AC-E7A5-4BE4-904C-DAC42561201B} = {1BC517EF-95A2-43DB-9590-4FEB2A923CE1}
 		{C8633045-FD39-48ED-A6E4-440A28ED57AD} = {F55E876C-702F-4F12-9DDB-539AD7AEB2E2}
+		{9DF4BEB9-9129-4034-8EB9-23A17E9A5EA3} = {1BC517EF-95A2-43DB-9590-4FEB2A923CE1}
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {C5C6E7C4-C130-4D0E-833E-C67B7F7A51CE}
 	EndGlobalSection
 EndGlobal

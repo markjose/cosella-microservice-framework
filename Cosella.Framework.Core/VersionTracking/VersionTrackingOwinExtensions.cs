@@ -9,12 +9,7 @@ namespace Cosella.Framework.Core.VersionTracking
     {
         public static IAppBuilder UseVersionTracking(this IAppBuilder app, IKernel kernel)
         {
-            var log = kernel.Get<ILogger>();
-            var serviceConfiguration = kernel.Get<HostedServiceConfiguration>();
-
-            app.Use<RestApiVersionMiddleware>(log, serviceConfiguration.ServiceName);
-
-            return app;
+            return app.Use<RestApiVersionMiddleware>(kernel);
         }
     }
 }

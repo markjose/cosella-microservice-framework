@@ -1,5 +1,7 @@
-﻿using Cosella.Framework.Core.Logging;
+﻿using Cosella.Framework.Core.Hosting;
+using Cosella.Framework.Core.Logging;
 using Microsoft.Owin;
+using Ninject;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 
@@ -8,16 +10,17 @@ namespace Cosella.Framework.Core.VersionTracking
     public class RestApiVersionMiddleware : OwinMiddleware
     {
         private ILogger _log;
-        private string _serviceName;
+        private HostedServiceConfiguration _serviceConfiguration;
 
         public const string ApiVersionFieldName = "api_version";
         public const string ApiFromUriRegex = @"\/api\/v([a-zA-Z0-9]+)";
 
-        public RestApiVersionMiddleware(OwinMiddleware next, ILogger log, string serviceName)
+        public RestApiVersionMiddleware(OwinMiddleware next, IKernel kernel)
             : base(next)
         {
-            _log = log;
-            _serviceName = serviceName;
+            _log = kernel.Get<ILogger>();
+            _serviceConfiguration = kernel.Get<HostedServiceConfiguration>();
+
         }
 
         public async override Task Invoke(IOwinContext context)
@@ -39,7 +42,7 @@ namespace Cosella.Framework.Core.VersionTracking
 
             if (version != null)
             {
-                _log.Debug($"Service={_serviceName}, Endpoint={endpoint}, ApiVersion={version}");
+                _log.Debug($"Service={_serviceConfiguration.ServiceName}, Endpoint={endpoint}, ApiVersion={version}");
             }
 
             await Next.Invoke(context);

@@ -45,10 +45,9 @@
                         .Where(instance => instance.Health == "passing")
                         .First()));
 
-                await Task.WhenAll(descriptorTasks);
+                var results = await Task.WhenAll(descriptorTasks);
 
-                descriptors = descriptorTasks
-                    .Select(task => task.Result)
+                descriptors = results
                     .Where(descriptor => descriptor != null)
                     .ToDictionary(descriptor => $"{descriptor.ServiceName}-{descriptor.Version}", descriptor => descriptor.Schema);
             }

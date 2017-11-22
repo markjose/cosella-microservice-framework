@@ -15,6 +15,7 @@
     using System;
     using System.Collections.Generic;
     using System.Net;
+    using System.Threading.Tasks;
     using System.Web.Http;
 
     [RoutePrefix("token")]
@@ -44,19 +45,19 @@
 
         [Route("")]
         [HttpPost]
-        public IHttpActionResult GetToken([FromBody] TokenRequest request)
+        public async Task<IHttpActionResult> GetToken([FromBody] TokenRequest request)
         {
-            var userService = ServiceRestApiClient.Create("User", _discovery);
+            var userService = await ServiceRestApiClient.Create("User", _discovery);
             if (userService == null)
             {
                 return Content(HttpStatusCode.ServiceUnavailable, $"The User service could not be found.");
             }
 
-            var auth = userService.Post<AuthenticationResult>("users/authenticate", new AuthenticationRequest()
+            var auth = await userService.Post<AuthenticationResult>("users/authenticate", new AuthenticationRequest()
             {
                 Username = request.Username,
                 Password = request.Password
-            }).Result;
+            });
 
             if (auth.Status == ApiClientResponseStatus.Ok)
             {

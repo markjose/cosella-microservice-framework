@@ -5,11 +5,11 @@ namespace Cosella.Framework.Core.ServiceDiscovery
 {
     public interface IServiceDiscovery
     {
-        IServiceRegistration RegisterService();
+        Task<IServiceRegistration> RegisterService();
 
-        IServiceRegistration RegisterService(Task<ApiClientResponse<string>> registrationTask);
+        Task<IServiceRegistration> RegisterService(Task<ApiClientResponse<string>> registrationTask);
 
-        Task<ApiClientResponse<string>> RegisterServiceDeferred();
+        Task<Task<ApiClientResponse<string>>> RegisterServiceDeferred();
 
         void DeregisterService(IServiceRegistration registration);
 

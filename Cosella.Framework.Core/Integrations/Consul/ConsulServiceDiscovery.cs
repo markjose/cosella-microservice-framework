@@ -29,18 +29,17 @@ namespace Cosella.Framework.Core.Integrations.Consul
             _client = new ConsulApiClient();
         }
 
-        public void DeregisterService(IServiceRegistration registration)
+        public async void DeregisterService(IServiceRegistration registration)
         {
             if (registration != null)
             {
                 _log.Warn($"De-registering service '{registration.InstanceName}' from discovery...");
 
-                var deregistrationTask = _client.Put<string>($"/agent/service/deregister/{registration.InstanceName}", null);
+                var deregistrationTask = await _client.Put<string>($"/agent/service/deregister/{registration.InstanceName}", null);
 
                 //Do deregistration
                 try
                 {
-                    deregistrationTask.Wait();
                     _log.Info($"De-registration complete.");
                 }
                 catch (Exception ex)
@@ -50,7 +49,7 @@ namespace Cosella.Framework.Core.Integrations.Consul
             }
         }
 
-        public Task<ApiClientResponse<string>> RegisterServiceDeferred()
+        public async Task<Task<ApiClientResponse<string>>> RegisterServiceDeferred()
         {
             // We don't want to do any of this stuff is we've disabled service discovery or registration
             if(_configuration.DisableRegistration || _configuration.DisableServiceDiscovery) 
@@ -70,9 +69,7 @@ namespace Cosella.Framework.Core.Integrations.Consul
             {
                 _log.Debug($"Querying {_configuration.ServiceName} services for available ports");
 
-                var response = _client
-                    .Get<ConsulServices>("/agent/services")
-                    .Result;
+                var response = await _client.Get<ConsulServices>("/agent/services");
 
                 if (response.Status == ApiClientResponseStatus.Exception)
                 {
@@ -114,7 +111,7 @@ namespace Cosella.Framework.Core.Integrations.Consul
             });
         }
 
-        public IServiceRegistration RegisterService()
+        public async Task<IServiceRegistration> RegisterService()
         {
             // We don't want to do any of this stuff is we've disabled service discovery or registration
             if(_configuration.DisableRegistration || _configuration.DisableServiceDiscovery) 
@@ -122,10 +119,10 @@ namespace Cosella.Framework.Core.Integrations.Consul
                 return null;
             }
 
-            return RegisterService(RegisterServiceDeferred());
+            return await RegisterService(await RegisterServiceDeferred());
         }
 
-        public IServiceRegistration RegisterService(Task<ApiClientResponse<string>> registrationTask)
+        public async Task<IServiceRegistration> RegisterService(Task<ApiClientResponse<string>> registrationTask)
         {
             // We don't want to do any of this stuff is we've disabled service discovery or registration
             if(_configuration.DisableRegistration || _configuration.DisableServiceDiscovery) 
@@ -137,7 +134,7 @@ namespace Cosella.Framework.Core.Integrations.Consul
             //Do registration
             try
             {
-                registrationTask.Wait();
+                await registrationTask;
                 _log.Info($"Registration complete.");
                 return new ServiceRegistration()
                 {
@@ -179,31 +176,29 @@ namespace Cosella.Framework.Core.Integrations.Consul
                 return new ServiceInfo[0];
             }
 
-            var servicesTask = _client.Get<ConsulServices>("/agent/services");
-            var checksTask = _client.Get<ConsulServiceChecks>("/agent/checks");
-
-            await Task.WhenAll(servicesTask, checksTask);
+            var servicesResponse = await _client.Get<ConsulServices>("/agent/services");
+            var checksResponse = await _client.Get<ConsulServiceChecks>("/agent/checks");
 
             var services = new Dictionary<string, IServiceInfo>();
 
-            if (servicesTask.Result.Status == ApiClientResponseStatus.Exception)
+            if (servicesResponse.Status == ApiClientResponseStatus.Exception)
             {
-                throw servicesTask.Result.Exception;
+                throw servicesResponse.Exception;
             }
 
-            if (checksTask.Result.Status == ApiClientResponseStatus.Exception)
+            if (checksResponse.Status == ApiClientResponseStatus.Exception)
             {
-                throw checksTask.Result.Exception;
+                throw checksResponse.Exception;
             }
 
-            foreach (ConsulServiceInfo info in servicesTask.Result.Payload.Values)
+            foreach (ConsulServiceInfo info in servicesResponse.Payload.Values)
             {
                 var healthCheckKey = $"service:{info.Id}";
 
                 ConsulServiceHealth healthCheck = null;
-                if (checksTask.Result.Payload.ContainsKey(healthCheckKey))
+                if (checksResponse.Payload.ContainsKey(healthCheckKey))
                 {
-                    healthCheck = checksTask.Result.Payload[healthCheckKey];
+                    healthCheck = checksResponse.Payload[healthCheckKey];
                 }
 
                 if (!services.ContainsKey(info.Service))

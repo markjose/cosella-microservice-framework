@@ -2,6 +2,7 @@
 using Cosella.Framework.Core.Integrations.Log4Net;
 using System;
 using System.Reflection;
+using System.Threading.Tasks;
 using Topshelf;
 using Topshelf.ServiceConfigurators;
 
@@ -59,7 +60,7 @@ namespace Cosella.Framework.Core
                 {
                     ServiceConfigurator<HostedService> hostedService = service;
                     hostedService.ConstructUsing(() => HostedService.Create(_configuration));
-                    hostedService.WhenStarted((s, hostControl) => s.Start(hostControl));
+                    hostedService.WhenStarted((s, hostControl) => s.Start(hostControl).Result);
                     hostedService.WhenStopped(s => s.Stopped());
                     hostedService.WhenPaused(s => s.Paused());
                     hostedService.WhenContinued(s => s.Continued());

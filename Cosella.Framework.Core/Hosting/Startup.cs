@@ -54,12 +54,12 @@ namespace Cosella.Framework.Core.Hosting
                 });
 
             app
+                .UseNinjectMiddleware(() => _kernel)
                 .UseCors(CorsOptions.AllowAll)
                 .UseVersionTracking(_kernel)
                 .UseAuthentication(_kernel)
-                //.UseNinjectMiddleware(() => _kernel)
-                //.UseNinjectWebApi(config);
-                .UseWebApi(config);
+                .UseNinjectWebApi(config);
+                //.UseWebApi(config);
         }
     }
 }

@@ -63,60 +63,58 @@ namespace Cosella.Framework.Core.Hosting
 
             _log.Info("Starting Hosted Microservice...");
 
-            try
+            int retries = MaxRetries;
+            while (retries > 0)
             {
-                int retries = MaxRetries;
-                while (retries > 0)
+                var discovery = _kernel.Get<IServiceDiscovery>();
+                var deferredRegistration = await _discovery.RegisterServiceDeferred();
+
+                if (configuration.RestApiPort > 0)
                 {
-                    var discovery = _kernel.Get<IServiceDiscovery>();
-                    var deferredRegistration = await _discovery.RegisterServiceDeferred();
-
-                    if (configuration.RestApiPort > 0)
+                    var apiUri = $"http://{configuration.RestApiHostname}:{configuration.RestApiPort}";
+                    try
                     {
-                        var apiUri = $"http://{configuration.RestApiHostname}:{configuration.RestApiPort}";
-                        try
+                        _app = WebApp.Start(apiUri, startup.Configuration);
+                        _log.Info($"Started API at {apiUri}");
+
+                        _registration = await _discovery.RegisterService(deferredRegistration);
+                        MonitorServiceRegistration(_cancellationTokenSource.Token);
+
+                        _inServiceWorkers = _kernel.GetAll<IInServiceWorker>().ToArray();
+                        if (_inServiceWorkers.Any())
                         {
-                            _app = WebApp.Start(apiUri, startup.Configuration);
-                            _log.Info($"Started API at {apiUri}");
-
-                            _registration = await _discovery.RegisterService(deferredRegistration);
-                            MonitorServiceRegistration(_cancellationTokenSource.Token);
-
-                            _inServiceWorkers = _kernel.GetAll<IInServiceWorker>().ToArray();
-                            if (_inServiceWorkers.Any())
-                            {
-                                _inServiceWorkers.ToList().ForEach(worker => worker.Start(_cancellationTokenSource.Token));
-                                _log.Info($"Startd {_inServiceWorkers.Count()} in service workers");
-                            }
-
-                            await Task.Delay(0, _cancellationTokenSource.Token);
+                            _inServiceWorkers.ToList().ForEach(worker => worker.Start(_cancellationTokenSource.Token));
+                            _log.Info($"Startd {_inServiceWorkers.Count()} in service workers");
                         }
-                        catch (Exception ex)
-                        {
-                            _log.Debug($"Failed to start the API {ex.Message}");
-                            _log.Warn($"Failed to start the API host on {apiUri}");
-                            _log.Info($"Retrying...({MaxRetries - retries}/{MaxRetries})");
-                            configuration.RestApiPort = 0;
-                            retries--;
-                        }
+
+                        return true;
                     }
-                    else
+                    catch (Exception ex)
                     {
-                        retries = 0;
-                    }
+                        _log.Warn($"Failed to start the API host on {apiUri}: {ex.Message}");
+                        do
+                        {
+                            ex = ex.InnerException;
+                            _log.Debug(ex.Message);
+                        } while (ex.InnerException != null);
 
-                    await Task.Delay(RetryPeriodInSeconds * 1000, _cancellationTokenSource.Token);
+                        _log.Info($"Retrying...({MaxRetries - retries}/{MaxRetries})");
+                        configuration.RestApiPort = 0;
+                        retries--;
+                    }
+                }
+                else
+                {
+                    retries = 0;
                 }
 
-                _discovery.DeregisterService(_registration);
-                _log.Fatal($"Could not start API due to one or more fatal errors");
-            }
-            catch (OperationCanceledException)
-            {
-                _log.Info("The service was stopped, exiting.");
+                await Task.Delay(RetryPeriodInSeconds * 1000, _cancellationTokenSource.Token);
             }
 
-            return true;
+            _discovery.DeregisterService(_registration);
+            _log.Fatal($"Could not start API due to one or more fatal errors");
+
+            return false;
         }
 
         internal bool Stopped()

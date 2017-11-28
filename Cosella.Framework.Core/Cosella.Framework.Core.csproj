@@ -33,9 +33,6 @@
     <Reference Include="Castle.Core, Version=4.0.0.0, Culture=neutral, PublicKeyToken=407dd0808d44fbdc, processorArchitecture=MSIL">
       <HintPath>..\packages\Castle.Core.4.2.1\lib\net45\Castle.Core.dll</HintPath>
     </Reference>
-    <Reference Include="JWT, Version=3.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\JWT.3.1.1\lib\net46\JWT.dll</HintPath>
-    </Reference>
     <Reference Include="log4net, Version=2.0.8.0, Culture=neutral, PublicKeyToken=669e0ddf0bb1aa2a, processorArchitecture=MSIL">
       <HintPath>..\packages\log4net.2.0.8\lib\net45-full\log4net.dll</HintPath>
       <Private>True</Private>
@@ -149,15 +146,9 @@
     <Compile Include="ApiClient\ApiClientBase.cs" />
     <Compile Include="ApiClient\ApiClientResponse.cs" />
     <Compile Include="ApiClient\ApiClientException.cs" />
-    <Compile Include="Authentication\AuthenticatedUser.cs" />
-    <Compile Include="Authentication\AuthenticationConfiguration.cs" />
-    <Compile Include="Authentication\AuthenticationMiddleware.cs" />
-    <Compile Include="Authentication\AuthenticationType.cs" />
-    <Compile Include="Authentication\ITokenManager.cs" />
-    <Compile Include="Authentication\TokenManager.cs" />
-    <Compile Include="Authentication\AuthenticationOwinExtensions.cs" />
-    <Compile Include="Authentication\TokenManagerException.cs" />
-    <Compile Include="Controllers\RoutePrefixProvider.cs" />
+    <Compile Include="Contracts\MicroServiceStatus.cs" />
+    <Compile Include="Contracts\ServiceDescription.cs" />
+    <Compile Include="Hosting\RoutePrefixProvider.cs" />
     <Compile Include="Controllers\SystemRestApiController.cs" />
     <Compile Include="Controllers\RestApiController.cs" />
     <Compile Include="CoreModule.cs" />
@@ -167,9 +158,8 @@
     <Compile Include="Integrations\Consul\ConsulApiClient.cs" />
     <Compile Include="Integrations\Consul\ConsulServiceDiscovery.cs" />
     <Compile Include="Configuration\JsonFileConfigurator.cs" />
-    <Compile Include="Controllers\Status\StatusController.cs" />
+    <Compile Include="Controllers\StatusController.cs" />
     <Compile Include="Hosting\HostedService.cs" />
-    <Compile Include="Authentication\RolesAttribute.cs" />
     <Compile Include="ApiClient\IApiClient.cs" />
     <Compile Include="Configuration\IConfigurator.cs" />
     <Compile Include="Integrations\Log4Net\Log4NetAppenders.cs" />
@@ -200,12 +190,6 @@
   <ItemGroup>
     <None Include="app.config" />
     <None Include="packages.config" />
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\Cosella.Framework.Contracts\Cosella.Framework.Contracts.csproj">
-      <Project>{2FF471C8-1D7B-459C-AE69-083B6269ECC9}</Project>
-      <Name>Cosella.Framework.Contracts</Name>
-    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it.

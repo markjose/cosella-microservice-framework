@@ -1,10 +1,9 @@
-﻿namespace Cosella.Services.Gateway
-{
-    using Cosella.Framework.Core.Authentication;
-    using Cosella.Framework.Extensions.Models;
-    using Framework.Core;
-    using Framework.Extensions;
+﻿using Cosella.Framework.Core;
+using Cosella.Framework.Extensions.Authentication;
+using Cosella.Framework.Extensions.Gateway;
 
+namespace Cosella.Services.Gateway
+{
     internal class Program
     {
         private static int Main(string[] args)
@@ -21,18 +20,12 @@
                     config.DisableRegistration = true;
                     config.DisableServiceDiscovery = true;
                 })
-                .AddAuthentication(config =>
-                {
-                    config.AuthenticationType = AuthenticationType.Jwt;
-                    config.OnAuthenticate = OnAuthenticate;
-
-                    config.Jwt.Secret = "nf42v97n24nn34589fcco3mjcfjv49vhcp93x9unv84bxv05jv0wm";
-                })
                 .AddGateway()
+                .AddAuthentication("nf42v97n24nn34589fcco3mjcfjv49vhcp93x9unv84bxv05jv0wm")
                 .Run();
         }
 
-        private static Framework.Core.Authentication.AuthenticatedUser OnAuthenticate(string username, string password)
+        private static AuthenticatedUser OnAuthenticate(string username, string password)
         {
             return username == "test" && password == "test"
             ? new AuthenticatedUser

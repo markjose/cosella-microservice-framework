@@ -88,6 +88,10 @@
       <Project>{c99c794b-61c5-4e6e-a459-dd2ee9c72deb}</Project>
       <Name>Cosella.Framework.Core</Name>
     </ProjectReference>
+    <ProjectReference Include="..\Cosella.Framework.Extensions\Cosella.Framework.Extensions.csproj">
+      <Project>{6322CE84-7DBD-42A3-880A-39F49FAED543}</Project>
+      <Name>Cosella.Framework.Extensions</Name>
+    </ProjectReference>
   </ItemGroup>
   <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

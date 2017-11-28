@@ -1,5 +1,4 @@
-﻿using Cosella.Framework.Core.Authentication;
-using Cosella.Framework.Core.Integrations.Swagger;
+﻿using Cosella.Framework.Core.Integrations.Swagger;
 using Cosella.Framework.Core.VersionTracking;
 using Microsoft.Owin.Cors;
 using Newtonsoft.Json;
@@ -57,9 +56,7 @@ namespace Cosella.Framework.Core.Hosting
                 .UseNinjectMiddleware(() => _kernel)
                 .UseCors(CorsOptions.AllowAll)
                 .UseVersionTracking(_kernel)
-                .UseAuthentication(_kernel)
                 .UseNinjectWebApi(config);
-                //.UseWebApi(config);
         }
     }
 }

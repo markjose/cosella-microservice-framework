@@ -1,12 +1,12 @@
-﻿namespace Cosella.Services.Contacts.Controllers
-{
-    using Cosella.Framework.Core.Authentication;
-    using Cosella.Framework.Core.Logging;
-    using Framework.Core.Controllers;
-    using Interfaces;
-    using Model;
-    using System.Web.Http;
+﻿using Cosella.Framework.Core.Controllers;
+using Cosella.Framework.Core.Logging;
+using Cosella.Framework.Extensions.Authentication;
+using Cosella.Services.Contacts.Interfaces;
+using Cosella.Services.Contacts.Model;
+using System.Web.Http;
 
+namespace Cosella.Services.Contacts.Controllers
+{
     [RoutePrefix("addresses")]
     public class AddressController : RestApiController
     {

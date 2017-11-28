@@ -1,10 +1,10 @@
-﻿namespace Cosella.Services.Contacts.Controllers
-{
-    using Cosella.Framework.Core.Authentication;
-    using Cosella.Framework.Core.Logging;
-    using Framework.Core.Controllers;
-    using System.Web.Http;
+﻿using Cosella.Framework.Core.Controllers;
+using Cosella.Framework.Core.Logging;
+using Cosella.Framework.Extensions.Authentication;
+using System.Web.Http;
 
+namespace Cosella.Services.Contacts.Controllers
+{
     [RoutePrefix("social")]
     public class SocialController : RestApiController
     {

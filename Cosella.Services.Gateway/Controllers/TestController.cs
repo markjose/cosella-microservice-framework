@@ -1,5 +1,5 @@
-﻿using Cosella.Framework.Core.Authentication;
-using Cosella.Framework.Core.Controllers;
+﻿using Cosella.Framework.Core.Controllers;
+using Cosella.Framework.Extensions.Authentication;
 using System.Web.Http;
 
 namespace Cosella.Services.Gateway.Controllers

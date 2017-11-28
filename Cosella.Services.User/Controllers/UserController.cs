@@ -1,13 +1,11 @@
-﻿namespace Cosella.Services.User.Controllers
-{
-    using Cosella.Framework.Core.Authentication;
-    using Cosella.Framework.Core.Logging;
-    using Framework.Contracts;
-    using Framework.Core.Configuration;
-    using Framework.Core.Controllers;
-    using System.Net;
-    using System.Web.Http;
+﻿using Cosella.Framework.Core.Configuration;
+using Cosella.Framework.Core.Controllers;
+using Cosella.Framework.Core.Logging;
+using Cosella.Framework.Extensions.Authentication;
+using System.Web.Http;
 
+namespace Cosella.Services.User.Controllers
+{
     [RoutePrefix("users")]
     public class UserController : RestApiController
     {
@@ -26,32 +24,6 @@
         public IHttpActionResult GetAll()
         {
             return Ok();
-        }
-
-        [Route("authenticate")]
-        [HttpPost]
-        public IHttpActionResult Authenticate([FromBody] AuthenticationRequest request)
-        {
-            if (request == null ||
-                string.IsNullOrWhiteSpace(request.Username) ||
-                string.IsNullOrWhiteSpace(request.Password))
-            {
-                return Content(HttpStatusCode.BadRequest, "Invalid username or password in data body");
-            }
-
-            if (request.Username == "test" &&
-                request.Password == "test")
-            {
-                return Ok(new AuthenticationResult()
-                {
-                    IsAuthorised = true,
-                    Name = "Test User",
-                    Roles = new string[] { "super:users:read" },
-                    Username = request.Username
-                });
-            }
-
-            return Unauthorized();
         }
     }
 }

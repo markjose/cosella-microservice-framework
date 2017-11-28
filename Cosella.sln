@@ -13,13 +13,9 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Services", "Services", "{1B
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Framework", "Framework", "{F55E876C-702F-4F12-9DDB-539AD7AEB2E2}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Cosella.Framework.Contracts", "Cosella.Framework.Contracts\Cosella.Framework.Contracts.csproj", "{2FF471C8-1D7B-459C-AE69-083B6269ECC9}"
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Cosella.Framework.Core", "Cosella.Framework.Core\Cosella.Framework.Core.csproj", "{C99C794B-61C5-4E6E-A459-DD2EE9C72DEB}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Cosella.Framework.Extensions", "Cosella.Framework.Extensions\Cosella.Framework.Extensions.csproj", "{6322CE84-7DBD-42A3-880A-39F49FAED543}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Cosella.Services.Authenticator", "Cosella.Services.Authenticator\Cosella.Services.Authenticator.csproj", "{EA9B981C-9D01-4564-BBD9-878BBCE0B331}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Cosella.Services.Gateway", "Cosella.Services.Gateway\Cosella.Services.Gateway.csproj", "{04CCE304-CDBE-492A-A819-8500453AC28B}"
 EndProject
@@ -31,16 +27,14 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Cosella.Framework.PubSub", 
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Cosella.Services.Example", "Cosella.Services.Example\Cosella.Services.Example.csproj", "{9DF4BEB9-9129-4034-8EB9-23A17E9A5EA3}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Cosella.Services.Common", "Cosella.Services.Common\Cosella.Services.Common.csproj", "{996F70ED-5ED5-471D-BA97-B76B2920974F}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{2FF471C8-1D7B-459C-AE69-083B6269ECC9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{2FF471C8-1D7B-459C-AE69-083B6269ECC9}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{2FF471C8-1D7B-459C-AE69-083B6269ECC9}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{2FF471C8-1D7B-459C-AE69-083B6269ECC9}.Release|Any CPU.Build.0 = Release|Any CPU
 		{C99C794B-61C5-4E6E-A459-DD2EE9C72DEB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{C99C794B-61C5-4E6E-A459-DD2EE9C72DEB}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{C99C794B-61C5-4E6E-A459-DD2EE9C72DEB}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -49,10 +43,6 @@ Global
 		{6322CE84-7DBD-42A3-880A-39F49FAED543}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{6322CE84-7DBD-42A3-880A-39F49FAED543}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{6322CE84-7DBD-42A3-880A-39F49FAED543}.Release|Any CPU.Build.0 = Release|Any CPU
-		{EA9B981C-9D01-4564-BBD9-878BBCE0B331}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{EA9B981C-9D01-4564-BBD9-878BBCE0B331}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{EA9B981C-9D01-4564-BBD9-878BBCE0B331}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{EA9B981C-9D01-4564-BBD9-878BBCE0B331}.Release|Any CPU.Build.0 = Release|Any CPU
 		{04CCE304-CDBE-492A-A819-8500453AC28B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{04CCE304-CDBE-492A-A819-8500453AC28B}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{04CCE304-CDBE-492A-A819-8500453AC28B}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -73,20 +63,23 @@ Global
 		{9DF4BEB9-9129-4034-8EB9-23A17E9A5EA3}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{9DF4BEB9-9129-4034-8EB9-23A17E9A5EA3}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{9DF4BEB9-9129-4034-8EB9-23A17E9A5EA3}.Release|Any CPU.Build.0 = Release|Any CPU
+		{996F70ED-5ED5-471D-BA97-B76B2920974F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{996F70ED-5ED5-471D-BA97-B76B2920974F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{996F70ED-5ED5-471D-BA97-B76B2920974F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{996F70ED-5ED5-471D-BA97-B76B2920974F}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
-		{2FF471C8-1D7B-459C-AE69-083B6269ECC9} = {F55E876C-702F-4F12-9DDB-539AD7AEB2E2}
 		{C99C794B-61C5-4E6E-A459-DD2EE9C72DEB} = {F55E876C-702F-4F12-9DDB-539AD7AEB2E2}
 		{6322CE84-7DBD-42A3-880A-39F49FAED543} = {F55E876C-702F-4F12-9DDB-539AD7AEB2E2}
-		{EA9B981C-9D01-4564-BBD9-878BBCE0B331} = {1BC517EF-95A2-43DB-9590-4FEB2A923CE1}
 		{04CCE304-CDBE-492A-A819-8500453AC28B} = {1BC517EF-95A2-43DB-9590-4FEB2A923CE1}
 		{67D44727-B43F-4372-8320-C4B677BBBD8F} = {1BC517EF-95A2-43DB-9590-4FEB2A923CE1}
 		{506C05AC-E7A5-4BE4-904C-DAC42561201B} = {1BC517EF-95A2-43DB-9590-4FEB2A923CE1}
 		{C8633045-FD39-48ED-A6E4-440A28ED57AD} = {F55E876C-702F-4F12-9DDB-539AD7AEB2E2}
 		{9DF4BEB9-9129-4034-8EB9-23A17E9A5EA3} = {1BC517EF-95A2-43DB-9590-4FEB2A923CE1}
+		{996F70ED-5ED5-471D-BA97-B76B2920974F} = {1BC517EF-95A2-43DB-9590-4FEB2A923CE1}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {C5C6E7C4-C130-4D0E-833E-C67B7F7A51CE}

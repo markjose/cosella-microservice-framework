@@ -1,16 +1,13 @@
-﻿namespace Cosella.Framework.Core.Integrations.Swagger
-{
-    using Cosella.Framework.Core.Authentication;
-    using Swashbuckle.Swagger;
-    using System.Collections.Generic;
-    using System.Linq;
-    using System.Web.Http.Description;
+﻿using Swashbuckle.Swagger;
+using System.Web.Http.Description;
 
+namespace Cosella.Framework.Core.Integrations.Swagger
+{
     internal class RolesOperationFilter : IOperationFilter
     {
         public void Apply(Operation operation, SchemaRegistry schemaRegistry, ApiDescription apiDescription)
         {
-            var scopes = apiDescription.ActionDescriptor.GetFilterPipeline()
+            /*var scopes = apiDescription.ActionDescriptor.GetFilterPipeline()
                             .Select(filterInfo => filterInfo.Instance)
                             .OfType<RolesAttribute>()
                             .SelectMany(attr => attr.Roles)
@@ -27,7 +24,7 @@
                 };
 
                 operation.security.Add(oAuthRequirements);
-            }
+            }*/
         }
     }
 }

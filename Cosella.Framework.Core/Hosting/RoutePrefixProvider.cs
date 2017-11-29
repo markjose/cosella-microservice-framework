@@ -1,5 +1,4 @@
 ﻿using Cosella.Framework.Core.Controllers;
-using Cosella.Framework.Core.Hosting;
 using System.Web.Http.Controllers;
 using System.Web.Http.Routing;
 

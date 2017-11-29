@@ -1,4 +1,7 @@
-﻿using System;
+﻿using System.Collections.Generic;
+using System.Linq;
+using System.Security.Claims;
+using System.Security.Principal;
 
 namespace Cosella.Framework.Extensions.Authentication.Default
 {
@@ -6,24 +9,48 @@ namespace Cosella.Framework.Extensions.Authentication.Default
     {
         private readonly string _jwtSecret;
 
+        public IEnumerable<AuthenticationTokenSource> TokenSources => new[]
+        {
+            new AuthenticationTokenSource
+            {
+                Type = AuthenticationTokenSourceType.Header,
+                Name = "X-ApiKey"
+            },
+            new AuthenticationTokenSource
+            {
+                Type = AuthenticationTokenSourceType.Url,
+                Name = "apikey"
+            },
+        };
+
         public DefaultAuthenticator(string jwtSecret)
         {
             _jwtSecret = jwtSecret;
         }
 
-        public string TokenFromUser(AuthenticatedUser user)
+        public ClaimsPrincipal PrincipleFromToken(string token)
         {
-            throw new NotImplementedException();
+            var roles = new [] { "private", "granular" };
+            var username = "test";
+
+            var claims = new Claim[]
+            {
+                new Claim(ClaimTypes.Name, username),
+                new Claim(ClaimTypes.Authentication, "true", ClaimValueTypes.Boolean)
+            };
+
+            var identity = new ClaimsIdentity(claims.Concat(roles.Select(r => new Claim(ClaimTypes.Role, r))));
+            var principle = new ClaimsPrincipal(identity);
+
+            return principle;
         }
 
-        public AuthenticatedUser UserFromCredentials(string userId, string secret)
+        public bool AuthenticateInRole(IPrincipal user, string[] roles, dynamic contextData = null)
         {
-            throw new NotImplementedException();
-        }
+            // contextData is ignored with this implementation so if its specified just return false
+            if (contextData != null) return false;
 
-        public AuthenticatedUser UserFromToken(string token)
-        {
-            throw new NotImplementedException();
+            return roles.All(r => user.IsInRole(r));
         }
     }
 }

@@ -1,4 +1,5 @@
-﻿using Cosella.Framework.Extensions.Authentication.Default;
+﻿using Cosella.Framework.Core.Hosting;
+using Cosella.Framework.Extensions.Authentication.Default;
 using Ninject.Modules;
 
 namespace Cosella.Framework.Extensions.Authentication

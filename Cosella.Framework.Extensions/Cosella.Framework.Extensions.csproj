@@ -131,9 +131,11 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Authentication\AuthenticatedUser.cs" />
+    <Compile Include="Authentication\AuthenticationMiddleware.cs" />
+    <Compile Include="Authentication\AuthenticationTokenSource.cs" />
+    <Compile Include="Authentication\AuthenticationTokenSourceType.cs" />
     <Compile Include="Authentication\Default\DefaultAuthenticator.cs" />
-    <Compile Include="Authentication\IAuthenticator.cs" />
-    <Compile Include="Authentication\RolesAttribute.cs" />
+    <Compile Include="Authentication\AuthenticationAttribute.cs" />
     <Compile Include="Authentication\AuthenticationExtensions.cs" />
     <Compile Include="Gateway\GatewayExtensions.cs" />
     <Compile Include="Gateway\ServicesController.cs" />
@@ -142,6 +144,7 @@
     <Compile Include="Gateway\GatewayExtensionsModule.cs" />
     <Compile Include="Gateway\IServiceManager.cs" />
     <Compile Include="Gateway\ServiceApiDescriptor.cs" />
+    <Compile Include="Authentication\IAuthenticator.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

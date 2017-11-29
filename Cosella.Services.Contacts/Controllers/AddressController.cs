@@ -21,7 +21,7 @@ namespace Cosella.Services.Contacts.Controllers
 
         [Route("")]
         [HttpGet]
-        [Roles(new[] { "contacts:address:read" })]
+        [Authentication("contacts:address:read")]
         public IHttpActionResult GetAll()
         {
             return Ok(_addressManager.SummariseAll());
@@ -29,7 +29,7 @@ namespace Cosella.Services.Contacts.Controllers
 
         [Route("lookup")]
         [HttpGet]
-        [Roles(new[] { "contacts:address:lookup" })]
+        [Authentication("contacts:address:lookup")]
         public IHttpActionResult Lookup([FromUri] string countryCode = "gb")
         {
             if (!_addressManager.IsSupportedCountryCode(countryCode))
@@ -41,7 +41,7 @@ namespace Cosella.Services.Contacts.Controllers
 
         [Route("lookup")]
         [HttpPost]
-        [Roles(new[] { "contacts:address:lookup" })]
+        [Authentication("contacts:address:lookup")]
         public IHttpActionResult Lookup([FromBody] AddressRequest request)
         {
             var response = _addressManager.LookupAddress(request.AreaCode, request.NameNumber, request.CountryCode);

@@ -24,16 +24,5 @@ namespace Cosella.Services.Gateway
                 .AddAuthentication("nf42v97n24nn34589fcco3mjcfjv49vhcp93x9unv84bxv05jv0wm")
                 .Run();
         }
-
-        private static AuthenticatedUser OnAuthenticate(string username, string password)
-        {
-            return username == "test" && password == "test"
-            ? new AuthenticatedUser
-            {
-                Username = "test",
-                Name = "Test User",
-                Roles = new[] { "_all_" }
-            } : null;
-        }
     }
 }

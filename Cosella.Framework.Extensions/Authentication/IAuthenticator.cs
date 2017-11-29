@@ -1,9 +1,13 @@
-﻿namespace Cosella.Framework.Extensions.Authentication
+﻿using System.Collections.Generic;
+using System.Security.Claims;
+using System.Security.Principal;
+
+namespace Cosella.Framework.Extensions.Authentication
 {
     public interface IAuthenticator
     {
-        AuthenticatedUser UserFromToken(string token);
-        AuthenticatedUser UserFromCredentials(string userId, string secret);
-        string TokenFromUser(AuthenticatedUser user);
+        IEnumerable<AuthenticationTokenSource> TokenSources { get; }
+        ClaimsPrincipal PrincipleFromToken(string token);
+        bool AuthenticateInRole(IPrincipal user, string[] roles, dynamic contextData = null);
     }
 }

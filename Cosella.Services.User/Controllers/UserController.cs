@@ -20,7 +20,7 @@ namespace Cosella.Services.User.Controllers
 
         [Route("")]
         [HttpGet]
-        [Roles(new[] { "super:user:read" })]
+        [Authentication("super:user:read")]
         public IHttpActionResult GetAll()
         {
             return Ok();

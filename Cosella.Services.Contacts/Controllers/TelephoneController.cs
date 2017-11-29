@@ -17,7 +17,7 @@ namespace Cosella.Services.Contacts.Controllers
 
         [Route("")]
         [HttpGet]
-        [Roles(new[] { "contacts:phone:read" })]
+        [Authentication("contacts:phone:read")]
         public IHttpActionResult GetAll()
         {
             return Ok();

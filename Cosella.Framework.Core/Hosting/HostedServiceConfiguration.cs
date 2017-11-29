@@ -1,15 +1,17 @@
-﻿namespace Cosella.Framework.Core.Hosting
-{
-    using Ninject.Modules;
-    using Microsoft.Owin;
-    using System;
-    using System.Collections.Generic;
+﻿using Ninject;
+using Ninject.Modules;
+using Owin;
+using System;
+using System.Collections.Generic;
 
+namespace Cosella.Framework.Core.Hosting
+{
     public class HostedServiceConfiguration
     {
         public List<INinjectModule> Modules { get; } = new List<INinjectModule>();
+        public List<Func<IAppBuilder, IKernel, IAppBuilder>> Middleware { get; } = new List<Func<IAppBuilder, IKernel, IAppBuilder>>();
 
-        public string ServiceName { get; set; }
+    public string ServiceName { get; set; }
         public string ServiceDisplayName { get; set; }
         public string ServiceInstanceName { get; set; }
         public string ServiceDescription { get; set; }

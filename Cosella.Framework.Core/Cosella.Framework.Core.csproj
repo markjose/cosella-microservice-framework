@@ -143,34 +143,26 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="ApiClient\ApiClientBase.cs" />
-    <Compile Include="ApiClient\ApiClientResponse.cs" />
-    <Compile Include="ApiClient\ApiClientException.cs" />
     <Compile Include="Contracts\MicroServiceStatus.cs" />
     <Compile Include="Contracts\ServiceDescription.cs" />
+    <Compile Include="Hosting\DependantOnAttribute.cs" />
     <Compile Include="Hosting\RoutePrefixProvider.cs" />
     <Compile Include="Controllers\SystemRestApiController.cs" />
     <Compile Include="Controllers\RestApiController.cs" />
     <Compile Include="CoreModule.cs" />
     <Compile Include="Integrations\Consul\ConsulServiceChecks.cs" />
     <Compile Include="Integrations\Consul\ConsulServiceCheckInfo.cs" />
-    <Compile Include="ApiClient\ServiceRestApiClient.cs" />
     <Compile Include="Integrations\Consul\ConsulApiClient.cs" />
     <Compile Include="Integrations\Consul\ConsulServiceDiscovery.cs" />
     <Compile Include="Configuration\JsonFileConfigurator.cs" />
     <Compile Include="Controllers\StatusController.cs" />
     <Compile Include="Hosting\HostedService.cs" />
-    <Compile Include="ApiClient\IApiClient.cs" />
     <Compile Include="Configuration\IConfigurator.cs" />
     <Compile Include="Integrations\Log4Net\Log4NetAppenders.cs" />
     <Compile Include="Integrations\Log4Net\Log4NetLogger.cs" />
     <Compile Include="Logging\LogMetric.cs" />
     <Compile Include="Logging\ILogger.cs" />
     <Compile Include="Logging\LogLevel.cs" />
-    <Compile Include="ServiceDiscovery\IServiceDiscovery.cs" />
-    <Compile Include="ServiceDiscovery\IServiceInfo.cs" />
-    <Compile Include="ServiceDiscovery\IServiceInstanceInfo.cs" />
-    <Compile Include="ServiceDiscovery\IServiceRegistration.cs" />
     <Compile Include="MicroService.cs" />
     <Compile Include="Hosting\HostedServiceConfiguration.cs" />
     <Compile Include="Integrations\Consul\ConsulHealthCheck.cs" />
@@ -190,6 +182,12 @@
   <ItemGroup>
     <None Include="app.config" />
     <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Cosella.Framework.Client\Cosella.Framework.Client.csproj">
+      <Project>{11A15522-F1B7-4CED-809B-25AABF3562A8}</Project>
+      <Name>Cosella.Framework.Client</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it.

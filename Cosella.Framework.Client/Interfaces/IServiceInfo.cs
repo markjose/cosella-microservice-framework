@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 
-namespace Cosella.Framework.Core.ServiceDiscovery
+namespace Cosella.Framework.Client.Interfaces
 {
     public interface IServiceInfo
     {

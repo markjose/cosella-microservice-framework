@@ -29,6 +29,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Cosella.Services.Example", 
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Cosella.Services.Common", "Cosella.Services.Common\Cosella.Services.Common.csproj", "{996F70ED-5ED5-471D-BA97-B76B2920974F}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Cosella.Framework.Client", "Cosella.Framework.Client\Cosella.Framework.Client.csproj", "{11A15522-F1B7-4CED-809B-25AABF3562A8}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -67,6 +69,10 @@ Global
 		{996F70ED-5ED5-471D-BA97-B76B2920974F}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{996F70ED-5ED5-471D-BA97-B76B2920974F}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{996F70ED-5ED5-471D-BA97-B76B2920974F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{11A15522-F1B7-4CED-809B-25AABF3562A8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{11A15522-F1B7-4CED-809B-25AABF3562A8}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{11A15522-F1B7-4CED-809B-25AABF3562A8}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{11A15522-F1B7-4CED-809B-25AABF3562A8}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -80,6 +86,7 @@ Global
 		{C8633045-FD39-48ED-A6E4-440A28ED57AD} = {F55E876C-702F-4F12-9DDB-539AD7AEB2E2}
 		{9DF4BEB9-9129-4034-8EB9-23A17E9A5EA3} = {1BC517EF-95A2-43DB-9590-4FEB2A923CE1}
 		{996F70ED-5ED5-471D-BA97-B76B2920974F} = {1BC517EF-95A2-43DB-9590-4FEB2A923CE1}
+		{11A15522-F1B7-4CED-809B-25AABF3562A8} = {F55E876C-702F-4F12-9DDB-539AD7AEB2E2}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {C5C6E7C4-C130-4D0E-833E-C67B7F7A51CE}

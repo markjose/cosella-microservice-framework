@@ -1,13 +1,13 @@
-﻿namespace Cosella.Framework.Core
-{
-    using Configuration;
-    using Cosella.Framework.Core.Integrations.Log4Net;
-    using Cosella.Framework.Core.Logging;
-    using Hosting;
-    using Integrations.Consul;
-    using Ninject.Modules;
-    using ServiceDiscovery;
+﻿using Cosella.Framework.Client.Interfaces;
+using Cosella.Framework.Core.Configuration;
+using Cosella.Framework.Core.Hosting;
+using Cosella.Framework.Core.Integrations.Consul;
+using Cosella.Framework.Core.Integrations.Log4Net;
+using Cosella.Framework.Core.Logging;
+using Ninject.Modules;
 
+namespace Cosella.Framework.Core
+{
     internal class CoreModule : NinjectModule
     {
         public override void Load()

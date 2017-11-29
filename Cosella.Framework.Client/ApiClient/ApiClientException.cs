@@ -1,8 +1,8 @@
 ﻿using System;
 
-namespace Cosella.Framework.Core.ApiClient
+namespace Cosella.Framework.Client.ApiClient
 {
-    internal class ApiClientException : Exception
+    public class ApiClientException : Exception
     {
         private string _postData;
 

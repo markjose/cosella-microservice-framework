@@ -1,4 +1,6 @@
-﻿namespace Cosella.Framework.Core.ServiceDiscovery
+﻿using Cosella.Framework.Client.Interfaces;
+
+namespace Cosella.Framework.Core.ServiceDiscovery
 {
     internal class ServiceRegistration : IServiceRegistration
     {

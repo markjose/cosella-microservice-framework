@@ -22,14 +22,7 @@ namespace Cosella.Framework.Extensions.Authentication
         {
             var token = GetTokenFromRequest(context.Request);
             var user = _authenticator.PrincipleFromToken(token ?? "");
-            if (user == null)
-            {
-                await Next.Invoke(context);
-                return;
-            }
-
-            context.Authentication.User = user;
-            _log.Debug($"Authenticated as '{user.Identity.Name}'");
+            if (user != null) context.Authentication.User = user;
             await Next.Invoke(context);
         }
 

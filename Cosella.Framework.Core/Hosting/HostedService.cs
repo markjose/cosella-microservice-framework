@@ -1,4 +1,5 @@
-﻿using Cosella.Framework.Core.Logging;
+﻿using Cosella.Framework.Client.Interfaces;
+using Cosella.Framework.Core.Logging;
 using Cosella.Framework.Core.ServiceDiscovery;
 using Cosella.Framework.Core.Workers;
 using Microsoft.Owin.Hosting;

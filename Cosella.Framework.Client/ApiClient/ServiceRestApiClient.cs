@@ -1,9 +1,8 @@
-﻿namespace Cosella.Framework.Core
-{
-    using ApiClient;
-    using ServiceDiscovery;
-    using System.Threading.Tasks;
+﻿using Cosella.Framework.Client.Interfaces;
+using System.Threading.Tasks;
 
+namespace Cosella.Framework.Client.ApiClient
+{
     public class ServiceRestApiClient : ApiClientBase
     {
         private IServiceInstanceInfo _service;

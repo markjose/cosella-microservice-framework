@@ -1,10 +1,10 @@
-﻿using Cosella.Framework.Core.Configuration;
+﻿using Cosella.Framework.Client.Interfaces;
 using Newtonsoft.Json;
 using System;
 using System.Net.Http;
 using System.Threading.Tasks;
 
-namespace Cosella.Framework.Core.ApiClient
+namespace Cosella.Framework.Client.ApiClient
 {
     public abstract class ApiClientBase : IApiClient
     {

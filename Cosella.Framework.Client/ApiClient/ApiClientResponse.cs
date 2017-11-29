@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Cosella.Framework.Core.ApiClient
+namespace Cosella.Framework.Client.ApiClient
 {
     public enum ApiClientResponseStatus
     {

@@ -1,5 +1,5 @@
-﻿using Cosella.Framework.Core.ApiClient;
-using Cosella.Framework.Core.Configuration;
+﻿using Cosella.Framework.Client.ApiClient;
+using Cosella.Framework.Client.Interfaces;
 using Cosella.Framework.Core.Hosting;
 using Cosella.Framework.Core.Logging;
 using Cosella.Framework.Core.ServiceDiscovery;

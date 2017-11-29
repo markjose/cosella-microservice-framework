@@ -1,4 +1,4 @@
-﻿using Cosella.Framework.Core.ApiClient;
+﻿using Cosella.Framework.Client.ApiClient;
 using System.Net;
 
 namespace Cosella.Framework.Core.Integrations.Consul

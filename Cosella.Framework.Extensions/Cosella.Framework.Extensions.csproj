@@ -156,6 +156,10 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\Cosella.Framework.Client\Cosella.Framework.Client.csproj">
+      <Project>{11A15522-F1B7-4CED-809B-25AABF3562A8}</Project>
+      <Name>Cosella.Framework.Client</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Cosella.Framework.Core\Cosella.Framework.Core.csproj">
       <Project>{c99c794b-61c5-4e6e-a459-dd2ee9c72deb}</Project>
       <Name>Cosella.Framework.Core</Name>

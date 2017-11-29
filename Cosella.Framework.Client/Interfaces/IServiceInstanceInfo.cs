@@ -1,4 +1,4 @@
-﻿namespace Cosella.Framework.Core.ServiceDiscovery
+﻿namespace Cosella.Framework.Client.Interfaces
 {
     public interface IServiceInstanceInfo
     {

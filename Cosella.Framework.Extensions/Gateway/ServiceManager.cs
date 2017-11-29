@@ -6,8 +6,8 @@ using System.IO;
 using System.Text;
 using Newtonsoft.Json;
 using Cosella.Framework.Core.Logging;
-using Cosella.Framework.Core.ServiceDiscovery;
 using Cosella.Framework.Core.Contracts;
+using Cosella.Framework.Client.Interfaces;
 
 namespace Cosella.Framework.Extensions.Gateway
 {

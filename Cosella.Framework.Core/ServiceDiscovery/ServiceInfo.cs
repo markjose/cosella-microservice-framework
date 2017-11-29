@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using Cosella.Framework.Client.Interfaces;
+using System.Collections.Generic;
 
 namespace Cosella.Framework.Core.ServiceDiscovery
 {

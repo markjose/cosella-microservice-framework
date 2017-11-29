@@ -1,7 +1,7 @@
-﻿using Cosella.Framework.Core.ApiClient;
+﻿using Cosella.Framework.Client.ApiClient;
 using System.Threading.Tasks;
 
-namespace Cosella.Framework.Core.ServiceDiscovery
+namespace Cosella.Framework.Client.Interfaces
 {
     public interface IServiceDiscovery
     {

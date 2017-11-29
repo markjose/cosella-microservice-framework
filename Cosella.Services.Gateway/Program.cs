@@ -20,7 +20,7 @@ namespace Cosella.Services.Gateway
                     config.DisableRegistration = true;
                     config.DisableServiceDiscovery = true;
                 })
-                .AddGateway()
+                //.AddGateway()
                 .AddAuthentication()
                 .Run();
         }

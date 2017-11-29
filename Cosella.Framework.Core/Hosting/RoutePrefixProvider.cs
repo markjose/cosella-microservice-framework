@@ -16,6 +16,8 @@ namespace Cosella.Framework.Core.Hosting
 
         protected override string GetRoutePrefix(HttpControllerDescriptor controllerDescriptor)
         {
+            var dependancies = controllerDescriptor.GetCustomAttributes<DependantOnAttribute>();
+
             var existingPrefix = base.GetRoutePrefix(controllerDescriptor);
             if (typeof(SystemRestApiController).IsAssignableFrom(controllerDescriptor.ControllerType))
             {

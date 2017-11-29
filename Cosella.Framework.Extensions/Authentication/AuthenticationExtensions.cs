@@ -1,7 +1,7 @@
 ﻿using Cosella.Framework.Core;
-using Cosella.Framework.Core.Hosting;
 using Ninject;
 using Owin;
+using System;
 
 namespace Cosella.Framework.Extensions.Authentication
 {
@@ -14,9 +14,9 @@ namespace Cosella.Framework.Extensions.Authentication
             return microservice;
         }
 
-        public static MicroService AddAuthentication<T>(this MicroService microservice, T authenticator) where T : IAuthenticator
+        public static MicroService AddAuthentication(this MicroService microservice, Type authenticatorType)
         {
-            microservice.Configuration.Modules.Add(new AuthenticationExtensionsModule(authenticator));
+            microservice.Configuration.Modules.Add(new AuthenticationExtensionsModule(authenticatorType));
             microservice.Configuration.Middleware.Add(UseAuthentication);
             return microservice;
         }

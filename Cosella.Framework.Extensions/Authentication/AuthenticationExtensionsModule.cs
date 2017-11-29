@@ -1,16 +1,20 @@
-﻿using Cosella.Framework.Core.Hosting;
-using Cosella.Framework.Extensions.Authentication.Default;
+﻿using Cosella.Framework.Extensions.Authentication.Default;
 using Ninject.Modules;
+using System;
 
 namespace Cosella.Framework.Extensions.Authentication
 {
     public class AuthenticationExtensionsModule : NinjectModule
     {
-        private readonly IAuthenticator _authenticator;
+        private readonly Type _authenticatorType;
 
-        public AuthenticationExtensionsModule(IAuthenticator authenticator)
+        public AuthenticationExtensionsModule(Type authenticatorType)
         {
-            _authenticator = authenticator;
+            if(!typeof(IAuthenticator).IsAssignableFrom(authenticatorType))
+            {
+                throw new ArgumentException($"Authenticator type {authenticatorType.Name} does not implement {nameof(IAuthenticator)}");
+            }
+            _authenticatorType = authenticatorType;
         }
 
         public AuthenticationExtensionsModule()
@@ -19,10 +23,10 @@ namespace Cosella.Framework.Extensions.Authentication
 
         public override void Load()
         {
-            if (_authenticator != null)
+            if (_authenticatorType != null)
             {
                 Bind<IAuthenticator>()
-                    .ToConstant(_authenticator)
+                    .To(_authenticatorType)
                     .InSingletonScope();
             }
             else

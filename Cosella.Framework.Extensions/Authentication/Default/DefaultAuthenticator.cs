@@ -7,7 +7,7 @@ namespace Cosella.Framework.Extensions.Authentication.Default
 {
     internal class DefaultAuthenticator : IAuthenticator
     {
-        private readonly string _jwtSecret;
+        private readonly IUserManager _users;
 
         public IEnumerable<AuthenticationTokenSource> TokenSources => new[]
         {
@@ -23,30 +23,50 @@ namespace Cosella.Framework.Extensions.Authentication.Default
             },
         };
 
-        public DefaultAuthenticator(string jwtSecret)
+        public DefaultAuthenticator(IUserManager users)
         {
-            _jwtSecret = jwtSecret;
+            _users = users;
         }
 
         public ClaimsPrincipal PrincipleFromToken(string token)
         {
-            var roles = new [] { "private", "granular" };
-            var username = "test";
+            var parts = token.Split(':');
 
+            if (parts.Length != 2) return PrincipleForGuest();
+            if (parts.Any(p => string.IsNullOrWhiteSpace(p))) return PrincipleForGuest();
+
+            var user = _users.Authenticate(parts[0], parts[1]);
+            if (user == null) return PrincipleForGuest();
+
+            return PrincipleFromUser(user);
+        }
+
+        private ClaimsPrincipal PrincipleForGuest()
+        {
             var claims = new Claim[]
             {
-                new Claim(ClaimTypes.Name, username),
+                new Claim(ClaimTypes.Name, "__guest"),
                 new Claim(ClaimTypes.Authentication, "true", ClaimValueTypes.Boolean)
             };
+            var identity = new ClaimsIdentity(claims);
+            return new ClaimsPrincipal(identity);
+        }
 
-            var identity = new ClaimsIdentity(claims.Concat(roles.Select(r => new Claim(ClaimTypes.Role, r))));
-            var principle = new ClaimsPrincipal(identity);
-
-            return principle;
+        private ClaimsPrincipal PrincipleFromUser(User user)
+        {
+            var claims = new Claim[]
+            {
+                new Claim(ClaimTypes.Name, user.Username),
+                new Claim(ClaimTypes.Authentication, "true", ClaimValueTypes.Boolean)
+            };
+            var identity = new ClaimsIdentity(claims.Concat(user.Roles.Select(r => new Claim(ClaimTypes.Role, r))));
+            return new ClaimsPrincipal(identity);
         }
 
         public bool AuthenticateInRole(IPrincipal user, string[] roles, dynamic contextData = null)
         {
+            if (_users.Empty) return true;
+
             // contextData is ignored with this implementation so if its specified just return false
             if (contextData != null) return false;
 

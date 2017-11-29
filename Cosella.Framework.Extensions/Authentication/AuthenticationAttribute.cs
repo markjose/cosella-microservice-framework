@@ -1,5 +1,4 @@
-﻿using Cosella.Framework.Core.Hosting;
-using Cosella.Framework.Core.Logging;
+﻿using Cosella.Framework.Core.Logging;
 using Ninject;
 using System.Linq;
 using System.Web.Http;

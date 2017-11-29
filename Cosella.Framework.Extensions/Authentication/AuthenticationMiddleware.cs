@@ -20,16 +20,8 @@ namespace Cosella.Framework.Extensions.Authentication
 
         public override async Task Invoke(IOwinContext context)
         {
-            // retrieve the token from the specified sources
             var token = GetTokenFromRequest(context.Request);
-            if (string.IsNullOrWhiteSpace(token))
-            {
-                await Next.Invoke(context);
-                return;
-            }
-
-            // get the identity from the token
-            var user = _authenticator.PrincipleFromToken(token);
+            var user = _authenticator.PrincipleFromToken(token ?? "");
             if (user == null)
             {
                 await Next.Invoke(context);

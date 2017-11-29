@@ -6,7 +6,6 @@ namespace Cosella.Framework.Extensions.Authentication
 {
     public class AuthenticationExtensionsModule : NinjectModule
     {
-        private readonly string _jwtSecret;
         private readonly IAuthenticator _authenticator;
 
         public AuthenticationExtensionsModule(IAuthenticator authenticator)
@@ -14,20 +13,27 @@ namespace Cosella.Framework.Extensions.Authentication
             _authenticator = authenticator;
         }
 
-        public AuthenticationExtensionsModule(string jwtSecret)
+        public AuthenticationExtensionsModule()
         {
-            _jwtSecret = jwtSecret;
         }
 
         public override void Load()
         {
             if (_authenticator != null)
             {
-                Bind<IAuthenticator>().ToConstant(_authenticator).InSingletonScope();
+                Bind<IAuthenticator>()
+                    .ToConstant(_authenticator)
+                    .InSingletonScope();
             }
             else
             {
-                Bind<IAuthenticator>().ToConstant(new DefaultAuthenticator(_jwtSecret)).InSingletonScope();
+                Bind<IUserManager>()
+                    .To<UserManager>()
+                    .InSingletonScope();
+
+                Bind<IAuthenticator>()
+                    .To<DefaultAuthenticator>()
+                    .InSingletonScope();
             }
         }
     }

@@ -14,7 +14,7 @@ namespace Cosella.Services.User
                     config.ServiceDisplayName = "Cosella User";
                     config.ServiceDescription = "User and Role service for Cosella framework";
                 })
-                .AddAuthentication("testtest")
+                .AddAuthentication()
                 .Run();
         }
     }

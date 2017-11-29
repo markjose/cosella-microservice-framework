@@ -21,7 +21,7 @@ namespace Cosella.Services.Gateway
                     config.DisableServiceDiscovery = true;
                 })
                 .AddGateway()
-                .AddAuthentication("nf42v97n24nn34589fcco3mjcfjv49vhcp93x9unv84bxv05jv0wm")
+                .AddAuthentication()
                 .Run();
         }
     }

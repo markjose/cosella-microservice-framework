@@ -130,13 +130,17 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Authentication\AuthenticatedUser.cs" />
     <Compile Include="Authentication\AuthenticationMiddleware.cs" />
     <Compile Include="Authentication\AuthenticationTokenSource.cs" />
     <Compile Include="Authentication\AuthenticationTokenSourceType.cs" />
     <Compile Include="Authentication\Default\DefaultAuthenticator.cs" />
     <Compile Include="Authentication\AuthenticationAttribute.cs" />
     <Compile Include="Authentication\AuthenticationExtensions.cs" />
+    <Compile Include="Authentication\Default\AuthenticationController.cs" />
+    <Compile Include="Authentication\Default\IUserManager.cs" />
+    <Compile Include="Authentication\Default\User.cs" />
+    <Compile Include="Authentication\Default\UserException.cs" />
+    <Compile Include="Authentication\Default\UserManager.cs" />
     <Compile Include="Gateway\GatewayExtensions.cs" />
     <Compile Include="Gateway\ServicesController.cs" />
     <Compile Include="Gateway\ServiceManager.cs" />
@@ -157,9 +161,7 @@
       <Name>Cosella.Framework.Core</Name>
     </ProjectReference>
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="ApplicationHost\" />
-  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

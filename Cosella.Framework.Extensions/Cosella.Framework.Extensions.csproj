@@ -141,6 +141,7 @@
     <Compile Include="ApplicationHost\HostedApplicationConfiguration.cs" />
     <Compile Include="ApplicationHost\HostedApplicationMeta.cs" />
     <Compile Include="ApplicationHost\HostedApplicationResource.cs" />
+    <Compile Include="ApplicationHost\HostedApplicationTypes.cs" />
     <Compile Include="ApplicationHost\IApplicationManager.cs" />
     <Compile Include="ApplicationHost\IApplicationManagerOverRest.cs" />
     <Compile Include="Authentication\AuthenticationMiddleware.cs" />

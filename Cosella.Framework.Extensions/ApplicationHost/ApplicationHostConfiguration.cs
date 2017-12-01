@@ -5,6 +5,19 @@ namespace Cosella.Framework.Extensions.ApplicationHost
     public class ApplicationHostConfiguration
     {
         public bool EnableApplicationManagerApi { get; set; } = false;
-        public List<HostedApplicationConfiguration> Applications { get; } = new List<HostedApplicationConfiguration>();
+        public ApplicationList Applications { get; } = new ApplicationList();
+
+        public class ApplicationList : List<HostedApplicationConfiguration>
+        {
+            public void Add(string name, string primaryAlias, bool isDefault = false)
+            {
+                Add(new HostedApplicationConfiguration
+                {
+                    Name = name,
+                    Aliases = new [] { primaryAlias },
+                    IsDefault = isDefault
+                });
+            }
+        }
     }
 }

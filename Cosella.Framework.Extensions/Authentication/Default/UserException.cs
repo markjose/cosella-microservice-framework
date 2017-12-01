@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Runtime.Serialization;
 
 namespace Cosella.Framework.Extensions.Authentication.Default
 {
@@ -10,6 +11,14 @@ namespace Cosella.Framework.Extensions.Authentication.Default
         }
 
         public UserException(string message) : base(message)
+        {
+        }
+
+        public UserException(string message, Exception innerException) : base(message, innerException)
+        {
+        }
+
+        protected UserException(SerializationInfo info, StreamingContext context) : base(info, context)
         {
         }
 

@@ -23,7 +23,26 @@ namespace Cosella.Services.Gateway
                 })
                 .AddGateway()
                 .AddAuthentication()
-                .AddApplicationHost()
+                .AddApplicationHost(config =>
+                {
+                    config.EnableApplicationManagerApi = true;
+                    config.Applications.Add(new HostedApplicationConfiguration
+                    {
+                        Name = "Example Application 1",
+                        Aliases = new [] { "app1" }
+                    });
+                    config.Applications.Add(new HostedApplicationConfiguration
+                    {
+                        Name = "Example Application 2 (Default)",
+                        Aliases = new[] { "app2" },
+                        IsDefault = true
+                    });
+                    config.Applications.Add(new HostedApplicationConfiguration
+                    {
+                        Name = "Example Application 3",
+                        Aliases = new[] { "app3" }
+                    });
+                })
                 .Run();
         }
     }

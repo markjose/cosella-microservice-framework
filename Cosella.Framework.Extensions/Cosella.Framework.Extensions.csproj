@@ -130,12 +130,19 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ApplicationHost\ApplicationHostConfiguration.cs" />
     <Compile Include="ApplicationHost\ApplicationHostController.cs" />
+    <Compile Include="ApplicationHost\ApplicationHostException.cs" />
     <Compile Include="ApplicationHost\ApplicationHostExtensions.cs" />
     <Compile Include="ApplicationHost\ApplicationHostExtensionsModule.cs" />
     <Compile Include="ApplicationHost\ApplicationManager.cs" />
     <Compile Include="ApplicationHost\DefaultController.cs" />
+    <Compile Include="ApplicationHost\HostedApplication.cs" />
+    <Compile Include="ApplicationHost\HostedApplicationConfiguration.cs" />
+    <Compile Include="ApplicationHost\HostedApplicationMeta.cs" />
+    <Compile Include="ApplicationHost\HostedApplicationResource.cs" />
     <Compile Include="ApplicationHost\IApplicationManager.cs" />
+    <Compile Include="ApplicationHost\IApplicationManagerOverRest.cs" />
     <Compile Include="Authentication\AuthenticationMiddleware.cs" />
     <Compile Include="Authentication\AuthenticationTokenSource.cs" />
     <Compile Include="Authentication\AuthenticationTokenSourceType.cs" />
@@ -171,7 +178,12 @@
       <Name>Cosella.Framework.Core</Name>
     </ProjectReference>
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <EmbeddedResource Include="ApplicationHost\Content\TenantRoot.html" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="ApplicationHost\Content\NoTenantRoot.html" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

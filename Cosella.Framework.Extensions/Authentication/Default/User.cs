@@ -1,6 +1,5 @@
 ﻿using Newtonsoft.Json;
 using System.Collections.Generic;
-using System.ComponentModel;
 
 namespace Cosella.Framework.Extensions.Authentication.Default
 {

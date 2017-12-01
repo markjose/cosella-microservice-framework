@@ -6,7 +6,7 @@ namespace Cosella.Framework.Extensions.Gateway
     {
         public override void Load()
         {
-            Bind<IServiceManager>().To<ServiceManager>();
+            Bind<IServiceManager>().To<ServiceManager>().InSingletonScope();
         }
     }
 }

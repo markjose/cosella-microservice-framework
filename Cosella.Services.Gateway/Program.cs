@@ -1,4 +1,5 @@
 ﻿using Cosella.Framework.Core;
+using Cosella.Framework.Extensions.ApplicationHost;
 using Cosella.Framework.Extensions.Authentication;
 using Cosella.Framework.Extensions.Gateway;
 
@@ -20,8 +21,9 @@ namespace Cosella.Services.Gateway
                     config.DisableRegistration = true;
                     config.DisableServiceDiscovery = true;
                 })
-                //.AddGateway()
+                .AddGateway()
                 .AddAuthentication()
+                .AddApplicationHost()
                 .Run();
         }
     }

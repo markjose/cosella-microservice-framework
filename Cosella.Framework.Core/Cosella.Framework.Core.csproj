@@ -146,7 +146,7 @@
     <Compile Include="Contracts\MicroServiceStatus.cs" />
     <Compile Include="Contracts\ServiceDescription.cs" />
     <Compile Include="Hosting\CustomControllerResolver.cs" />
-    <Compile Include="Hosting\ControllerDependantOnAttribute.cs" />
+    <Compile Include="Hosting\ControllerDependsOnAttribute.cs" />
     <Compile Include="Hosting\RoutePrefixProvider.cs" />
     <Compile Include="Controllers\SystemRestApiController.cs" />
     <Compile Include="Controllers\RestApiController.cs" />

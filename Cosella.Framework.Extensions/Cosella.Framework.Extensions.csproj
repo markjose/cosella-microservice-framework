@@ -130,6 +130,12 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ApplicationHost\ApplicationHostController.cs" />
+    <Compile Include="ApplicationHost\ApplicationHostExtensions.cs" />
+    <Compile Include="ApplicationHost\ApplicationHostExtensionsModule.cs" />
+    <Compile Include="ApplicationHost\ApplicationManager.cs" />
+    <Compile Include="ApplicationHost\DefaultController.cs" />
+    <Compile Include="ApplicationHost\IApplicationManager.cs" />
     <Compile Include="Authentication\AuthenticationMiddleware.cs" />
     <Compile Include="Authentication\AuthenticationTokenSource.cs" />
     <Compile Include="Authentication\AuthenticationTokenSourceType.cs" />

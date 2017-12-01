@@ -8,7 +8,7 @@ using System.Web.Http;
 
 namespace Cosella.Framework.Extensions.Gateway
 {
-    [ControllerDependantOn(typeof(IServiceManager))]
+    [ControllerDependsOn(typeof(IServiceManager))]
     [RoutePrefix("services")]
     public class ServicesController : RestApiController
     {

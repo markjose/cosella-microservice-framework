@@ -28,8 +28,8 @@ namespace Cosella.Framework.Core.Hosting
             if (!isController) return false;
 
             var dependancies = controllerType
-                .GetCustomAttributes(typeof(ControllerDependantOnAttribute), true)
-                .Cast<ControllerDependantOnAttribute>()
+                .GetCustomAttributes(typeof(ControllerDependsOnAttribute), true)
+                .Cast<ControllerDependsOnAttribute>()
                 .SelectMany(a => a.Types);
 
             var isEnabled = !dependancies.Any() || dependancies.All(t => _kernel.GetBindings(t).Any());

@@ -41,7 +41,7 @@ namespace Cosella.Services.Gateway
 
                     // Simple Add
                     config.Applications.Add("Example Application 1", "app1");
-                    config.Applications.Add("Example Application 1", "app2", true);
+                    config.Applications.Add("Example Application 2", "app2", true);
 
                     // Fully configured Add
                     config.Applications.Add(new HostedApplicationConfiguration

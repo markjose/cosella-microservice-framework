@@ -21,7 +21,9 @@ namespace Cosella.Framework.Extensions.ApplicationHost
                 Add(new HostedApplicationMeta()
                 {
                     Name = app.Name,
-                    Aliases = app.Aliases.ToList()
+                    Aliases = app.Aliases.ToList(),
+                    ApplicationRoot = app.ApplicationRoot,
+                    ApplicationType = app.ApplicationType
                 }, app.IsDefault);
             });
         }

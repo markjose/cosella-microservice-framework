@@ -60,10 +60,18 @@
   <ItemGroup>
     <None Include="App.config" />
     <None Include="Apps\app3\.gitignore" />
-    <None Include="Apps\app3\build\asset-manifest.json" />
-    <None Include="Apps\app3\build\manifest.json" />
-    <None Include="Apps\app3\build\static\css\main.c17080f1.css.map" />
-    <None Include="Apps\app3\build\static\js\main.35d639b7.js.map" />
+    <None Include="Apps\app3\build\asset-manifest.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Apps\app3\build\manifest.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Apps\app3\build\static\css\main.c17080f1.css.map">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Apps\app3\build\static\js\main.35d639b7.js.map">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
     <None Include="Apps\app3\package-lock.json" />
     <None Include="Apps\app3\package.json" />
     <None Include="Apps\app3\public\manifest.json" />
@@ -85,12 +93,24 @@
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>
-    <Content Include="Apps\app3\build\favicon.ico" />
-    <Content Include="Apps\app3\build\index.html" />
-    <Content Include="Apps\app3\build\service-worker.js" />
-    <Content Include="Apps\app3\build\static\css\main.c17080f1.css" />
-    <Content Include="Apps\app3\build\static\js\main.35d639b7.js" />
-    <Content Include="Apps\app3\build\static\media\logo.5d5d9eef.svg" />
+    <Content Include="Apps\app3\build\favicon.ico">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Apps\app3\build\index.html">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Apps\app3\build\service-worker.js">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Apps\app3\build\static\css\main.c17080f1.css">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Apps\app3\build\static\js\main.35d639b7.js">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Apps\app3\build\static\media\logo.5d5d9eef.svg">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <Content Include="Apps\app3\public\favicon.ico" />
     <Content Include="Apps\app3\public\index.html" />
     <Content Include="Apps\app3\src\App.css" />

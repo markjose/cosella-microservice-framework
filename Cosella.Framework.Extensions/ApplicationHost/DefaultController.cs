@@ -7,6 +7,8 @@ using System.IO;
 using System.Net.Http;
 using System.Net;
 using System.Net.Http.Headers;
+using System.Reflection;
+using Cosella.Framework.Core.Logging;
 
 namespace Cosella.Framework.Extensions.ApplicationHost
 {
@@ -14,10 +16,12 @@ namespace Cosella.Framework.Extensions.ApplicationHost
     [RoutePrefix("")]
     public class _DefaultController : SystemRestApiController
     {
+        private readonly ILogger _log;
         private readonly IApplicationManager _applicationManager;
 
         public _DefaultController(IKernel kernel)
         {
+            _log = kernel.Get<ILogger>();
             _applicationManager = kernel.Get<IApplicationManager>();
         }
 
@@ -59,10 +63,23 @@ namespace Cosella.Framework.Extensions.ApplicationHost
                 return SendResource(ReadTextResource("NoTenantRoot.html"), "text/html");
             }
 
-            var resource = ReadTextResource("TenantRoot.html");
+            var appRoot = GetApplicationRoot(app.Meta);
+
+            var resource = string.IsNullOrWhiteSpace(appRoot)
+                ? ReadTextResource("TenantRoot.html")
+                : ReadTextContent(appRoot);
+
             resource = resource.Replace("[[TenantName]]", app.Meta.Name);
             resource = resource.Replace("[[TenantAppId]]", app.AppId.ToString());
+
             return SendResource(resource, "text/html");
+        }
+
+        private string GetApplicationRoot(HostedApplicationMeta meta)
+        {
+            if (string.IsNullOrWhiteSpace(meta.ApplicationRoot)) return "";
+            if (meta.ApplicationType == HostedApplicationTypes.React) return $"{meta.ApplicationRoot}/index.html";
+            return "";
         }
 
         private IHttpActionResult SendResource(string resource, string mimeType)
@@ -97,6 +114,23 @@ namespace Cosella.Framework.Extensions.ApplicationHost
             }
             catch (Exception)
             {
+                return "";
+            }
+        }
+
+        private string ReadTextContent(string appRoot)
+        {
+            var uri = new UriBuilder(Assembly.GetEntryAssembly().CodeBase);
+            var path = Uri.UnescapeDataString(uri.Path);
+            var file = Path.Combine(Path.GetDirectoryName(path), appRoot);
+
+            try
+            {
+                return File.ReadAllText(file);
+            }
+            catch (Exception ex)
+            {
+                _log.Fatal($"Failed to load content from {file}", ex);
                 return "";
             }
         }

@@ -11,6 +11,7 @@ using Owin;
 using Swashbuckle.Application;
 using System.Linq;
 using System.Web.Http;
+using System.Web.Http.Dispatcher;
 
 namespace Cosella.Framework.Core.Hosting
 {
@@ -27,6 +28,8 @@ namespace Cosella.Framework.Core.Hosting
         {
             var serviceConfiguration = _kernel.Get<HostedServiceConfiguration>();
             var config = new HttpConfiguration();
+
+            config.Services.Replace(typeof(IHttpControllerTypeResolver), new CustomControllerResolver(_kernel));
 
             config.MapHttpAttributeRoutes(new RoutePrefixProvider(serviceConfiguration));
 

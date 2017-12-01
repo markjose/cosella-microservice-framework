@@ -1,4 +1,5 @@
 ﻿using Cosella.Framework.Core.Controllers;
+using Cosella.Framework.Core.Hosting;
 using Cosella.Framework.Core.Logging;
 using System;
 using System.Net;
@@ -7,6 +8,7 @@ using System.Web.Http;
 
 namespace Cosella.Framework.Extensions.Gateway
 {
+    [ControllerDependantOn(typeof(IServiceManager))]
     [RoutePrefix("services")]
     public class ServicesController : RestApiController
     {

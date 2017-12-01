@@ -1,9 +1,11 @@
 ﻿using Cosella.Framework.Core.Controllers;
+using Cosella.Framework.Core.Hosting;
 using System.Linq;
 using System.Web.Http;
 
 namespace Cosella.Framework.Extensions.Authentication.Default
 {
+    [ControllerDependantOn(typeof(IUserManager))]
     [RoutePrefix("authentication")]
     public class AuthenticationController : RestApiController
     {

@@ -14,9 +14,9 @@ namespace Cosella.Framework.Extensions.Authentication
             return microservice;
         }
 
-        public static MicroService AddAuthentication(this MicroService microservice, Type authenticatorType)
+        public static MicroService AddAuthentication<T>(this MicroService microservice) where T : IAuthenticator
         {
-            microservice.Configuration.Modules.Add(new AuthenticationExtensionsModule(authenticatorType));
+            microservice.Configuration.Modules.Add(new AuthenticationExtensionsModule(typeof(T)));
             microservice.Configuration.Middleware.Add(UseAuthentication);
             return microservice;
         }

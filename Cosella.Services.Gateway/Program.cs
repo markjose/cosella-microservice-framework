@@ -49,7 +49,8 @@ namespace Cosella.Services.Gateway
                         Name = "Example Application 3",
                         Aliases = new[] { "app3" },
                         ApplicationType = HostedApplicationTypes.React,
-                        ApplicationRoot = "./Apps/app3/build"
+                        ApplicationRoot = "./Apps/app3/build",
+                        IsDefault = true
                     });
                 })
                 .Run();

@@ -32,7 +32,7 @@ namespace Cosella.Framework.Extensions.ApplicationHost
             return GetRootContent(tenant);
         }
 
-        [Route("{tenant}")]
+        [Route("{tenant}/")]
         [HttpGet]
         public IHttpActionResult TenantDefault(string tenant)
         {

@@ -13,7 +13,7 @@ using Cosella.Framework.Core.Logging;
 namespace Cosella.Framework.Extensions.ApplicationHost
 {
     [ControllerDependsOn(typeof(IApplicationManager))]
-    [RoutePrefix("")]
+    [RoutePrefix("app")]
     public class _DefaultController : SystemRestApiController
     {
         private readonly ILogger _log;

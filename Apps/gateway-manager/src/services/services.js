@@ -1,6 +1,7 @@
 import serviceData from './data/services.json';
 
 const useMocks = false;
+const baseUrl = window.cosella.baseUrl || '';
 
 const fetchSettings = {
     headers: new Headers({
@@ -13,7 +14,7 @@ const fetchSettings = {
 const listServices = () => {
     return useMocks ? 
         new Promise(resolve => resolve(serviceData)) : 
-        fetch('http://localhost:5000/services?includeDescriptors=true', {...fetchSettings, method: 'GET'})
+        fetch(`${baseUrl}services?includeDescriptors=true`, {...fetchSettings, method: 'GET'})
             .then(response => {
                 if(response.ok) {
                     return response.json();

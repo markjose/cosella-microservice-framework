@@ -9,19 +9,19 @@ using System.Web.Http;
 namespace Cosella.Framework.Extensions.Gateway
 {
     [ControllerDependsOn(typeof(IServiceManager))]
-    [RoutePrefix("services")]
-    public class ServicesController : RestApiController
+    [RoutePrefix("gateway")]
+    public class GatewayController : SystemRestApiController
     {
         private ILogger _log;
         private IServiceManager _serviceDataManager;
 
-        public ServicesController(ILogger log, IServiceManager serviceDataManager)
+        public GatewayController(ILogger log, IServiceManager serviceDataManager)
         {
             _log = log;
             _serviceDataManager = serviceDataManager;
         }
 
-        [Route("")]
+        [Route("services")]
         [HttpGet]
         public async Task<IHttpActionResult> List([FromUri] bool includeDescriptors)
         {
@@ -35,6 +35,13 @@ namespace Cosella.Framework.Extensions.Gateway
                     HttpStatusCode.ServiceUnavailable,
                     $"Service unavailable: {ex.InnerException.Message}");
             }
+        }
+
+        [Route("{*resource}")]
+        [HttpGet]
+        public IHttpActionResult AppResource(string resource)
+        {
+            return new EmbeddedWebResource(resource);
         }
     }
 }

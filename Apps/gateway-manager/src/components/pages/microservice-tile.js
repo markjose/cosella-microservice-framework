@@ -60,38 +60,39 @@ export class MicroserviceTile extends Component {
     };
     const { service } = this.state;
 
-    const passingServices = (service.Instances || []).filter(instance => instance.Health === 'passing');
-    const criticalServices = (service.Instances || []).filter(instance => instance.Health === 'critical');
+    const passingServices = (service.instances || []).filter(instance => instance.health === 'passing');
+    const criticalServices = (service.instances || []).filter(instance => instance.health === 'critical');
 
+    const avatarChar = service.serviceName[0].toUpperCase();
     const avatar = (
-        <Avatar size={40}>{service.ServiceName[0].toUpperCase()}</Avatar>
+        <Avatar size={40}>{avatarChar}</Avatar>
     );
 
     const instances = [
             ...passingServices, 
             ...criticalServices
         ].map(instance => {
-            const icon = instance.Health === 'passing' ? <Done style={styles.good} /> : <Close style={styles.bad} />;
-            const classNames = `microservice-tile-instance ${instance.Health}`;
+            const icon = instance.health === 'passing' ? <Done style={styles.good} /> : <Close style={styles.bad} />;
+            const classNames = `microservice-tile-instance ${instance.health}`;
             return (
-                <div className={classNames} key={instance.InstanceName} >
-                    <div>{instance.InstanceName}</div>
+                <div className={classNames} key={instance.instanceName} >
+                    <div>{instance.instanceName}</div>
                     <div><small>@</small></div>
-                    <div>{instance.NodeId}</div>
+                    <div>{instance.nodeId}</div>
                     {icon}
                 </div>
             );
         });
 
-    const hasDescriptor = service.Descriptor !== null;
+    const hasDescriptor = service.descriptor !== null;
 
     return (
         <GridTile>
             <Paper style={styles.paper} zDepth={3}>
                 <Card expanded={this.state.expanded} onExpandChange={this.handleExpandChange}>
                     <CardHeader
-                        title={service.ServiceName}
-                        subtitle={service.ServiceDescription}
+                        title={service.serviceName}
+                        subtitle={service.serviceDescription}
                         avatar={avatar}
                         actAsExpander={true}
                         showExpandableButton={true} />
@@ -99,8 +100,8 @@ export class MicroserviceTile extends Component {
                         {instances}
                     </CardText>
                     <CardActions>
-                        <FlatButton label="Manage" onTouchTap={() => this.handleManage(service.ServiceName)} disabled={true} />
-                        <FlatButton label="Explore" onTouchTap={() => this.handleExplore(service.ServiceName)} disabled={!hasDescriptor} />
+                        <FlatButton label="Manage" onTouchTap={() => this.handleManage(service.serviceName)} disabled={true} />
+                        <FlatButton label="Explore" onTouchTap={() => this.handleExplore(service.serviceName)} disabled={!hasDescriptor} />
                     </CardActions>
                 </Card>
             </Paper>

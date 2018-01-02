@@ -25,9 +25,9 @@ export class MicroserviceExplorer extends Component {
     assignProps(props) {
         const { service, onCancel } = props;
         const paths = Object
-            .getOwnPropertyNames(service.Descriptor.paths)
+            .getOwnPropertyNames(service.descriptor.paths)
             .map(path => Object
-                .getOwnPropertyNames(service.Descriptor.paths[path])
+                .getOwnPropertyNames(service.descriptor.paths[path])
                 .map(method => ({ method, path, key: `${method}|${path}` })))
             .reduce((a, b) => a.concat(b));
 
@@ -114,13 +114,13 @@ export class MicroserviceExplorer extends Component {
         );
 
         const path = paths.filter(path => path.key === pathKey)[0];
-        const endpoint = service.Descriptor.paths[path.path][path.method];
+        const endpoint = service.descriptor.paths[path.path][path.method];
 
         const parameters = (endpoint.parameters || []).map((parameter, key) => (
             <MicroserviceParam
                 key={key}
                 meta={parameter}
-                definitions={service.Descriptor.definitions}
+                definitions={service.descriptor.definitions}
                 onChange={newValue => this.onChange(parameter, newValue)}
             />
         ));
@@ -170,9 +170,9 @@ export class MicroserviceExplorer extends Component {
                         <h2>Microservice Explorer</h2>
                     </div>
                     <Divider />
-                    <h1>{service.ServiceName}</h1>
-                    <h3>REST Version {service.Version}</h3>
-                    <p>{service.Description}</p>
+                    <h1>{service.serviceName}</h1>
+                    <h3>REST Version {service.version}</h3>
+                    <p>{service.description}</p>
                     <Divider />
                     {pathComponents}
                 </div>

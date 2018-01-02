@@ -9,8 +9,9 @@
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>Cosella.Framework.Extensions</RootNamespace>
     <AssemblyName>Cosella.Framework.Extensions</AssemblyName>
-    <TargetFrameworkVersion>v4.6.2</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.7.1</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
+    <TargetFrameworkProfile />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -155,8 +156,9 @@
     <Compile Include="Authentication\Default\User.cs" />
     <Compile Include="Authentication\Default\UserException.cs" />
     <Compile Include="Authentication\Default\UserManager.cs" />
+    <Compile Include="Gateway\EmbeddedWebResource.cs" />
     <Compile Include="Gateway\GatewayExtensions.cs" />
-    <Compile Include="Gateway\ServicesController.cs" />
+    <Compile Include="Gateway\GatewayController.cs" />
     <Compile Include="Gateway\ServiceManager.cs" />
     <Compile Include="Authentication\AuthenticationExtensionsModule.cs" />
     <Compile Include="Gateway\GatewayExtensionsModule.cs" />
@@ -167,6 +169,10 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="app.config" />
+    <EmbeddedResource Include="Gateway\Console\asset-manifest.json" />
+    <EmbeddedResource Include="Gateway\Console\manifest.json" />
+    <EmbeddedResource Include="Gateway\Console\static\css\main.0ad7effb.css.map" />
+    <EmbeddedResource Include="Gateway\Console\static\js\main.d27fd687.js.map" />
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
@@ -184,6 +190,15 @@
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="ApplicationHost\Content\NoTenantRoot.html" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Gateway\Console\static\js\main.d27fd687.js" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Gateway\Console\index.html" />
+    <EmbeddedResource Include="Gateway\Console\service-worker.js" />
+    <EmbeddedResource Include="Gateway\Console\static\css\main.0ad7effb.css" />
+    <EmbeddedResource Include="Gateway\Console\static\media\logo.f1de11db.svg" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

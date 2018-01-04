@@ -4,6 +4,7 @@ using Cosella.Framework.Core.ServiceDiscovery;
 using Cosella.Framework.Core.Workers;
 using Microsoft.Owin.Hosting;
 using Ninject;
+using Ninject.Extensions.ChildKernel;
 using System;
 using System.Linq;
 using System.Reflection;
@@ -35,7 +36,7 @@ namespace Cosella.Framework.Core.Hosting
             _cancellationTokenSource = new CancellationTokenSource();
 
             // Create instance name
-            configuration.ServiceInstanceName = $"{configuration.ServiceName}{DateTime.UtcNow.ToString("yyyyMMddHHmmssfff")}";
+            configuration.ServiceInstanceName = $"{configuration.ServiceName}.{DateTime.UtcNow.ToString("yyyyMMddHHmmssfff")}";
 
             _kernel = new StandardKernel();
             _kernel.Bind<HostedServiceConfiguration>().ToMethod(context => configuration).InSingletonScope();
@@ -59,15 +60,16 @@ namespace Cosella.Framework.Core.Hosting
         {
             _hostControl = hostControl;
 
-            var startup = _kernel.Get<Startup>();
-            var configuration = _kernel.Get<HostedServiceConfiguration>();
 
             _log.Info("Starting Hosted Microservice...");
 
             int retries = MaxRetries;
             while (retries > 0)
             {
-                var discovery = _kernel.Get<IServiceDiscovery>();
+                var childKernel = new ChildKernel(_kernel);
+
+                var configuration = childKernel.Get<HostedServiceConfiguration>();
+                var startup = childKernel.Get<Startup>();
                 var deferredRegistration = await _discovery.RegisterServiceDeferred();
 
                 if (configuration.RestApiPort > 0)
@@ -81,7 +83,7 @@ namespace Cosella.Framework.Core.Hosting
                         _registration = await _discovery.RegisterService(deferredRegistration);
                         MonitorServiceRegistration(_cancellationTokenSource.Token);
 
-                        _inServiceWorkers = _kernel.GetAll<IInServiceWorker>().ToArray();
+                        _inServiceWorkers = childKernel.GetAll<IInServiceWorker>().ToArray();
                         if (_inServiceWorkers.Any())
                         {
                             _inServiceWorkers.ToList().ForEach(worker => worker.Start(_cancellationTokenSource.Token));
@@ -98,6 +100,12 @@ namespace Cosella.Framework.Core.Hosting
                             ex = ex.InnerException;
                             _log.Debug(ex.Message);
                         } while (ex.InnerException != null);
+
+                        if(_app != null)
+                        {
+                            _app.Dispose();
+                            _app = null;
+                        }
 
                         _log.Info($"Retrying...({MaxRetries - retries}/{MaxRetries})");
                         configuration.RestApiPort = 0;

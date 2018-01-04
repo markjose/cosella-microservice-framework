@@ -8,6 +8,7 @@ using Newtonsoft.Json;
 using Cosella.Framework.Core.Logging;
 using Cosella.Framework.Core.Contracts;
 using Cosella.Framework.Client.Interfaces;
+using Cosella.Framework.Client.ApiClient;
 
 namespace Cosella.Framework.Extensions.Gateway
 {
@@ -31,17 +32,18 @@ namespace Cosella.Framework.Extensions.Gateway
                 .Where(instance => instance.Version > 0)
                 .GroupBy(service => new
                 {
-                    ServiceName = service.ServiceName,
-                    Version = service.Version
+                    service.ServiceName,
+                    service.Version
                 });
 
             var descriptors = new Dictionary<string, string>();
             if (includeServiceDescriptor)
             {
                 var descriptorTasks = groupedServices
-                    .Select(group => CreateWebRequest(group
-                        .Where(instance => instance.Health == "passing")
-                        .First()));
+                    .Select(group => group.Any() 
+                        ? CreateWebRequest(group.Where(instance => instance.Health == "passing").FirstOrDefault())
+                        : null)
+                    .Where(task => task != null);
 
                 var results = await Task.WhenAll(descriptorTasks);
 
@@ -76,10 +78,36 @@ namespace Cosella.Framework.Extensions.Gateway
                 .ToArray();
         }
 
+        public async Task<ApiClientResponse<object>> ProxyRequest(ServiceProxyRequest request)
+        {
+            if (string.IsNullOrEmpty(request.ServiceName)) throw new ServiceNotFoundException(request.ServiceName);
+
+            var client = await ServiceRestApiClient.Create(request.ServiceName, _discovery);
+            if(client == null) throw new ServiceNotFoundException(request.ServiceName);
+
+            switch (request.Method.ToLowerInvariant())
+            {
+                case "get":
+                    return await client.Get<object>($"{request.Url}{request.QueryString}");
+                case "post":
+                    return await client.Post<object>($"{request.Url}{request.QueryString}", request.Body);
+                case "put":
+                    return await client.Put<object>($"{request.Url}{request.QueryString}", request.Body);
+                /*case "patch":
+                    return await client.Patch<object>($"{request.Url}{request.QueryString}", request.Body);*/
+                case "delete":
+                    return await client.Delete<object>($"{request.Url}{request.QueryString}");
+            }
+
+            return null;
+        }
+
         private Task<ServiceApiDescriptor> CreateWebRequest(IServiceInstanceInfo instanceInfo)
         {
             return Task.Run(() =>
             {
+                if (instanceInfo == null) return null;
+
                 var descriptor = new ServiceApiDescriptor()
                 {
                     ServiceName = instanceInfo.ServiceName,

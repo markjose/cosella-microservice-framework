@@ -20,7 +20,7 @@ namespace Cosella.Framework.Client.ApiClient
             _service = await _discovery.FindServiceByName(_serviceName);
             if (_service != null)
             {
-                _baseUrl = _service.ApiUri;
+                _baseUrl = _service.BaseUri;
                 return true;
             }
             return false;

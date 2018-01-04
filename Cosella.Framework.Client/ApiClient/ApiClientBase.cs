@@ -30,7 +30,7 @@ namespace Cosella.Framework.Client.ApiClient
 
         public async Task<ApiClientResponse<T>> Get<T>(string uri)
         {
-            var fullUri = $"{_baseUrl}{uri}";
+            var fullUri = CombineUrls(_baseUrl, uri);
             try
             {
                 var response = await Client.GetAsync(fullUri);
@@ -52,7 +52,7 @@ namespace Cosella.Framework.Client.ApiClient
 
         public async Task<ApiClientResponse<T>> Delete<T>(string uri)
         {
-            var fullUri = $"{_baseUrl}{uri}";
+            var fullUri = CombineUrls(_baseUrl, uri);
             try
             {
                 var response = await Client.DeleteAsync(fullUri);
@@ -74,7 +74,7 @@ namespace Cosella.Framework.Client.ApiClient
 
         public async Task<ApiClientResponse<T>> Post<T>(string uri, object data)
         {
-            var fullUri = $"{_baseUrl}{uri}";
+            var fullUri = CombineUrls(_baseUrl, uri);
             try
             {
                 var response = await Client.PostAsJsonAsync(fullUri, data);
@@ -96,7 +96,7 @@ namespace Cosella.Framework.Client.ApiClient
 
         public async Task<ApiClientResponse<T>> Put<T>(string uri, object data)
         {
-            var fullUri = $"{_baseUrl}{uri}";
+            var fullUri = CombineUrls(_baseUrl, uri);
             try
             {
                 var response = await Client.PutAsJsonAsync(fullUri, data);
@@ -141,6 +141,25 @@ namespace Cosella.Framework.Client.ApiClient
                 Status = ApiClientResponseStatus.Ok,
                 Payload = payload
             };
+        }
+
+        private string CombineUrls(string baseUrl, string uri, bool overlap = false)
+        {
+            if (overlap == false) return $"{baseUrl}{uri}";
+
+            int rightOffset = 1;
+            string endOfUrl = baseUrl.Substring(baseUrl.Length - rightOffset++);
+
+            while (uri.IndexOf(endOfUrl) >= 0)
+            {
+                endOfUrl = baseUrl.Substring(baseUrl.Length - rightOffset++);
+            }
+            endOfUrl = endOfUrl.Substring(1);
+
+            var shortenedUri = uri.IndexOf(endOfUrl) == 0 ? uri.Substring(endOfUrl.Length) : uri;
+            var combinedUrl = $"{baseUrl}{shortenedUri}";
+
+            return combinedUrl;
         }
     }
 }

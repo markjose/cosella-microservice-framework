@@ -1,5 +1,7 @@
 ﻿using Ninject;
+using Ninject.Planning.Bindings;
 using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Web.Http.Controllers;
 using System.Web.Http.Dispatcher;
@@ -32,7 +34,7 @@ namespace Cosella.Framework.Core.Hosting
                 .Cast<ControllerDependsOnAttribute>()
                 .SelectMany(a => a.Types);
 
-            var isEnabled = !dependancies.Any() || dependancies.All(t => _kernel.GetBindings(t).Any());
+            var isEnabled = !dependancies.Any() || dependancies.All(t => _kernel.CanResolve(t));
 
             return isEnabled;
         }

@@ -11,15 +11,16 @@ import { Card, CardText } from 'material-ui/Card';
 import { MicroserviceParam } from '.';
 
 import './microservice-explorer.css';
+import { services } from '../../services/index';
 
 export class MicroserviceExplorer extends Component {
   
     state = {
         requestUrl: "",
-        requestBody: {},
+        requestBody: null,
         requestQuery: {},
         responseCode: 0,
-        responseBody: {}
+        responseBody: null
     }
 
     assignProps(props) {
@@ -63,7 +64,10 @@ export class MicroserviceExplorer extends Component {
             requestQuery[parameter.name] = newValue;
             this.setState({
                 ...this.state,
-                requestQuery
+                requestQuery,
+                requestBody: null,
+                responseCode: 0,
+                responseBody: null
             })
         }
     }
@@ -73,6 +77,27 @@ export class MicroserviceExplorer extends Component {
         if(onCancel) {
             onCancel();
         }
+    }
+
+    sendRequest() {
+        const {
+            service,
+            pathKey,
+            requestQuery,
+            requestBody
+        } = this.state;
+
+        services
+            .proxyRequest(service.serviceName, pathKey, requestQuery, requestBody)
+            .then(response => {
+                console.log('sendRequest', response);
+                this.setState({
+                    ...this.state,
+                    responseCode: response.status,
+                    responseBody: response.status === 'Error' ? response.message : response.payload
+                });
+            })
+            .catch(error => console.warn('sendRequest', error));
     }
 
     render() {
@@ -134,7 +159,7 @@ export class MicroserviceExplorer extends Component {
                     </ToolbarGroup>
                     <ToolbarGroup>
                         <RaisedButton label="Save request" disabled={true} />
-                        <RaisedButton label="Send request" primary={true} />
+                        <RaisedButton label="Send request" primary={true} onClick={() => this.sendRequest()} />
                     </ToolbarGroup>
                 </Toolbar>
                 <div className="endpoint-metadata">

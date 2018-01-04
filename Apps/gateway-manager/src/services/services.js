@@ -24,6 +24,38 @@ const listServices = () => {
             .then(json => json);
 };
 
+const proxyRequest = (serviceName, pathKey, requestQuery, body) => {
+
+    const [method, url] = pathKey.split('|');
+    let queryString = '';
+    if(Object.keys(requestQuery).length > 0) {
+        queryString = '?' + Object.keys(requestQuery)
+            .map(key => `${key}=${requestQuery[key]}`)
+            .join('&');
+    }
+
+    console.log('proxyRequest', serviceName, method, url, queryString, body);
+
+    const proxyRequest = {
+        serviceName,
+        method,
+        url,
+        queryString,
+        body
+    };
+
+    return useMocks ? 
+        new Promise(resolve => resolve({ statusCode: 200, body: "Mock Data" })) : 
+        fetch(`${baseUrl}services/proxy`, {...fetchSettings, method: 'POST', body: JSON.stringify(proxyRequest)})
+            .then(response => {
+                if(response.ok) {
+                    return response.json();
+                }
+                throw new Error(`Failed to proxy request for ${url} (${method})`);
+            });
+};
+
 export const services = {
-    list: () => listServices()
+    list: () => listServices(),
+    proxyRequest
 };

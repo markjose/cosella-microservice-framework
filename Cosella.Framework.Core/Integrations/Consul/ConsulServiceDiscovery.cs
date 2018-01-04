@@ -206,15 +206,18 @@ namespace Cosella.Framework.Core.Integrations.Consul
                     services.Add(info.Service, new ServiceInfo() { ServiceName = info.Service });
                 }
                 int version = ParseVersionFromTags(info.Tags);
+                var baseUri = $"http://{info.Address}:{info.Port}";
+
                 services[info.Service].Instances.Add(new ServiceInstanceInfo()
                 {
                     ServiceName = info.Service,
                     InstanceName = info.Id,
                     NodeId = healthCheck?.Node,
                     Health = healthCheck?.Status,
-                    MetadataUri = $"http://{info.Address}:{info.Port}/swagger/docs/v{version}",
-                    StatusUri = $"http://{info.Address}:{info.Port}/status?instanceId={info.Id}",
-                    ApiUri = $"http://{info.Address}:{info.Port}/api/v{version}/",
+                    MetadataUri = $"{baseUri}/swagger/docs/v{version}",
+                    StatusUri = $"{baseUri}/status?instanceId={info.Id}",
+                    ApiUri = $"{baseUri}/api/v{version}/",
+                    BaseUri = baseUri,
                     Version = version
                 });
             }

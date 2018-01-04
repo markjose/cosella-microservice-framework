@@ -1,6 +1,5 @@
 ﻿using Cosella.Framework.Core.Integrations.Swagger;
 using Cosella.Framework.Core.VersionTracking;
-using Microsoft.Owin;
 using Microsoft.Owin.Cors;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Serialization;
@@ -9,7 +8,6 @@ using Ninject.Web.Common.OwinHost;
 using Ninject.Web.WebApi.OwinHost;
 using Owin;
 using Swashbuckle.Application;
-using System.Linq;
 using System.Web.Http;
 using System.Web.Http.Dispatcher;
 

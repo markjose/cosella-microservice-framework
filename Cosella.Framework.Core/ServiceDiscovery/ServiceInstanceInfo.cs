@@ -9,6 +9,7 @@ namespace Cosella.Framework.Core.ServiceDiscovery
         public string NodeId { get; set; }
         public string Health { get; set; }
         public int Version { get; set; }
+        public string BaseUri { get; set; }
         public string StatusUri { get; set; }
         public string MetadataUri { get; set; }
         public string ApiUri { get; set; }

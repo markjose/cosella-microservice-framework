@@ -13,12 +13,12 @@ namespace Cosella.Framework.Extensions.Gateway
     public class GatewayController : SystemRestApiController
     {
         private ILogger _log;
-        private IServiceManager _serviceDataManager;
+        private IServiceManager _serviceManager;
 
-        public GatewayController(ILogger log, IServiceManager serviceDataManager)
+        public GatewayController(ILogger log, IServiceManager serviceManager)
         {
             _log = log;
-            _serviceDataManager = serviceDataManager;
+            _serviceManager = serviceManager;
         }
 
         [Route("services")]
@@ -27,13 +27,30 @@ namespace Cosella.Framework.Extensions.Gateway
         {
             try
             {
-                return Ok(await _serviceDataManager.GetServiceDescriptions(includeDescriptors));
+                return Ok(await _serviceManager.GetServiceDescriptions(includeDescriptors));
             }
             catch (Exception ex)
             {
                 return Content(
                     HttpStatusCode.ServiceUnavailable,
                     $"Service unavailable: {ex.InnerException.Message}");
+            }
+        }
+
+        [Route("services/proxy")]
+        [HttpPost]
+        public async Task<IHttpActionResult> Proxy([FromBody] ServiceProxyRequest request)
+        {
+            try
+            {
+                var response = await _serviceManager.ProxyRequest(request);
+                return Ok(response);
+            }
+            catch (Exception ex)
+            {
+                return Content(
+                    HttpStatusCode.ServiceUnavailable,
+                    $"Service unavailable: {ex.Message}");
             }
         }
 

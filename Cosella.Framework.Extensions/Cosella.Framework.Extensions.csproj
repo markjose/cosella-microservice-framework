@@ -165,6 +165,9 @@
     <Compile Include="Gateway\IServiceManager.cs" />
     <Compile Include="Gateway\ServiceApiDescriptor.cs" />
     <Compile Include="Authentication\IAuthenticator.cs" />
+    <Compile Include="Gateway\ServiceNotFoundException.cs" />
+    <Compile Include="Gateway\ServiceProxyRequest.cs" />
+    <Compile Include="Gateway\ServiceProxyResponse.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

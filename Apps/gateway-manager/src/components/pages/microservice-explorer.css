@@ -31,10 +31,35 @@
 }
 
 .microservice-explorer .endpoint-metadata .request {
-    flex: 1;
+    flex: 2;
     margin-right: 2em;
 }
 
 .microservice-explorer .endpoint-metadata .response {
-    flex: 1;
+    flex: 2;
+}
+
+.microservice-explorer .response-metadata {
+    font-size: 0.8em;
+}
+.microservice-explorer .response-metadata h4 {
+    margin: 0;
+    margin-top: 1em;
+    padding: 0;
+}
+.microservice-explorer .response-metadata p {
+    margin: 0;
+    padding: 0;
+}
+.microservice-explorer strong.status-2 {
+    color: #690;
+}
+.microservice-explorer strong.status-3 {
+    color: #069;
+}
+.microservice-explorer strong.status-4 {
+    color: #f80;
+}
+.microservice-explorer strong.status-5 {
+    color: #f30;
 }

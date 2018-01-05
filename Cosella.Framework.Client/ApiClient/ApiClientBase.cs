@@ -1,6 +1,7 @@
 ﻿using Cosella.Framework.Client.Interfaces;
 using Newtonsoft.Json;
 using System;
+using System.Net;
 using System.Net.Http;
 using System.Threading.Tasks;
 
@@ -28,117 +29,96 @@ namespace Cosella.Framework.Client.ApiClient
             _baseUrl = baseUrl;
         }
 
-        public async Task<ApiClientResponse<T>> Get<T>(string uri)
+        public Task<ApiClientResponse<T>> Get<T>(string uri)
+        {
+            return MakeRequest<T>(uri, Client.GetAsync, "GET");
+        }
+
+        public Task<ApiClientResponse<T>> Delete<T>(string uri)
+        {
+            return MakeRequest<T>(uri, Client.DeleteAsync, "DELETE");
+        }
+
+        public Task<ApiClientResponse<T>> Post<T>(string uri, object data)
+        {
+            return MakeDataRequest<T>(uri, Client.PostAsJsonAsync, "POST", data);
+        }
+
+        public Task<ApiClientResponse<T>> Put<T>(string uri, object data)
+        {
+            return MakeDataRequest<T>(uri, Client.PutAsJsonAsync, "PUT", data);
+        }
+
+        private async Task<ApiClientResponse<T>> MakeRequest<T>(string uri, Func<string, Task<HttpResponseMessage>> getAsync, string label)
         {
             var fullUri = CombineUrls(_baseUrl, uri);
             try
             {
-                var response = await Client.GetAsync(fullUri);
-                if(response.IsSuccessStatusCode)
-                {
-                    string content = await response.Content.ReadAsStringAsync();
-                    return ApiResponseOk(JsonConvert.DeserializeObject<T>(content));
-                }
-                else
-                {
-                    return ApiResponseError<T>($"Failed while GET-ting {fullUri} ({response.StatusCode})");
-                }
+                var response = await getAsync(fullUri);
+                string content = await response.Content.ReadAsStringAsync();
+                return response.IsSuccessStatusCode
+                    ? ApiResponseOk(fullUri, response.StatusCode, JsonConvert.DeserializeObject<T>(content))
+                    : ApiResponseError<T>(fullUri, response.StatusCode, response.ReasonPhrase, JsonConvert.DeserializeObject(content));
             }
             catch (Exception ex)
             {
-                return ApiResponseException<T>(new ApiClientException($"Exception while GET-ting {fullUri}, {ex.Message}", ex));
+                return ApiResponseException<T>(fullUri, new ApiClientException($"Exception while {label}-ing {fullUri}, {ex.Message}", ex));
             }
         }
 
-        public async Task<ApiClientResponse<T>> Delete<T>(string uri)
+        private async Task<ApiClientResponse<T>> MakeDataRequest<T>(string uri, Func<string, object, Task<HttpResponseMessage>> getAsync, string label, object data)
         {
             var fullUri = CombineUrls(_baseUrl, uri);
             try
             {
-                var response = await Client.DeleteAsync(fullUri);
-                if (response.IsSuccessStatusCode)
-                {
-                    string content = await response.Content.ReadAsStringAsync();
-                    return ApiResponseOk(JsonConvert.DeserializeObject<T>(content));
-                }
-                else
-                {
-                    return ApiResponseError<T>($"Failed while DELETE-ing {fullUri} ({response.StatusCode})");
-                }
+                var response = await getAsync(fullUri, data);
+                string content = await response.Content.ReadAsStringAsync();
+                return response.IsSuccessStatusCode
+                    ? ApiResponseOk(fullUri, response.StatusCode, JsonConvert.DeserializeObject<T>(content))
+                    : ApiResponseError<T>(fullUri, response.StatusCode, response.ReasonPhrase, JsonConvert.DeserializeObject(content));
             }
             catch (Exception ex)
             {
-                return ApiResponseException<T>(new ApiClientException($"Exception while DELETE-ing {fullUri}, {ex.Message}", ex));
+                return ApiResponseException<T>(fullUri, new ApiClientException($"Exception while {label}-ing {fullUri}, {ex.Message}", ex));
             }
         }
 
-        public async Task<ApiClientResponse<T>> Post<T>(string uri, object data)
+        private Task<ApiClientResponse<T>> MakeRequest<T>(string uri, Func<string, T, Task<HttpResponseMessage>> postAsJsonAsync, string label, object data)
         {
-            var fullUri = CombineUrls(_baseUrl, uri);
-            try
-            {
-                var response = await Client.PostAsJsonAsync(fullUri, data);
-                if (response.IsSuccessStatusCode)
-                {
-                    string content = await response.Content.ReadAsStringAsync();
-                    return ApiResponseOk(JsonConvert.DeserializeObject<T>(content));
-                }
-                else
-                {
-                    return ApiResponseError<T>($"Failed while POST-ing {fullUri} ({response.StatusCode})");
-                }
-            }
-            catch (Exception ex)
-            {
-                return ApiResponseException<T>(new ApiClientException($"Exception while POST-ing {fullUri}, {ex.Message}", ex));
-            }
+            throw new NotImplementedException();
         }
 
-        public async Task<ApiClientResponse<T>> Put<T>(string uri, object data)
-        {
-            var fullUri = CombineUrls(_baseUrl, uri);
-            try
-            {
-                var response = await Client.PutAsJsonAsync(fullUri, data);
-                if (response.IsSuccessStatusCode)
-                {
-                    string content = await response.Content.ReadAsStringAsync();
-                    return ApiResponseOk(JsonConvert.DeserializeObject<T>(content));
-                }
-                else
-                {
-                    return ApiResponseError<T>($"Failed while PUT-ing {fullUri} ({response.StatusCode})");
-                }
-            }
-            catch (Exception ex)
-            {
-                return ApiResponseException<T>(new ApiClientException($"Exception while PUT-ing {fullUri}, {ex.Message}", ex));
-            }
-        }
-
-        protected ApiClientResponse<T> ApiResponseException<T>(Exception ex)
+        protected ApiClientResponse<T> ApiResponseException<T>(string fullUri, Exception ex)
         {
             return new ApiClientResponse<T>()
             {
-                Status = ApiClientResponseStatus.Exception,
+                RequestUri = fullUri,
+                ResponseStatus = ApiClientResponseStatus.Exception,
+                StatusCode = HttpStatusCode.InternalServerError,
+                Message = ex.Message,
                 Exception = ex
             };
         }
 
-        protected ApiClientResponse<T> ApiResponseError<T>(string error)
+        protected ApiClientResponse<T> ApiResponseError<T>(string fullUri, HttpStatusCode statusCode, string reasonPhrase, object content)
         {
             return new ApiClientResponse<T>()
             {
-                Status = ApiClientResponseStatus.Error,
-                Message = error
+                RequestUri = fullUri,
+                ResponseStatus = ApiClientResponseStatus.Error,
+                StatusCode = statusCode,
+                Message = reasonPhrase,
+                Error = content
             };
         }
 
-        protected ApiClientResponse<T> ApiResponseOk<T>(T payload)
+        protected ApiClientResponse<T> ApiResponseOk<T>(string fullUri, HttpStatusCode statusCode, T payload)
         {
             return new ApiClientResponse<T>()
             {
-                Status = ApiClientResponseStatus.Ok,
+                RequestUri = fullUri,
+                ResponseStatus = ApiClientResponseStatus.Ok,
+                StatusCode = statusCode,
                 Payload = payload
             };
         }

@@ -84,7 +84,7 @@ export class MicroserviceTile extends Component {
             );
         });
 
-    const hasDescriptor = service.descriptor !== null;
+    const hasDescriptor = service.descriptor !== null && passingServices.length > 0;
 
     return (
         <GridTile>

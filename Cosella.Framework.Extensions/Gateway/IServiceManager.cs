@@ -7,6 +7,6 @@ namespace Cosella.Framework.Extensions.Gateway
     public interface IServiceManager
     {
         Task<ServiceDescription[]> GetServiceDescriptions(bool includeServiceDescriptor = false);
-        Task<ApiClientResponse<object>> ProxyRequest(ServiceProxyRequest request);
+        Task<ServiceRestResponse<object>> ProxyRequest(ServiceProxyRequest request);
     }
 }

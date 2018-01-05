@@ -34,8 +34,6 @@ const proxyRequest = (serviceName, pathKey, requestQuery, body) => {
             .join('&');
     }
 
-    console.log('proxyRequest', serviceName, method, url, queryString, body);
-
     const proxyRequest = {
         serviceName,
         method,
@@ -51,7 +49,9 @@ const proxyRequest = (serviceName, pathKey, requestQuery, body) => {
                 if(response.ok) {
                     return response.json();
                 }
-                throw new Error(`Failed to proxy request for ${url} (${method})`);
+                return {
+                    ...response
+                };
             });
 };
 

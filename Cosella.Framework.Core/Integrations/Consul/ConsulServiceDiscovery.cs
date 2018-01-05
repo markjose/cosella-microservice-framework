@@ -71,7 +71,7 @@ namespace Cosella.Framework.Core.Integrations.Consul
 
                 var response = await _client.Get<ConsulServices>("/agent/services");
 
-                if (response.Status == ApiClientResponseStatus.Exception)
+                if (response.ResponseStatus == ApiClientResponseStatus.Exception)
                 {
                     _log.Error($"Failed to query auto port for service instance '{_configuration.ServiceInstanceName}'");
                     _log.Error(response.Exception.Message);
@@ -181,12 +181,12 @@ namespace Cosella.Framework.Core.Integrations.Consul
 
             var services = new Dictionary<string, IServiceInfo>();
 
-            if (servicesResponse.Status == ApiClientResponseStatus.Exception)
+            if (servicesResponse.ResponseStatus == ApiClientResponseStatus.Exception)
             {
                 throw servicesResponse.Exception;
             }
 
-            if (checksResponse.Status == ApiClientResponseStatus.Exception)
+            if (checksResponse.ResponseStatus == ApiClientResponseStatus.Exception)
             {
                 throw checksResponse.Exception;
             }

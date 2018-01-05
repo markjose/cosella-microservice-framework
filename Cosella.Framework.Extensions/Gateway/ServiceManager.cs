@@ -78,7 +78,7 @@ namespace Cosella.Framework.Extensions.Gateway
                 .ToArray();
         }
 
-        public async Task<ApiClientResponse<object>> ProxyRequest(ServiceProxyRequest request)
+        public async Task<ServiceRestResponse<object>> ProxyRequest(ServiceProxyRequest request)
         {
             if (string.IsNullOrEmpty(request.ServiceName)) throw new ServiceNotFoundException(request.ServiceName);
 

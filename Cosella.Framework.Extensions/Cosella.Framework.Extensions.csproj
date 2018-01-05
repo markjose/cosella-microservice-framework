@@ -174,8 +174,8 @@
     <None Include="app.config" />
     <EmbeddedResource Include="Gateway\Console\asset-manifest.json" />
     <EmbeddedResource Include="Gateway\Console\manifest.json" />
-    <EmbeddedResource Include="Gateway\Console\static\css\main.0ad7effb.css.map" />
-    <EmbeddedResource Include="Gateway\Console\static\js\main.d27fd687.js.map" />
+    <EmbeddedResource Include="Gateway\Console\static\css\main.b9218c20.css.map" />
+    <EmbeddedResource Include="Gateway\Console\static\js\main.be3d9ceb.js.map" />
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
@@ -195,13 +195,13 @@
     <EmbeddedResource Include="ApplicationHost\Content\NoTenantRoot.html" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Gateway\Console\static\js\main.d27fd687.js" />
-  </ItemGroup>
-  <ItemGroup>
     <EmbeddedResource Include="Gateway\Console\index.html" />
     <EmbeddedResource Include="Gateway\Console\service-worker.js" />
-    <EmbeddedResource Include="Gateway\Console\static\css\main.0ad7effb.css" />
     <EmbeddedResource Include="Gateway\Console\static\media\logo.f1de11db.svg" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Gateway\Console\static\css\main.b9218c20.css" />
+    <EmbeddedResource Include="Gateway\Console\static\js\main.be3d9ceb.js" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

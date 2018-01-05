@@ -1,6 +1,7 @@
 ﻿using Newtonsoft.Json;
 using Newtonsoft.Json.Converters;
 using System;
+using System.Net;
 
 namespace Cosella.Framework.Client.ApiClient
 {
@@ -13,10 +14,14 @@ namespace Cosella.Framework.Client.ApiClient
 
     public class ApiClientResponse<T>
     {
-        public Exception Exception { get; set; }
         public string Message { get; set; }
         public T Payload { get; set; }
+
+        public string RequestUri { get; set; }
         [JsonConverter(typeof(StringEnumConverter))]
-        public ApiClientResponseStatus Status { get; set; }
+        public ApiClientResponseStatus ResponseStatus { get; set; }
+        public HttpStatusCode StatusCode { get; set; }
+        public object Error { get; set; }
+        public Exception Exception { get; set; }
     }
 }

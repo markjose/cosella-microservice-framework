@@ -48,6 +48,9 @@ namespace Cosella.Framework.Extensions.Authentication.Default
 
         public User Add(User request)
         {
+            if (request == null)
+                throw new UserException("No data was passed for the user.");
+
             if (string.IsNullOrWhiteSpace(request.Username))
                 throw new UserException("You must specify a username for the user.");
 

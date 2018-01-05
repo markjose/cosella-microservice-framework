@@ -8,8 +8,7 @@ const definitionsRegex = /#\/definitions\/([a-zA-Z0-9]+)/g;
 
 export class MicroserviceParam extends Component {
   
-    state = {
-    }
+    state = {}
 
     assignProps(props) {
         this.setState({
@@ -26,56 +25,43 @@ export class MicroserviceParam extends Component {
         this.assignProps(props);
     }
 
-    onChange(ev) {
+    onBlur(ev) {
         const { onChange } = this.state;
-        const currentValue = ev.target.value;
-
-        this.setState({
-            ...this.state,
-            meta: {
-                ...this.state.meta,
-                value: currentValue
-            }
-        })
-
         if(onChange) {
-            onChange(currentValue);
+            onChange(ev.target.value);
         }
     }
 
-    renderString() {
-        const { meta } = this.state;
+    renderString(name, required) {
         return (
             <TextField
                 type="text"
-                id={meta.name}
-                value={meta.value}
-                onChange={ev => this.onChange(ev)}
-                hintText={meta.required ? 'Required' : 'Optional'}
-                floatingLabelText={meta.name}
+                id={name}
+                onBlur={ev => this.onBlur(ev)}
+                hintText={required ? 'Required' : 'Optional'}
+                floatingLabelText={name}
                 fullWidth={true}
-                errorText={meta.required ? 'Required' : null}
+                errorText={required ? 'Required' : null}
             />
         );
     }
 
-    renderBoolean() {
-        const { meta } = this.state;
+    renderBoolean(name) {
         return (
             <Toggle
-                key={meta.name}
-                id={meta.name}
-                onChange={(ev, newValue) => this.onChange(newValue)}
-                label={meta.name}
+                key={name}
+                id={name}
+                onBlur={(ev, newValue) => this.onBlur(newValue)}
+                label={name}
                 defaultToggled={false}
             />
         );
     }
 
-    renderComplex() {
-        const { meta, definitions } = this.state;
+    renderComplex(name, schema) {
+        const { definitions } = this.state;
 
-        const refs = definitionsRegex.exec(meta.schema['$ref']);
+        const refs = definitionsRegex.exec(schema['$ref']);
         const typeName = refs && refs.length > 1 ? refs[1] : "unknown";
         const definition = definitions[typeName];
 
@@ -93,8 +79,31 @@ export class MicroserviceParam extends Component {
 
         return (
             <div>
-                <h3>{meta.name} ({typeName})</h3>
+                <h3>{name} ({typeName})</h3>
                 {properties}
+            </div>
+        );
+    }
+
+    renderArray() {
+        const { meta, arrayItems } = this.state;
+
+        const dom = (arrayItems || []).map(item => (
+            <p>{item.toString()}</p>
+        ));
+
+        return (
+            <div>
+                {dom}
+                <TextField
+                    type={"text"}
+                    id={meta.name}
+                    onBlur={ev => this.onBlur(ev)}
+                    hintText={meta.required ? 'Required' : 'Optional'}
+                    floatingLabelText={meta.name}
+                    fullWidth={true}
+                    errorText={meta.required ? 'Required' : null}
+                />
             </div>
         );
     }
@@ -108,14 +117,17 @@ export class MicroserviceParam extends Component {
 
         if (meta.type) {
             if(meta.type.toLowerCase() === 'string') {
-                output = this.renderString();
+                output = this.renderString(meta.name, meta.required);
             }
             else if(meta.type.toLowerCase() === 'boolean') {
-                output = this.renderBoolean();
+                output = this.renderBoolean(meta.name);
+            }
+            else if(meta.type.toLowerCase() === 'array') {
+                output = this.renderArray();
             }
         }
         if(meta.schema) {
-            output = this.renderComplex();
+            output = this.renderComplex(meta.name, meta.schema);
         }
 
         return output;

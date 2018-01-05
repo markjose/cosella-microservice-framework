@@ -29,6 +29,10 @@ export class MicroserviceList extends Component {
             })
             .catch(error => {
                 console.warn(error);
+                this.setState({
+                    ...this.state,
+                    microservices: []
+                });
                 setTimeout(() => this.reloadServices(), 2000);
             });
     }
@@ -75,7 +79,7 @@ export class MicroserviceList extends Component {
                         <Refresh />
                     </FloatingActionButton>
 
-                    <GridList cols={4} cellHeight="auto">
+                    <GridList cols={3} cellHeight="auto">
                         {tiles}
                     </GridList>
                 </div>

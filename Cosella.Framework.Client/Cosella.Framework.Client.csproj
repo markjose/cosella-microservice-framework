@@ -49,6 +49,7 @@
   <ItemGroup>
     <Compile Include="ApiClient\ApiClientBase.cs" />
     <Compile Include="ApiClient\ApiClientException.cs" />
+    <Compile Include="ApiClient\ServiceRestResponse.cs" />
     <Compile Include="ApiClient\ApiClientResponse.cs" />
     <Compile Include="Interfaces\IApiClient.cs" />
     <Compile Include="ApiClient\ServiceRestApiClient.cs" />

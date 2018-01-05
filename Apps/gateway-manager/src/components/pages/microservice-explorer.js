@@ -16,30 +16,33 @@ import { services } from '../../services/index';
 export class MicroserviceExplorer extends Component {
   
     state = {
-        requestUrl: "",
+        requestUrlTemplate: "",
+        requestUrlParams: {},
         requestBody: null,
         requestQuery: {},
-        responseCode: 0,
         responseBody: null
     }
 
     assignProps(props) {
         const { service, onCancel } = props;
-        const paths = Object
-            .getOwnPropertyNames(service.descriptor.paths)
-            .map(path => Object
-                .getOwnPropertyNames(service.descriptor.paths[path])
-                .map(method => ({ method, path, key: `${method}|${path}` })))
-            .reduce((a, b) => a.concat(b));
 
-        this.setState({
-            ...this.state,
-            service,
-            onCancel,
-            paths,
-            pathKey: paths[0].key,
-            requestUrl: paths[0].path
-        });
+        if(service && service.descriptor) {
+            const paths = Object
+                .getOwnPropertyNames(service.descriptor.paths)
+                .map(path => Object
+                    .getOwnPropertyNames(service.descriptor.paths[path])
+                    .map(method => ({ method, path, key: `${method}|${path}` })))
+                .reduce((a, b) => a.concat(b));
+
+            this.setState({
+                ...this.state,
+                service,
+                onCancel,
+                paths,
+                pathKey: paths[0].key,
+                requestUrlTemplate: paths[0].path
+            });
+        }
     }
 
     componentWillMount() {
@@ -54,21 +57,38 @@ export class MicroserviceExplorer extends Component {
         this.setState({
             ...this.state,
             pathKey: path.key,
-            requestUrl: path.path
-        });
+            requestUrlTemplate: path.path,
+            requestQuery: {},
+            requestBody: null,
+            responseBody: null
+    });
     }
 
     onChange(parameter, newValue) {
-        if(parameter && parameter.in && parameter.in === 'query') {
-            const requestQuery = { ...this.state.requestQuery };
-            requestQuery[parameter.name] = newValue;
-            this.setState({
-                ...this.state,
-                requestQuery,
-                requestBody: null,
-                responseCode: 0,
-                responseBody: null
-            })
+        console.log('onChange(parameter, newValue)', parameter, newValue);
+        if(parameter) {
+
+            parameter.value = newValue;
+
+            if(parameter.in && parameter.in === 'query') {
+                const requestQuery = { ...this.state.requestQuery };
+                requestQuery[parameter.name] = parameter.value;
+                this.setState({
+                    ...this.state,
+                    requestQuery,
+                    responseBody: null
+                })
+            }
+
+            if(parameter.in && parameter.in === 'path') {
+                const requestUrlParams = { ...this.state.requestUrlParams };
+                requestUrlParams[parameter.name] = parameter.value;
+                this.setState({
+                    ...this.state,
+                    requestUrlParams,
+                    responseBody: null
+                })
+            }
         }
     }
 
@@ -83,21 +103,34 @@ export class MicroserviceExplorer extends Component {
         const {
             service,
             pathKey,
+            requestUrlParams,
             requestQuery,
             requestBody
         } = this.state;
 
         services
-            .proxyRequest(service.serviceName, pathKey, requestQuery, requestBody)
+            .proxyRequest(service.serviceName, this.templateReplace(pathKey, requestUrlParams), requestQuery, requestBody)
             .then(response => {
-                console.log('sendRequest', response);
                 this.setState({
                     ...this.state,
-                    responseCode: response.status,
-                    responseBody: response.status === 'Error' ? response.message : response.payload
+                    responseBody: response
                 });
             })
-            .catch(error => console.warn('sendRequest', error));
+            .catch(error => {
+                this.setState({
+                    ...this.state,
+                    responseBody: {
+
+                    }
+                });
+                console.warn('sendRequest', error);
+            });
+    }
+
+    templateReplace(template, params) {
+        return Object.keys(params)
+            .filter(key => params[key] !== null && params[key].toString().length > 0)
+            .reduce((prev, key) => prev.replace(`{${key}}`, params[key]), template);
     }
 
     render() {
@@ -105,10 +138,10 @@ export class MicroserviceExplorer extends Component {
             service,
             paths,
             pathKey,
-            requestUrl,
+            requestUrlTemplate,
+            requestUrlParams,
             requestQuery,
             requestBody,
-            responseCode,
             responseBody
         } = this.state;
 
@@ -150,6 +183,21 @@ export class MicroserviceExplorer extends Component {
             />
         ));
 
+        const {statusCode, statusMessage, responseStatus} = responseBody || {};
+        const statusCodeGroup = statusCode ? statusCode.toString()[0] : '0';
+
+        const payloadOutput = responseBody 
+            ? JSON.stringify(responseBody.payload || responseBody.error, null, 2)
+            : ''
+
+        const responseMeta = responseBody ? (
+            <div className="response-metadata">
+                <h4>Metadata</h4>
+                <p>Full URL: {responseBody.requestUri}, Version: {responseBody.serviceVersion}</p>
+                <p>Instance: {responseBody.serviceInstance}, Node: {responseBody.serviceNode}</p>
+            </div>
+        ) : null;
+
         const content = (
             <div className="endpoint">
                 <h1>{path.path}</h1>
@@ -169,17 +217,23 @@ export class MicroserviceExplorer extends Component {
                     </div>    
                     <div className="request">
                         <h2>Request</h2>
-                        <p>URL: {requestUrl}{queryParams}</p>
+                        <p>URL: {this.templateReplace(requestUrlTemplate, requestUrlParams)}{queryParams}</p>
                         <Card style={styles.card}>
-                            <CardText>{JSON.stringify(requestBody,null,2)}</CardText>
+                            <CardText><pre>{requestBody ? JSON.stringify(requestBody,null,2) : ''}</pre></CardText>
                         </Card>
                     </div> 
                     <div className="response">
                         <h2>Response</h2>
-                        <p>StatusCode: {responseCode}</p>
+                        <p>
+                            Status Code:&nbsp;
+                            <strong className={`status-${statusCodeGroup}`}>{statusCode}</strong>,
+                            Status Message:&nbsp;
+                            <strong className={`status-${statusCodeGroup}`}>{statusMessage || responseStatus}</strong>
+                        </p>
                         <Card style={styles.card}>
-                            <CardText>{JSON.stringify(responseBody,null,2)}</CardText>
+                            <CardText><pre>{payloadOutput}</pre></CardText>
                         </Card>
+                        {responseMeta}
                     </div> 
                 </div>
             </div>

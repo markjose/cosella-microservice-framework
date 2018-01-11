@@ -7,7 +7,7 @@ namespace Cosella.Framework.Extensions.Authentication
 {
     public static class AuthenticationExtensions
     {
-        public static MicroService AddAuthentication(this MicroService microservice)
+        public static MicroService WithAuthentication(this MicroService microservice)
         {
             microservice.Configuration.Modules.Add(new AuthenticationExtensionsModule());
             microservice.Configuration.Middleware.Add(UseAuthentication);

@@ -7,7 +7,7 @@ namespace Cosella.Services.Example
         static int Main(string[] args)
         {
             return MicroService
-                .Create(config =>
+                .ConfiguredFor(MicroServiceType.ServiceFabric, config =>
                 {
                     config.ServiceName = "Cosella.Example";
                     config.ServiceDisplayName = "Cosella Example Service";

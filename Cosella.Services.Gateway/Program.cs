@@ -12,7 +12,7 @@ namespace Cosella.Services.Gateway
             return MicroService
 
                 // Create the service
-                .Create(config =>
+                .ConfiguredFor(MicroServiceType.WindowsService, config =>
                 {
                     // Gateway service basic config
                     config.ServiceName = "Gateway";
@@ -28,13 +28,13 @@ namespace Cosella.Services.Gateway
                 })
 
                 // Use default gateway (No configuration available yet)
-                .AddGateway()
+                .WithGateway()
 
                 // Use the built in simple authenticator (inject your IAuthentictaor here)
-                .AddAuthentication()
+                .WithAuthentication()
 
                 // Set up some example applications to host
-                .AddApplicationHost(config =>
+                .WithApplicationHost(config =>
                 {
                     // Deploy and configure apps via the API
                     config.EnableApplicationManagerApi = true;

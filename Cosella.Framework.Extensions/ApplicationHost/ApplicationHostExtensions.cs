@@ -10,7 +10,7 @@ namespace Cosella.Framework.Extensions.ApplicationHost
             microservice.Configuration.Modules.Add(new ApplicationHostExtensionsModule());
             return microservice;
         }
-        public static MicroService AddApplicationHost(this MicroService microservice, Action<ApplicationHostConfiguration> configurator)
+        public static MicroService WithApplicationHost(this MicroService microservice, Action<ApplicationHostConfiguration> configurator)
         {
             var config = new ApplicationHostConfiguration();
             configurator(config);

@@ -7,7 +7,7 @@
         private static int Main(string[] args)
         {
             return MicroService
-                .Create(config =>
+                .ConfiguredFor(MicroServiceType.WindowsService, config =>
                 {
                     config.ServiceName = "Contacts";
                     config.ServiceDisplayName = "Cosella Contacts";

@@ -4,7 +4,7 @@ namespace Cosella.Framework.Extensions.Gateway
 {
     public static class GatewayExtensions
     {
-        public static MicroService AddGateway(this MicroService microservice)
+        public static MicroService WithGateway(this MicroService microservice)
         {
             microservice.Configuration.Modules.Add(new GatewayExtensionsModule());
             return microservice;

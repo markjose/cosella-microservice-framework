@@ -8,13 +8,13 @@ namespace Cosella.Services.User
         private static int Main(string[] args)
         {
             return MicroService
-                .Create(config =>
+                .ConfiguredFor(MicroServiceType.WindowsService, config =>
                 {
                     config.ServiceName = "User";
                     config.ServiceDisplayName = "Cosella User";
                     config.ServiceDescription = "User and Role service for Cosella framework";
                 })
-                .AddAuthentication()
+                .WithAuthentication()
                 .Run();
         }
     }

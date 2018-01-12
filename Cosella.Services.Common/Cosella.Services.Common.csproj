@@ -44,5 +44,11 @@
     <Compile Include="Class1.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Cosella.Framework.Extensions.Authentication\Cosella.Framework.Extensions.Authentication.csproj">
+      <Project>{d742b27f-3857-4fd1-80d2-796ab7558acf}</Project>
+      <Name>Cosella.Framework.Extensions.Authentication</Name>
+    </ProjectReference>
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

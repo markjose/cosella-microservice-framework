@@ -8,7 +8,7 @@ namespace Cosella.Services.User
         private static int Main(string[] args)
         {
             return MicroService
-                .ConfiguredFor(MicroServiceType.WindowsService, config =>
+                .Configure(config =>
                 {
                     config.ServiceName = "User";
                     config.ServiceDisplayName = "Cosella User";

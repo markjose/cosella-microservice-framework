@@ -12,7 +12,7 @@ namespace Cosella.Services.Gateway
             return MicroService
 
                 // Create the service
-                .ConfiguredFor(MicroServiceType.WindowsService, config =>
+                .Configure(config =>
                 {
                     // Gateway service basic config
                     config.ServiceName = "Gateway";

@@ -81,11 +81,11 @@
   <ItemGroup>
     <ProjectReference Include="..\Cosella.Framework.Core\Cosella.Framework.Core.csproj">
       <Project>{C99C794B-61C5-4E6E-A459-DD2EE9C72DEB}</Project>
-      <Name>Cosella.Services.Core</Name>
+      <Name>Cosella.Framework.Core</Name>
     </ProjectReference>
-    <ProjectReference Include="..\Cosella.Framework.Extensions\Cosella.Framework.Extensions.csproj">
-      <Project>{6322CE84-7DBD-42A3-880A-39F49FAED543}</Project>
-      <Name>Cosella.Framework.Extensions</Name>
+    <ProjectReference Include="..\Cosella.Framework.Extensions.Authentication\Cosella.Framework.Extensions.Authentication.csproj">
+      <Project>{d742b27f-3857-4fd1-80d2-796ab7558acf}</Project>
+      <Name>Cosella.Framework.Extensions.Authentication</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

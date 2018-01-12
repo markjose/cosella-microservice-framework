@@ -1,4 +1,5 @@
 ﻿using Cosella.Framework.Core;
+using Cosella.Framework.Extensions.ServiceFabric;
 
 namespace Cosella.Services.Example
 {
@@ -7,7 +8,7 @@ namespace Cosella.Services.Example
         static int Main(string[] args)
         {
             return MicroService
-                .ConfiguredFor(MicroServiceType.ServiceFabric, config =>
+                .Configure(config =>
                 {
                     config.ServiceName = "Cosella.Example";
                     config.ServiceDisplayName = "Cosella Example Service";

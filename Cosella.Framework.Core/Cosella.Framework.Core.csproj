@@ -149,12 +149,14 @@
   <ItemGroup>
     <Compile Include="Contracts\MicroServiceStatus.cs" />
     <Compile Include="Contracts\ServiceDescription.cs" />
+    <Compile Include="DefaultMicroServiceContainer.cs" />
     <Compile Include="Hosting\CustomControllerResolver.cs" />
     <Compile Include="Hosting\ControllerDependsOnAttribute.cs" />
     <Compile Include="Hosting\RoutePrefixProvider.cs" />
     <Compile Include="Controllers\SystemRestApiController.cs" />
     <Compile Include="Controllers\RestApiController.cs" />
     <Compile Include="CoreModule.cs" />
+    <Compile Include="IMicroServiceContainer.cs" />
     <Compile Include="Integrations\Consul\ConsulServiceChecks.cs" />
     <Compile Include="Integrations\Consul\ConsulServiceCheckInfo.cs" />
     <Compile Include="Integrations\Consul\ConsulApiClient.cs" />
@@ -174,7 +176,6 @@
     <Compile Include="Integrations\Consul\ConsulRegistrationRequest.cs" />
     <Compile Include="Integrations\Consul\ConsulServiceInfo.cs" />
     <Compile Include="Integrations\Consul\ConsulServices.cs" />
-    <Compile Include="MicroServiceType.cs" />
     <Compile Include="ServiceDiscovery\ServiceInstanceInfo.cs" />
     <Compile Include="ServiceDiscovery\ServiceInfo.cs" />
     <Compile Include="ServiceDiscovery\ServiceRegistration.cs" />

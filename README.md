@@ -1,8 +1,8 @@
 # Cosella
 
-The Cosella Microservice Framework is intended to make the development of service based solutions using .NET easier.
+The Cosella Microservice Framework is intended to make the development of .NET service based solutions easier.
 
-The framework is currently a very new project, if you want to use it, please understand:
+This framework is currently very new, if you want to use it, please understand:
   - there may be limited support
   - documentation will probably be incomplete
   - code may not be as tidy or organised as expected
@@ -16,19 +16,19 @@ I'll also try and be as responsive as I can to issues raised on GitHub.
 #### Core Features
 - RESTful API (WepApi on OWIN)
 - API versioning
-- API Explorer (Swagger and Swagger UI)
+- API explorer (Swagger and Swagger UI)
 - Logging (Log4Net)
-- Windows Console Application support
-- Windows Service support (Topshelf)
+- Windows Console Application
+- Windows Service (Topshelf)
 - IoC/Dependency Injection (Ninject)
 - Service Discovery (Consul)
 - Service Scale Out (Instancing)
 - Long running background tasks (InServiceWorker)
 
 #### Core Features - In Progress 
-- API usage statitics
+- API usage statistics
 - API version tracking
-- Simple load balance
+- Simple load balancer
 
 #### Extension libraries
 
@@ -41,14 +41,16 @@ I'll also try and be as responsive as I can to issues raised on GitHub.
 #### Prerequisites
 
 - [.NET Framework 4.7.1 targeting pack or SDK](https://www.microsoft.com/net/download/visual-studio-sdks)
-- [Consul](https://www.consul.io/downloads.html) - start as local development agent ```./consul.exe agent -dev```
+- [Consul](https://www.consul.io/downloads.html) - start as local development agent
+```./consul.exe agent -dev```
 
 #### Using the framework
 
 1. Open Visual Studio (not required, you can use VS Code or whichever IDE you normally use for .NET development)
 2. Create a new 'Console App (Net Framework)' project.
 3. Include the 'Cosella.Framework.Core' package from the NuGet package manager
-4. Include the 'Microsoft.Owin.Host.HttpListener' package from the NuGet package manager (this is not pulled in automagically)
+4. Include the 'Microsoft.Owin.Host.HttpListener' package from the NuGet package manager (this is not pulled in
+automagically)
 5. In your ```Main()``` method, create your microservice like this:
 ```
 static int Main(string[] args)
@@ -74,11 +76,14 @@ static int Main(string[] args)
 
 ### Adding a RESTful API controller to the service
 
-As the framework uses WebApi, you can add an API controller in exactly the same way as you would with a normal WebAPI project.
-If you do this then all controller route mappings will be done using the MapAttributeRoutes setting. 
+As the framework uses WebApi, you can add an API controller in exactly the same way as you would with a normal
+WebAPI project. If you do this, then all controller routes will be mapped using the MapAttributeRoutes setting. 
 However, this fails to leverage the versioning, service discovery and API proxying offered by the framework.
-In order to lverage this functionality you should inherit from ```RestApiController``` instead of ```ApiController```.
-As with standard WebApi controllers the class needs to be ```public``` to be visible. the below controller example will appear at ```http://localhost:5000/api/v1/example/route1``` (This assumes you haven't changed any of the default options)
+In order to leverage this functionality you should inherit from ```RestApiController``` instead of
+```ApiController```. As with standard WebApi controllers the class needs to be ```public``` to be visible.
+The below controller example will appear at ```http://localhost:5000/api/v1/example/route1``` (This
+assumes you haven't changed any of the default options)
+
 ```
 using Cosella.Framework.Core.Controllers;
 using System.Web.Http;
@@ -100,12 +105,15 @@ namespace MyProject
 
 #### Alternative ```SystemRestApiController```
 
-Inheriting from the ```SystemRestApiController``` allows you to remove the added ```api/v#``` path and place the routes in your controller at the root of the service host.
-The above example would be available at ```http://localhost:5000/example/route1``` if you used the ```SystemRestApiController```.
+Inheriting from the ```SystemRestApiController``` allows you to remove the added ```api/v#``` part of the
+path and map the routes in your controller to the root of the service host.
+The above example would be available at ```http://localhost:5000/example/route1``` if you used the
+```SystemRestApiController```.
 
 ### Adding a long running task to the service
 
-Long running or background tasks can be added to the service by implementing the ```IInServiceWorker``` interface and then registering the service as a named service in you custom module.
+Long running or background tasks can be added to the service by implementing the ```IInServiceWorker```
+interface and registering the service as a named service in your custom module.
 ```IInWorkerService``` enforces two methods, ```Start``` and ```Stop```. 
 You should also make sure the ```CancellationToken``` passed to the ```Start``` method is honoured.
 
@@ -130,7 +138,8 @@ namespace Cosella.Services.Example.InServiceWorkers
 }
 ```
 
-Then register your worker (for more information see the section on [Dependency Injection below](#ioc)). It's not essential, but good practice,
+Then register your worker (for more information see the section on [Dependency Injection below](#ioc)). It's
+not essential, but good practice,
 that if you register more than one ```IInServiceWorker``` binding, that you name each binding:
 
 ```
@@ -170,7 +179,28 @@ If you need to resolve by context (named bindings) you will need use the first m
 
 ### Accessing other services using the ServiceRestApiClient
 
-*TODO: I'll do this next week W/C 14-01-2018*
+You can access any of the RESTful endpoints of any of the services using an HTTP client, but this means you
+will need to do all of the service discovery yourself. If you don't want to worry about this and leverage the
+simple load balancer included in the framework you can use the ```ServiceRestApiClient``` class.
+
+You'll need to install the ```Cosella.Framework.Client``` package from Nuget. Then you can reference services
+by name or instance name rather than worying about where those services are deployed. Services which have the 
+service registration option disabled will not be available using the client. Services that have service discovery
+disabled will not be able to use the client either.
+
+You can call a service endpoint by creating a client instance and then calling the relative endpoint as shown in
+the example below:
+
+```
+var client = new ServiceRestApiClient("MyService", kernel.Get<IServiceDiscovery>());
+...or...
+var client = kernel.Get<ServiceRestApiClient>(new ConstructorArgument("serviceName", "MyService"));
+...or...
+var client = kernel.Get<IServiceRestClientFactory>().Create("MyService"); // <- coming soon
+
+var myServiceRestResponse = client.Get<MyPayloadType>("example/route1");
+```
+
 
 ### All Core Configuration Options
 

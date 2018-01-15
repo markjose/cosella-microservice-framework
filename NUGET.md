@@ -11,4 +11,4 @@ If you like what's here already and want to improve it, PRs are most welcome.
 
 I'll also try and be as responsive as I can to issues raised on GitHub.
 
-[A feature list and 'Getting Started' instructions can be found on GitHub](https://github.com/markjose/cosella-microservice-framework)
+[A feature list and 'Getting Started' instructions can be found on GitHub](https://markjose.github.io/cosella-microservice-framework/)

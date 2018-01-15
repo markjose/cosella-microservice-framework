@@ -48,8 +48,8 @@ I'll also try and be as responsive as I can to issues raised on GitHub.
 
 1. Open Visual Studio (not required, you can use VS Code or whichever IDE you normally use for .NET development)
 2. Create a new 'Console App (Net Framework)' project.
-3. Include the 'Cosella.Framework.Core' package from the NuGet package manager
-4. Include the 'Microsoft.Owin.Host.HttpListener' package from the NuGet package manager (this is not pulled in
+3. Include the [Cosella.Framework.Core](https://www.nuget.org/packages/Cosella.Framework.Core/) package from the NuGet package manager
+4. Include the [Microsoft.Owin.Host.HttpListener](https://www.nuget.org/packages/Microsoft.Owin.Host.HttpListener/) package from the NuGet package manager (this is not pulled in
 automagically)
 5. In your ```Main()``` method, create your microservice like this:
 ```
@@ -183,10 +183,10 @@ You can access any of the RESTful endpoints of any of the services using an HTTP
 will need to do all of the service discovery yourself. If you don't want to worry about this and leverage the
 simple load balancer included in the framework you can use the ```ServiceRestApiClient``` class.
 
-You'll need to install the ```Cosella.Framework.Client``` package from Nuget. Then you can reference services
-by name or instance name rather than worying about where those services are deployed. Services which have the 
-service registration option disabled will not be available using the client. Services that have service discovery
-disabled will not be able to use the client either.
+You'll need to install the [Cosella.Framework.Client](https://www.nuget.org/packages/Cosella.Framework.Client/)
+package from Nuget. Then you can reference services by name or instance name rather than worrying about where
+those services are deployed. Services which have the service registration option disabled will not be available
+using the client. Services that have service discovery disabled will not be able to use the client either.
 
 You can call a service endpoint by creating a client instance and then calling the relative endpoint as shown in
 the example below:

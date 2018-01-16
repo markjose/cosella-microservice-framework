@@ -25,7 +25,7 @@ namespace Cosella.Framework.Core
 
         public static MicroService Configure(Action<HostedServiceConfiguration> configurator = null)
         {
-            return ConfiguredFor<DefaultMicroServiceContainer>();
+            return ConfiguredFor<DefaultMicroServiceContainer>(configurator);
         }
 
         public static MicroService ConfiguredFor<T>(Action<HostedServiceConfiguration> configurator = null)

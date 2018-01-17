@@ -35,7 +35,14 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Cosella.Services.Gateway", 
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Documentation", "Documentation", "{E8B6A5B1-5646-450C-9AE8-92CAE78DF6AE}"
 	ProjectSection(SolutionItems) = preProject
+		documentation\configuration.md = documentation\configuration.md
+		documentation\features.md = documentation\features.md
+		documentation\gettingstarted.md = documentation\gettingstarted.md
+		documentation\inserviceworker.md = documentation\inserviceworker.md
+		documentation\ioc.md = documentation\ioc.md
 		documentation\NUGET.md = documentation\NUGET.md
+		documentation\restapi.md = documentation\restapi.md
+		documentation\restclient.md = documentation\restclient.md
 	EndProjectSection
 EndProject
 Global

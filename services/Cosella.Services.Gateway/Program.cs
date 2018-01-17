@@ -1,5 +1,4 @@
 ﻿using Cosella.Framework.Core;
-using Cosella.Framework.Extensions.ApplicationHost;
 using Cosella.Framework.Extensions.Authentication;
 using Cosella.Framework.Extensions.Gateway;
 
@@ -26,33 +25,10 @@ namespace Cosella.Services.Gateway
                     //config.DisableRegistration = true;
                     //config.DisableServiceDiscovery = true;
                 })
-
                 // Use default gateway (No configuration available yet)
                 .WithGateway()
-
                 // Use the built in simple authenticator (inject your IAuthentictaor here)
                 .WithAuthentication()
-
-                // Set up some example applications to host
-                .WithApplicationHost(config =>
-                {
-                    // Deploy and configure apps via the API
-                    config.EnableApplicationManagerApi = true;
-
-                    // Simple Add
-                    config.Applications.Add("Example Application 1", "app1");
-                    config.Applications.Add("Example Application 2", "app2", true);
-
-                    // Fully configured Add
-                    /*config.Applications.Add(new HostedApplicationConfiguration
-                    {
-                        Name = "Example Application 3",
-                        Aliases = new[] { "app3" },
-                        ApplicationType = HostedApplicationTypes.React,
-                        ApplicationRoot = "./Apps/app3/build",
-                        IsDefault = true
-                    });*/
-                })
                 .Run();
         }
     }

@@ -28,12 +28,23 @@ namespace Cosella.Framework.Core.Integrations.Ninject
 
         public override IEnumerable<IBinding> GetBindings(Type service)
         {
-            return base.GetBindings(service).Concat(_parent.GetBindings(service));
+            var bindings = _parent.GetBindings(service)
+                .Concat(base.GetBindings(service))
+                .GroupBy(binding => binding.Service.Name)
+                .Select(group => group.Last());
+
+            return bindings;
         }
 
         public override IEnumerable<object> Resolve(IRequest request)
         {
-            return base.Resolve(request).Concat(_parent.Resolve(request));
+            var objects = _parent.Resolve(request)
+                .Concat(base.Resolve(request))
+                .Distinct()
+                .Reverse()
+                .Take(1);
+
+            return objects;
         }
     }
 }

@@ -66,25 +66,25 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Cosella.Framework.Core\Cosella.Framework.Core.csproj">
-      <Project>{C99C794B-61C5-4E6E-A459-DD2EE9C72DEB}</Project>
-      <Name>Cosella.Framework.Core</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\Cosella.Framework.Extensions.ApplicationHost\Cosella.Framework.Extensions.ApplicationHost.csproj">
+    <Folder Include="Apps\" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\framework-extensions\Cosella.Framework.Extensions.ApplicationHost\Cosella.Framework.Extensions.ApplicationHost.csproj">
       <Project>{357d4f58-704c-4263-a829-bde3d520f866}</Project>
       <Name>Cosella.Framework.Extensions.ApplicationHost</Name>
     </ProjectReference>
-    <ProjectReference Include="..\Cosella.Framework.Extensions.Authentication\Cosella.Framework.Extensions.Authentication.csproj">
+    <ProjectReference Include="..\..\framework-extensions\Cosella.Framework.Extensions.Authentication\Cosella.Framework.Extensions.Authentication.csproj">
       <Project>{d742b27f-3857-4fd1-80d2-796ab7558acf}</Project>
       <Name>Cosella.Framework.Extensions.Authentication</Name>
     </ProjectReference>
-    <ProjectReference Include="..\Cosella.Framework.Extensions.Gateway\Cosella.Framework.Extensions.Gateway.csproj">
+    <ProjectReference Include="..\..\framework-extensions\Cosella.Framework.Extensions.Gateway\Cosella.Framework.Extensions.Gateway.csproj">
       <Project>{6a3bc4a8-5996-4da6-955f-28b8787296a9}</Project>
       <Name>Cosella.Framework.Extensions.Gateway</Name>
     </ProjectReference>
-  </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Apps\" />
+    <ProjectReference Include="..\..\framework\Cosella.Framework.Core\Cosella.Framework.Core.csproj">
+      <Project>{c99c794b-61c5-4e6e-a459-dd2ee9c72deb}</Project>
+      <Name>Cosella.Framework.Core</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it.

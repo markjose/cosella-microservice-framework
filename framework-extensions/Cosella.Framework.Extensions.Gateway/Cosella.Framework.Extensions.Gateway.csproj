@@ -108,5 +108,15 @@
     <None Include="app.config" />
     <None Include="packages.config" />
   </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\framework\Cosella.Framework.Client\Cosella.Framework.Client.csproj">
+      <Project>{11a15522-f1b7-4ced-809b-25aabf3562a8}</Project>
+      <Name>Cosella.Framework.Client</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\framework\Cosella.Framework.Core\Cosella.Framework.Core.csproj">
+      <Project>{c99c794b-61c5-4e6e-a459-dd2ee9c72deb}</Project>
+      <Name>Cosella.Framework.Core</Name>
+    </ProjectReference>
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

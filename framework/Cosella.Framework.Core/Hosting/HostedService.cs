@@ -1,10 +1,10 @@
 ﻿using Cosella.Framework.Client.Interfaces;
+using Cosella.Framework.Core.Integrations.Ninject;
 using Cosella.Framework.Core.Logging;
 using Cosella.Framework.Core.ServiceDiscovery;
 using Cosella.Framework.Core.Workers;
 using Microsoft.Owin.Hosting;
 using Ninject;
-using Ninject.Extensions.ChildKernel;
 using System;
 using System.Linq;
 using System.Reflection;
@@ -60,13 +60,12 @@ namespace Cosella.Framework.Core.Hosting
         {
             _hostControl = hostControl;
 
-
             _log.Info("Starting Hosted Microservice...");
 
             int retries = MaxRetries;
             while (retries > 0)
             {
-                var childKernel = new ChildKernel(_kernel);
+                var childKernel = _kernel.CreateChild();
 
                 var configuration = childKernel.Get<HostedServiceConfiguration>();
                 var startup = childKernel.Get<Startup>();

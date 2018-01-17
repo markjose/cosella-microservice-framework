@@ -58,13 +58,9 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Cosella.Framework.Core\Cosella.Framework.Core.csproj">
+    <ProjectReference Include="..\..\framework\Cosella.Framework.Core\Cosella.Framework.Core.csproj">
       <Project>{c99c794b-61c5-4e6e-a459-dd2ee9c72deb}</Project>
       <Name>Cosella.Framework.Core</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\Cosella.Framework.Extensions.ServiceFabric\Cosella.Framework.Extensions.ServiceFabric.csproj">
-      <Project>{F1749436-7661-4493-B3D0-D986E7B3777A}</Project>
-      <Name>Cosella.Framework.Extensions.ServiceFabric</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

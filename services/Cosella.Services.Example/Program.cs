@@ -1,5 +1,4 @@
 ﻿using Cosella.Framework.Core;
-using Cosella.Framework.Extensions.ServiceFabric;
 
 namespace Cosella.Services.Example
 {

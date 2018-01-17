@@ -82,12 +82,6 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Cosella.Framework.Core\Cosella.Framework.Core.csproj">
-      <Project>{c99c794b-61c5-4e6e-a459-dd2ee9c72deb}</Project>
-      <Name>Cosella.Framework.Core</Name>
-    </ProjectReference>
-  </ItemGroup>
-  <ItemGroup>
     <None Include="app.config" />
     <None Include="packages.config" />
   </ItemGroup>

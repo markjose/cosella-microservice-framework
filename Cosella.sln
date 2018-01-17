@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
-VisualStudioVersion = 15.0.27130.2010
+VisualStudioVersion = 15.0.27130.2020
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{44DDE98D-5571-47FA-BEC4-4BDA58881F63}"
 	ProjectSection(SolutionItems) = preProject
@@ -16,29 +16,23 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Services", "Services", "{1B
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Framework", "Framework", "{F55E876C-702F-4F12-9DDB-539AD7AEB2E2}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Cosella.Framework.Core", "Cosella.Framework.Core\Cosella.Framework.Core.csproj", "{C99C794B-61C5-4E6E-A459-DD2EE9C72DEB}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Cosella.Framework.Core", "framework\Cosella.Framework.Core\Cosella.Framework.Core.csproj", "{C99C794B-61C5-4E6E-A459-DD2EE9C72DEB}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Cosella.Services.Gateway", "Cosella.Services.Gateway\Cosella.Services.Gateway.csproj", "{04CCE304-CDBE-492A-A819-8500453AC28B}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Cosella.Framework.Client", "framework\Cosella.Framework.Client\Cosella.Framework.Client.csproj", "{11A15522-F1B7-4CED-809B-25AABF3562A8}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Cosella.Services.User", "Cosella.Services.User\Cosella.Services.User.csproj", "{67D44727-B43F-4372-8320-C4B677BBBD8F}"
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Extensions", "Extensions", "{29D1741F-6748-4DF6-B512-C26A18C2378A}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Cosella.Services.Contacts", "Cosella.Services.Contacts\Cosella.Services.Contacts.csproj", "{506C05AC-E7A5-4BE4-904C-DAC42561201B}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Cosella.Framework.PubSub", "framework\Cosella.Framework.PubSub\Cosella.Framework.PubSub.csproj", "{C8633045-FD39-48ED-A6E4-440A28ED57AD}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Cosella.Framework.PubSub", "Cosella.Framework.PubSub\Cosella.Framework.PubSub.csproj", "{C8633045-FD39-48ED-A6E4-440A28ED57AD}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Cosella.Framework.Extensions.ApplicationHost", "framework-extensions\Cosella.Framework.Extensions.ApplicationHost\Cosella.Framework.Extensions.ApplicationHost.csproj", "{357D4F58-704C-4263-A829-BDE3D520F866}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Cosella.Services.Example", "Cosella.Services.Example\Cosella.Services.Example.csproj", "{9DF4BEB9-9129-4034-8EB9-23A17E9A5EA3}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Cosella.Framework.Extensions.Authentication", "framework-extensions\Cosella.Framework.Extensions.Authentication\Cosella.Framework.Extensions.Authentication.csproj", "{D742B27F-3857-4FD1-80D2-796AB7558ACF}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Cosella.Services.Common", "Cosella.Services.Common\Cosella.Services.Common.csproj", "{996F70ED-5ED5-471D-BA97-B76B2920974F}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Cosella.Framework.Extensions.Gateway", "framework-extensions\Cosella.Framework.Extensions.Gateway\Cosella.Framework.Extensions.Gateway.csproj", "{6A3BC4A8-5996-4DA6-955F-28B8787296A9}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Cosella.Framework.Client", "Cosella.Framework.Client\Cosella.Framework.Client.csproj", "{11A15522-F1B7-4CED-809B-25AABF3562A8}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Cosella.Framework.Extensions.ServiceFabric", "framework-extensions\Cosella.Framework.Extensions.ServiceFabric\Cosella.Framework.Extensions.ServiceFabric.csproj", "{F1749436-7661-4493-B3D0-D986E7B3777A}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Cosella.Framework.Extensions.ServiceFabric", "Cosella.Framework.Extensions.ServiceFabric\Cosella.Framework.Extensions.ServiceFabric.csproj", "{F1749436-7661-4493-B3D0-D986E7B3777A}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Cosella.Framework.Extensions.ApplicationHost", "Cosella.Framework.Extensions.ApplicationHost\Cosella.Framework.Extensions.ApplicationHost.csproj", "{357D4F58-704C-4263-A829-BDE3D520F866}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Cosella.Framework.Extensions.Authentication", "Cosella.Framework.Extensions.Authentication\Cosella.Framework.Extensions.Authentication.csproj", "{D742B27F-3857-4FD1-80D2-796AB7558ACF}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Cosella.Framework.Extensions.Gateway", "Cosella.Framework.Extensions.Gateway\Cosella.Framework.Extensions.Gateway.csproj", "{6A3BC4A8-5996-4DA6-955F-28B8787296A9}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Cosella.Services.Contacts", "services\Cosella.Services.Contacts\Cosella.Services.Contacts.csproj", "{506C05AC-E7A5-4BE4-904C-DAC42561201B}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -50,38 +44,14 @@ Global
 		{C99C794B-61C5-4E6E-A459-DD2EE9C72DEB}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{C99C794B-61C5-4E6E-A459-DD2EE9C72DEB}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{C99C794B-61C5-4E6E-A459-DD2EE9C72DEB}.Release|Any CPU.Build.0 = Release|Any CPU
-		{04CCE304-CDBE-492A-A819-8500453AC28B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{04CCE304-CDBE-492A-A819-8500453AC28B}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{04CCE304-CDBE-492A-A819-8500453AC28B}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{04CCE304-CDBE-492A-A819-8500453AC28B}.Release|Any CPU.Build.0 = Release|Any CPU
-		{67D44727-B43F-4372-8320-C4B677BBBD8F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{67D44727-B43F-4372-8320-C4B677BBBD8F}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{67D44727-B43F-4372-8320-C4B677BBBD8F}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{67D44727-B43F-4372-8320-C4B677BBBD8F}.Release|Any CPU.Build.0 = Release|Any CPU
-		{506C05AC-E7A5-4BE4-904C-DAC42561201B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{506C05AC-E7A5-4BE4-904C-DAC42561201B}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{506C05AC-E7A5-4BE4-904C-DAC42561201B}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{506C05AC-E7A5-4BE4-904C-DAC42561201B}.Release|Any CPU.Build.0 = Release|Any CPU
-		{C8633045-FD39-48ED-A6E4-440A28ED57AD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{C8633045-FD39-48ED-A6E4-440A28ED57AD}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{C8633045-FD39-48ED-A6E4-440A28ED57AD}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{C8633045-FD39-48ED-A6E4-440A28ED57AD}.Release|Any CPU.Build.0 = Release|Any CPU
-		{9DF4BEB9-9129-4034-8EB9-23A17E9A5EA3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{9DF4BEB9-9129-4034-8EB9-23A17E9A5EA3}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{9DF4BEB9-9129-4034-8EB9-23A17E9A5EA3}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{9DF4BEB9-9129-4034-8EB9-23A17E9A5EA3}.Release|Any CPU.Build.0 = Release|Any CPU
-		{996F70ED-5ED5-471D-BA97-B76B2920974F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{996F70ED-5ED5-471D-BA97-B76B2920974F}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{996F70ED-5ED5-471D-BA97-B76B2920974F}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{996F70ED-5ED5-471D-BA97-B76B2920974F}.Release|Any CPU.Build.0 = Release|Any CPU
 		{11A15522-F1B7-4CED-809B-25AABF3562A8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{11A15522-F1B7-4CED-809B-25AABF3562A8}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{11A15522-F1B7-4CED-809B-25AABF3562A8}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{11A15522-F1B7-4CED-809B-25AABF3562A8}.Release|Any CPU.Build.0 = Release|Any CPU
-		{F1749436-7661-4493-B3D0-D986E7B3777A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{F1749436-7661-4493-B3D0-D986E7B3777A}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{F1749436-7661-4493-B3D0-D986E7B3777A}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{F1749436-7661-4493-B3D0-D986E7B3777A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C8633045-FD39-48ED-A6E4-440A28ED57AD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C8633045-FD39-48ED-A6E4-440A28ED57AD}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C8633045-FD39-48ED-A6E4-440A28ED57AD}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C8633045-FD39-48ED-A6E4-440A28ED57AD}.Release|Any CPU.Build.0 = Release|Any CPU
 		{357D4F58-704C-4263-A829-BDE3D520F866}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{357D4F58-704C-4263-A829-BDE3D520F866}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{357D4F58-704C-4263-A829-BDE3D520F866}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -94,23 +64,27 @@ Global
 		{6A3BC4A8-5996-4DA6-955F-28B8787296A9}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{6A3BC4A8-5996-4DA6-955F-28B8787296A9}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{6A3BC4A8-5996-4DA6-955F-28B8787296A9}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F1749436-7661-4493-B3D0-D986E7B3777A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F1749436-7661-4493-B3D0-D986E7B3777A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F1749436-7661-4493-B3D0-D986E7B3777A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F1749436-7661-4493-B3D0-D986E7B3777A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{506C05AC-E7A5-4BE4-904C-DAC42561201B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{506C05AC-E7A5-4BE4-904C-DAC42561201B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{506C05AC-E7A5-4BE4-904C-DAC42561201B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{506C05AC-E7A5-4BE4-904C-DAC42561201B}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
 		{C99C794B-61C5-4E6E-A459-DD2EE9C72DEB} = {F55E876C-702F-4F12-9DDB-539AD7AEB2E2}
-		{04CCE304-CDBE-492A-A819-8500453AC28B} = {1BC517EF-95A2-43DB-9590-4FEB2A923CE1}
-		{67D44727-B43F-4372-8320-C4B677BBBD8F} = {1BC517EF-95A2-43DB-9590-4FEB2A923CE1}
-		{506C05AC-E7A5-4BE4-904C-DAC42561201B} = {1BC517EF-95A2-43DB-9590-4FEB2A923CE1}
-		{C8633045-FD39-48ED-A6E4-440A28ED57AD} = {F55E876C-702F-4F12-9DDB-539AD7AEB2E2}
-		{9DF4BEB9-9129-4034-8EB9-23A17E9A5EA3} = {1BC517EF-95A2-43DB-9590-4FEB2A923CE1}
-		{996F70ED-5ED5-471D-BA97-B76B2920974F} = {1BC517EF-95A2-43DB-9590-4FEB2A923CE1}
 		{11A15522-F1B7-4CED-809B-25AABF3562A8} = {F55E876C-702F-4F12-9DDB-539AD7AEB2E2}
-		{F1749436-7661-4493-B3D0-D986E7B3777A} = {F55E876C-702F-4F12-9DDB-539AD7AEB2E2}
-		{357D4F58-704C-4263-A829-BDE3D520F866} = {F55E876C-702F-4F12-9DDB-539AD7AEB2E2}
-		{D742B27F-3857-4FD1-80D2-796AB7558ACF} = {F55E876C-702F-4F12-9DDB-539AD7AEB2E2}
-		{6A3BC4A8-5996-4DA6-955F-28B8787296A9} = {F55E876C-702F-4F12-9DDB-539AD7AEB2E2}
+		{C8633045-FD39-48ED-A6E4-440A28ED57AD} = {F55E876C-702F-4F12-9DDB-539AD7AEB2E2}
+		{357D4F58-704C-4263-A829-BDE3D520F866} = {29D1741F-6748-4DF6-B512-C26A18C2378A}
+		{D742B27F-3857-4FD1-80D2-796AB7558ACF} = {29D1741F-6748-4DF6-B512-C26A18C2378A}
+		{6A3BC4A8-5996-4DA6-955F-28B8787296A9} = {29D1741F-6748-4DF6-B512-C26A18C2378A}
+		{F1749436-7661-4493-B3D0-D986E7B3777A} = {29D1741F-6748-4DF6-B512-C26A18C2378A}
+		{506C05AC-E7A5-4BE4-904C-DAC42561201B} = {1BC517EF-95A2-43DB-9590-4FEB2A923CE1}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {C5C6E7C4-C130-4D0E-833E-C67B7F7A51CE}

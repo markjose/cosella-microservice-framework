@@ -190,12 +190,6 @@
     <None Include="app.config" />
     <None Include="packages.config" />
   </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\Cosella.Framework.Client\Cosella.Framework.Client.csproj">
-      <Project>{11A15522-F1B7-4CED-809B-25AABF3562A8}</Project>
-      <Name>Cosella.Framework.Client</Name>
-    </ProjectReference>
-  </ItemGroup>
   <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it.

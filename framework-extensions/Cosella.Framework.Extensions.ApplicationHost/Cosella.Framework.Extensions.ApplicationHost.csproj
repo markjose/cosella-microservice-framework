@@ -88,16 +88,6 @@
     <EmbeddedResource Include="Content\TenantRoot.html" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Cosella.Framework.Core\Cosella.Framework.Core.csproj">
-      <Project>{c99c794b-61c5-4e6e-a459-dd2ee9c72deb}</Project>
-      <Name>Cosella.Framework.Core</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\Cosella.Framework.Extensions.Authentication\Cosella.Framework.Extensions.Authentication.csproj">
-      <Project>{d742b27f-3857-4fd1-80d2-796ab7558acf}</Project>
-      <Name>Cosella.Framework.Extensions.Authentication</Name>
-    </ProjectReference>
-  </ItemGroup>
-  <ItemGroup>
     <None Include="app.config" />
     <None Include="packages.config" />
   </ItemGroup>

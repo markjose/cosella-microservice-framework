@@ -152,8 +152,10 @@
     <Compile Include="Configuration\IConfigurator.cs" />
     <Compile Include="Integrations\Log4Net\Log4NetAppenders.cs" />
     <Compile Include="Integrations\Log4Net\Log4NetLogger.cs" />
-    <Compile Include="Integrations\Ninject\KernelExtensions.cs" />
-    <Compile Include="Integrations\Ninject\NinjectChildKernel.cs" />
+    <Compile Include="Integrations\Ninject\ChildActivationCache.cs" />
+    <Compile Include="Integrations\Ninject\ChildKernel.cs" />
+    <Compile Include="Integrations\Ninject\ChildKernelConstructorScorer.cs" />
+    <Compile Include="Integrations\Ninject\IChildKernel.cs" />
     <Compile Include="Logging\LogMetric.cs" />
     <Compile Include="Logging\ILogger.cs" />
     <Compile Include="Logging\LogLevel.cs" />

@@ -27,10 +27,10 @@ or [http://localhost:5000/swagger](http://localhost:5000/swagger) for interactiv
 ## Contents
 
 - [Getting Started](documentation/gettingstarted.md)
-- [Micorservice Configuration](documentation/configuration.md)
+- [Microservice Configuration](documentation/configuration.md)
 - [Adding a REST API](documentation/restapi.md)
 - [Adding a long running task](documentation/inserviceworker.md)
-- [Dependnecy Injection and Modules](documentation/ioc.md)
+- [Dependency Injection and Modules](documentation/ioc.md)
 - [Communication between services](documentation/restclient.md)
 - [Feature List](documentation/features.md)
 

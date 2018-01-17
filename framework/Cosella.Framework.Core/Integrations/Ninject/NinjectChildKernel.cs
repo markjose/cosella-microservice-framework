@@ -30,7 +30,7 @@ namespace Cosella.Framework.Core.Integrations.Ninject
         {
             var bindings = _parent.GetBindings(service)
                 .Concat(base.GetBindings(service))
-                .GroupBy(binding => binding.Service.Name)
+                .GroupBy(binding => binding?.Service?.Name)
                 .Select(group => group.Last());
 
             return bindings;

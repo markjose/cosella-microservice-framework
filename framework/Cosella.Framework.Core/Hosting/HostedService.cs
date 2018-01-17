@@ -94,11 +94,11 @@ namespace Cosella.Framework.Core.Hosting
                     catch (Exception ex)
                     {
                         _log.Warn($"Failed to start the API host on {apiUri}: {ex.Message}");
-                        do
+                        while (ex.InnerException != null)
                         {
-                            ex = ex.InnerException;
                             _log.Debug(ex.Message);
-                        } while (ex.InnerException != null);
+                            ex = ex.InnerException;
+                        }
 
                         if(_app != null)
                         {

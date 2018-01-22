@@ -26,7 +26,11 @@ namespace Cosella.Services.Gateway
                     //config.DisableServiceDiscovery = true;
                 })
                 // Use default gateway (No configuration available yet)
-                .WithGateway()
+                .WithGateway(config =>
+                {
+                    // We're not interested in the gateway endpoint or any service managment facility
+                    config.DisableServiceManager = true;
+                })
                 // Use the built in simple authenticator (inject your IAuthentictaor here)
                 .WithAuthentication()
                 .Run();

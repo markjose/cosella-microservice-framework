@@ -12,5 +12,17 @@ namespace Cosella.Services.Example.Controllers
         {
             return Ok("route1");
         }
+
+        [HttpPost]
+        [Route("route1")]
+        public IHttpActionResult Route1Post([FromBody] ExampleData data)
+        {
+            return Ok($"route1:{data.TextValue}");
+        }
+
+        public class ExampleData
+        {
+            public string TextValue { get; set; }
+        }
     }
 }

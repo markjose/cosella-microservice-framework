@@ -51,5 +51,10 @@ namespace Cosella.Framework.Client.ApiClient
         {
             return new ServiceRestResponse<T>(await base.Put<T>(uri, data), _serviceInstance);
         }
+
+        public new async Task<ServiceRestResponse<T>> Patch<T>(string uri, object data)
+        {
+            return new ServiceRestResponse<T>(await base.Patch<T>(uri, data), _serviceInstance);
+        }
     }
 }

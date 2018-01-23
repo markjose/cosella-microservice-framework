@@ -51,6 +51,7 @@
     <Compile Include="ApiClient\ApiClientException.cs" />
     <Compile Include="ApiClient\ServiceRestResponse.cs" />
     <Compile Include="ApiClient\ApiClientResponse.cs" />
+    <Compile Include="Extensions\HttpClientExtensions.cs" />
     <Compile Include="Interfaces\IApiClient.cs" />
     <Compile Include="ApiClient\ServiceRestApiClient.cs" />
     <Compile Include="Interfaces\IServiceDiscovery.cs" />

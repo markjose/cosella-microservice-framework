@@ -1,4 +1,5 @@
-﻿using Cosella.Framework.Client.Interfaces;
+﻿using Cosella.Framework.Client.Extensions;
+using Cosella.Framework.Client.Interfaces;
 using Newtonsoft.Json;
 using System;
 using System.Net;
@@ -47,6 +48,11 @@ namespace Cosella.Framework.Client.ApiClient
         public Task<ApiClientResponse<T>> Put<T>(string uri, object data)
         {
             return MakeDataRequest<T>(uri, Client.PutAsJsonAsync, "PUT", data);
+        }
+
+        public Task<ApiClientResponse<T>> Patch<T>(string uri, object data)
+        {
+            return MakeDataRequest<T>(uri, Client.PatchAsJsonAsync, "PATCH", data);
         }
 
         private async Task<ApiClientResponse<T>> MakeRequest<T>(string uri, Func<string, Task<HttpResponseMessage>> getAsync, string label)

@@ -76,6 +76,20 @@ namespace Cosella.Framework.Extensions.Gateway
             return HandleResponse(response);
         }
 
+        protected async Task<IHttpActionResult> ProxyPatchFor<TRequestData, TResult>(string serviceName, int serviceVersion, string apiPath, TRequestData data) where TRequestData : class
+        {
+            var client = await GetClient(serviceName);
+            if (client == null)
+            {
+                return Content(HttpStatusCode.ServiceUnavailable, $"The service '{serviceName}' is currently unavailable.");
+            }
+
+            var url = $"{BaseUrl}{serviceVersion}/{apiPath}";
+            var response = await client.Patch<TResult>(url, data);
+
+            return HandleResponse(response);
+        }
+
         private async Task<ServiceRestApiClient> GetClient(string serviceName)
         {
             if (_clients.ContainsKey(serviceName)) return _clients[serviceName];

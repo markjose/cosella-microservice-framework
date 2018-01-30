@@ -30,6 +30,12 @@ namespace Cosella.Framework.Client.ApiClient
             _baseUrl = baseUrl;
         }
 
+        public Task<HttpResponseMessage> GetStream(string uri)
+        {
+            var fullUri = CombineUrls(_baseUrl, uri);
+            return Client.GetAsync(fullUri);
+        }
+
         public Task<ApiClientResponse<T>> Get<T>(string uri)
         {
             return MakeRequest<T>(uri, Client.GetAsync, "GET");

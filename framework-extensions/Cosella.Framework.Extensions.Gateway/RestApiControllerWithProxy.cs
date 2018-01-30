@@ -17,19 +17,6 @@ namespace Cosella.Framework.Extensions.Gateway
         private IServiceDiscovery _discovery;
         private Dictionary<string, ServiceRestApiClient> _clients = new Dictionary<string, ServiceRestApiClient>();
 
-        private static HttpClient _staticClient;
-        protected HttpClient StreamClient
-        {
-            get
-            {
-                if (_staticClient == null)
-                {
-                    _staticClient = new HttpClient();
-                }
-                return _staticClient;
-            }
-        }
-
         public RestApiControllerWithProxy(IKernel kernel)
         {
             _discovery = kernel.Get<IServiceDiscovery>();
@@ -46,7 +33,7 @@ namespace Cosella.Framework.Extensions.Gateway
             var url = $"{BaseUrl}{serviceVersion}/{apiPath}";
             try
             {
-                var response = await StreamClient.GetAsync(url);
+                var response = await client.GetStream(url);
                 var contentStream = await response.Content.ReadAsStreamAsync();
                 return new ProxyStreamResult(contentStream, response.Content.Headers.ContentType.MediaType);
             }

@@ -2,8 +2,10 @@
 using Cosella.Framework.Client.Interfaces;
 using Cosella.Framework.Core.Controllers;
 using Ninject;
+using System;
 using System.Collections.Generic;
 using System.Net;
+using System.Net.Http;
 using System.Threading.Tasks;
 using System.Web.Http;
 
@@ -15,9 +17,43 @@ namespace Cosella.Framework.Extensions.Gateway
         private IServiceDiscovery _discovery;
         private Dictionary<string, ServiceRestApiClient> _clients = new Dictionary<string, ServiceRestApiClient>();
 
+        private static HttpClient _staticClient;
+        protected HttpClient StreamClient
+        {
+            get
+            {
+                if (_staticClient == null)
+                {
+                    _staticClient = new HttpClient();
+                }
+                return _staticClient;
+            }
+        }
+
         public RestApiControllerWithProxy(IKernel kernel)
         {
             _discovery = kernel.Get<IServiceDiscovery>();
+        }
+
+        protected async Task<IHttpActionResult> ProxyGetStream(string serviceName, int serviceVersion, string apiPath)
+        {
+            var client = await GetClient(serviceName);
+            if (client == null)
+            {
+                return Content(HttpStatusCode.ServiceUnavailable, $"The service '{serviceName}' is currently unavailable.");
+            }
+
+            var url = $"{BaseUrl}{serviceVersion}/{apiPath}";
+            try
+            {
+                var response = await StreamClient.GetAsync(url);
+                var contentStream = await response.Content.ReadAsStreamAsync();
+                return new ProxyStreamResult(contentStream, response.Content.Headers.ContentType.MediaType);
+            }
+            catch (Exception ex)
+            {
+                return Content(HttpStatusCode.InternalServerError, ex);
+            }
         }
 
         protected async Task<IHttpActionResult> ProxyGetFor<TResult>(string serviceName, int serviceVersion, string apiPath)

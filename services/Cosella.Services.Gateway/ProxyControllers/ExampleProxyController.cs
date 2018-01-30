@@ -13,6 +13,13 @@ namespace Cosella.Services.Gateway.ProxyControllers
         public ExampleProxyController(IKernel kernel) : base(kernel) { }
 
         [HttpGet]
+        [Route("streamed")]
+        public async Task<IHttpActionResult> Route1StreamedGet()
+        {
+            return await ProxyGetStream(ServiceName, 1, "example/route1");
+        }
+
+        [HttpGet]
         [Route("")]
         public async Task<IHttpActionResult> Route1Get()
         {

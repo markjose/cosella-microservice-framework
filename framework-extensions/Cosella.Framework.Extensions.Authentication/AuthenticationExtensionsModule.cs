@@ -36,8 +36,9 @@ namespace Cosella.Framework.Extensions.Authentication
             else Bind<ITokenHandler>().To<DefaultTokenHandler>().InSingletonScope();
 
             Bind<AuthenticationConfiguration>().ToMethod(context => _config);
+            Bind<IUserManager>().To<SimpleUserManager>().InSingletonScope();
 
-            if (_config.EnableSimpleUserManager) Bind<IUserManager>().To<SimpleUserManager>().InSingletonScope();
+            if (_config.EnableSimpleUserManager) Bind<SimpleUserController>().To<SimpleUserController>();
             if (_config.EnableSimpleTokenController) Bind<SimpleTokenController>().To<SimpleTokenController>();
         }
     }

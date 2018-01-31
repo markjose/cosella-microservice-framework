@@ -6,7 +6,7 @@ using System.Web.Http;
 
 namespace Cosella.Framework.Extensions.Authentication.Default
 {
-    [ControllerDependsOn(typeof(IUserManager))]
+    [ControllerDependsOn(typeof(IUserManager), typeof(SimpleUserController))]
     [RoutePrefix("user")]
     public class SimpleUserController : RestApiController
     {
@@ -19,7 +19,7 @@ namespace Cosella.Framework.Extensions.Authentication.Default
 
         [Route("")]
         [HttpGet]
-        [Authentication("Authentication:Admin")]
+        [Authentication("User:Admin")]
         public IHttpActionResult ListUsers()
         {
             return Ok(_users.List().Select(u => u.Identity));
@@ -27,7 +27,7 @@ namespace Cosella.Framework.Extensions.Authentication.Default
 
         [Route("")]
         [HttpPost]
-        [Authentication("Authentication:Admin")]
+        [Authentication("User:Admin")]
         public IHttpActionResult AddUser([FromBody] UserRequest userRequest)
         {
             try
@@ -45,7 +45,7 @@ namespace Cosella.Framework.Extensions.Authentication.Default
 
         [Route("{identity}")]
         [HttpDelete]
-        [Authentication("Authentication:Admin")]
+        [Authentication("User:Admin")]
         public IHttpActionResult RemoveUser(string identity)
         {
             try
@@ -62,7 +62,7 @@ namespace Cosella.Framework.Extensions.Authentication.Default
 
         [Route("roles")]
         [HttpGet]
-        [Authentication("Authentication")]
+        [Authentication("User")]
         public IHttpActionResult GetAllRoles()
         {
             return Ok(_users.ListRoles());
@@ -70,7 +70,7 @@ namespace Cosella.Framework.Extensions.Authentication.Default
 
         [Route("{identity}/roles")]
         [HttpPatch]
-        [Authentication("Authentication:Admin")]
+        [Authentication("User:Admin")]
         public IHttpActionResult SetUserRoles(string identity, [FromBody] string[] roles)
         {
             try

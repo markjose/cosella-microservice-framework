@@ -33,14 +33,18 @@ namespace Cosella.Services.Gateway
                     // We're not interested in the gateway endpoint or any service managment facility
                     config.DisableServiceManager = true;
                 })
-                // Use the built in simple authenticator (inject your IAuthentictaor here)
+                // Use the built in simple authenticator (inject your IAuthenticator and ITokenHandler here)
                 .WithAuthentication(config =>
                 {
+                    // Turning on the Simple Token controller will give you a token issuing endpoint
                     config.EnableSimpleTokenController = true;
+                    // Turning on the Simple User manager will give you a simple user management endpoint
                     config.EnableSimpleUserManager = true;
+                    // As the Simple User manager endpoints are permissions you need to set up some default users
                     config.SimpleUserManagerSeedUsers = new List<User>()
                     {
-                        new User("admin", "admin", new [] {"Authentication:Admin", "Authentication" })
+                        // The "User:Admin" and "User" roles are necessary to administer users
+                        new User("admin", "admin", new [] {"User:Admin", "User"})
                     };
                 })
                 .Run();

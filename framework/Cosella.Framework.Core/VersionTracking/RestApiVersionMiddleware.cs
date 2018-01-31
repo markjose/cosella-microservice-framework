@@ -30,6 +30,7 @@ namespace Cosella.Framework.Core.VersionTracking
             var apiVersionFromHeader = context.Request.Headers[ApiVersionFieldName];
             var apiVersionfromQuery = context.Request.Query[ApiVersionFieldName];
 
+            var method = context.Request.Method;
             var endpoint = context.Request.Uri.LocalPath;
             var match = apiFromUriRegex.Match(endpoint);
             var apiVersionFromUri = match.Success ? match.Groups[1].ToString() : null;
@@ -42,7 +43,7 @@ namespace Cosella.Framework.Core.VersionTracking
 
             if (version != null)
             {
-                _log.Debug($"Service={_serviceConfiguration.ServiceName}, Endpoint={endpoint}, ApiVersion={version}");
+                _log.Debug($"Service={_serviceConfiguration.ServiceName}, Method={method}, Endpoint={endpoint}, ApiVersion={version}");
             }
 
             await Next.Invoke(context);

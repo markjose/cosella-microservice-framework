@@ -22,7 +22,7 @@ namespace Cosella.Framework.Extensions.Authentication.Default
 
         [Route("")]
         [HttpPost]
-        public IHttpActionResult CreateToken([FromBody] TokenRequest tokenRequest)
+        public virtual IHttpActionResult CreateToken([FromBody] TokenRequest tokenRequest)
         {
             var user = _users.Authenticate(tokenRequest.Identity, tokenRequest.Secret);
             if (user == null) return Unauthorized();

@@ -1,6 +1,7 @@
 ﻿using Cosella.Framework.Core.Controllers;
 using Cosella.Framework.Core.Hosting;
 using Cosella.Framework.Extensions.Authentication.Interfaces;
+using Ninject;
 using System.Linq;
 using System.Web.Http;
 
@@ -12,15 +13,15 @@ namespace Cosella.Framework.Extensions.Authentication.Default
     {
         private IUserManager _users;
 
-        public SimpleUserController(IUserManager users)
+        public SimpleUserController(IKernel kernel)
         {
-            _users = users;
+            _users = kernel.Get<IUserManager>();
         }
 
         [Route("")]
         [HttpGet]
         [Authentication("user:admin")]
-        public IHttpActionResult ListUsers()
+        public virtual IHttpActionResult ListUsers()
         {
             return Ok(_users.List().Select(u => u.Identity));
         }
@@ -28,7 +29,7 @@ namespace Cosella.Framework.Extensions.Authentication.Default
         [Route("")]
         [HttpPost]
         [Authentication("user:admin")]
-        public IHttpActionResult AddUser([FromBody] UserRequest userRequest)
+        public virtual IHttpActionResult AddUser([FromBody] UserRequest userRequest)
         {
             try
             {
@@ -46,7 +47,7 @@ namespace Cosella.Framework.Extensions.Authentication.Default
         [Route("{identity}")]
         [HttpDelete]
         [Authentication("user:admin")]
-        public IHttpActionResult RemoveUser(string identity)
+        public virtual IHttpActionResult RemoveUser(string identity)
         {
             try
             {
@@ -63,7 +64,7 @@ namespace Cosella.Framework.Extensions.Authentication.Default
         [Route("roles")]
         [HttpGet]
         [Authentication("user")]
-        public IHttpActionResult GetAllRoles()
+        public virtual IHttpActionResult GetAllRoles()
         {
             return Ok(_users.ListRoles());
         }
@@ -71,7 +72,7 @@ namespace Cosella.Framework.Extensions.Authentication.Default
         [Route("{identity}/roles")]
         [HttpPatch]
         [Authentication("user:admin")]
-        public IHttpActionResult SetUserRoles(string identity, [FromBody] string[] roles)
+        public virtual IHttpActionResult SetUserRoles(string identity, [FromBody] string[] roles)
         {
             try
             {

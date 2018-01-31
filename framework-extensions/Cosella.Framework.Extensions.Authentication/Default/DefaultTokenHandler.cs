@@ -47,7 +47,7 @@ namespace Cosella.Framework.Extensions.Authentication.Default
             },
         };
 
-        public string CreateToken(Dictionary<string, object> claims)
+        public virtual string CreateToken(Dictionary<string, object> claims)
         {
             IJwtAlgorithm algorithm = new HMACSHA256Algorithm();
             IJwtEncoder encoder = new JwtEncoder(algorithm, _serializer, _urlEncoder);
@@ -55,7 +55,7 @@ namespace Cosella.Framework.Extensions.Authentication.Default
             return encoder.Encode(claims, _secret);
         }
 
-        public Dictionary<string, object> ClaimsFromToken(string token)
+        public virtual Dictionary<string, object> ClaimsFromToken(string token)
         {
             try
             {
@@ -80,7 +80,7 @@ namespace Cosella.Framework.Extensions.Authentication.Default
             return null;
         }
 
-        public string IdentityFromClaims(Dictionary<string, object> claims)
+        public virtual string IdentityFromClaims(Dictionary<string, object> claims)
         {
             if (claims == null) return null;
 

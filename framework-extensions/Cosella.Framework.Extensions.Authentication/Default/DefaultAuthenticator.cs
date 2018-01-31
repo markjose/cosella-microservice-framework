@@ -1,4 +1,5 @@
 ﻿using Cosella.Framework.Extensions.Authentication.Interfaces;
+using Ninject;
 using System.Linq;
 
 namespace Cosella.Framework.Extensions.Authentication.Default
@@ -7,22 +8,22 @@ namespace Cosella.Framework.Extensions.Authentication.Default
     {
         private readonly IUserManager _users;
 
-        public DefaultAuthenticator(IUserManager users)
+        public DefaultAuthenticator(IKernel kernel)
         {
-            _users = users;
+            _users = kernel.Get<IUserManager>();
         }
 
-        public bool AuthenticateInRole(IUser user, string[] roles, dynamic contextData = null)
+        public virtual bool AuthenticateInRole(IUser user, string[] roles, dynamic contextData = null)
         {
             return user != null && roles.Any(r => user.IsInRole(r));
         }
 
-        public IUser UserFromIdentity(string identity)
+        public virtual IUser UserFromIdentity(string identity)
         {
             return _users.Get(identity);
         }
 
-        public IUser AuthenticateUser(string identity, string secret)
+        public virtual IUser AuthenticateUser(string identity, string secret)
         {
             return _users.Authenticate(identity, secret);
         }

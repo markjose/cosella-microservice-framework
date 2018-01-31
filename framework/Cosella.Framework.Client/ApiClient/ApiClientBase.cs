@@ -46,6 +46,12 @@ namespace Cosella.Framework.Client.ApiClient
             return MakeRequest<T>(uri, Client.DeleteAsync, "DELETE");
         }
 
+        public Task<HttpResponseMessage> PostStream(string uri, object data)
+        {
+            var fullUri = CombineUrls(_baseUrl, uri);
+            return Client.PostAsJsonAsync(fullUri, data);
+        }
+
         public Task<ApiClientResponse<T>> Post<T>(string uri, object data)
         {
             return MakeDataRequest<T>(uri, Client.PostAsJsonAsync, "POST", data);

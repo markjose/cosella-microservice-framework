@@ -4,6 +4,7 @@ using JWT;
 using JWT.Algorithms;
 using JWT.Serializers;
 using Ninject;
+using System;
 using System.Collections.Generic;
 using System.Web.Security;
 
@@ -72,11 +73,17 @@ namespace Cosella.Framework.Extensions.Authentication.Default
             {
                 _log.Warn("Token has invalid signature");
             }
+            catch (Exception)
+            {
+                _log.Warn("An invalid Token was passed to the decoder");
+            }
             return null;
         }
 
         public string IdentityFromClaims(Dictionary<string, object> claims)
         {
+            if (claims == null) return null;
+
             return claims.ContainsKey("identity")
                 ? claims["identity"].ToString()
                 : null;

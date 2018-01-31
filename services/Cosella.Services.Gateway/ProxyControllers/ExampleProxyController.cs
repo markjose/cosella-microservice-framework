@@ -19,11 +19,25 @@ namespace Cosella.Services.Gateway.ProxyControllers
             return await ProxyStreamGet(ServiceName, 1, "example/route1");
         }
 
+        [HttpPost]
+        [Route("streamed")]
+        public async Task<IHttpActionResult> Route1StreamedPost([FromBody] ExampleData data)
+        {
+            return await ProxyStreamPost(ServiceName, 1, "example/route1", data);
+        }
+
         [HttpGet]
         [Route("")]
         public async Task<IHttpActionResult> Route1Get()
         {
             return await ProxyRestGet<string>(ServiceName, 1, "example/route1");
+        }
+
+        [HttpPost]
+        [Route("")]
+        public async Task<IHttpActionResult> Route1Post([FromBody] ExampleData data)
+        {
+            return await ProxyRestPost<ExampleData, string>(ServiceName, 1, "example/route1", data);
         }
 
         [HttpGet]
@@ -38,6 +52,27 @@ namespace Cosella.Services.Gateway.ProxyControllers
         public async Task<IHttpActionResult> RouteAnyPost(string routeName, [FromBody] ExampleData data)
         {
             return await ProxyRestPost<ExampleData, string>(ServiceName, 1, $"example/{routeName}", data);
+        }
+
+        [HttpPut]
+        [Route("{routeName}")]
+        public async Task<IHttpActionResult> RouteAnyPut(string routeName, [FromBody] ExampleData data)
+        {
+            return await ProxyRestPut<ExampleData, string>(ServiceName, 1, $"example/{routeName}", data);
+        }
+
+        [HttpPatch]
+        [Route("{routeName}")]
+        public async Task<IHttpActionResult> RouteAnyPatch(string routeName, [FromBody] ExampleData data)
+        {
+            return await ProxyRestPatch<ExampleData, string>(ServiceName, 1, $"example/{routeName}", data);
+        }
+
+        [HttpDelete]
+        [Route("{routeName}")]
+        public async Task<IHttpActionResult> RouteAnyDelete(string routeName)
+        {
+            return await ProxyRestDelete<string>(ServiceName, 1, $"example/{routeName}");
         }
     }
 

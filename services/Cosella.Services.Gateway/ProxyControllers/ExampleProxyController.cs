@@ -1,4 +1,5 @@
-﻿using Cosella.Framework.Extensions.Gateway;
+﻿using Cosella.Framework.Extensions.Authentication;
+using Cosella.Framework.Extensions.Gateway;
 using Ninject;
 using System.Threading.Tasks;
 using System.Web.Http;
@@ -11,6 +12,14 @@ namespace Cosella.Services.Gateway.ProxyControllers
         private const string ServiceName = "Cosella.Example";
 
         public ExampleProxyController(IKernel kernel) : base(kernel) { }
+
+        [HttpGet]
+        [Route("streamed")]
+        [Authentication("stream")]
+        public async Task<IHttpActionResult> ProtectedRoute1StreamedGet()
+        {
+            return await ProxyStreamGet(ServiceName, 1, "example/route1");
+        }
 
         [HttpGet]
         [Route("streamed")]

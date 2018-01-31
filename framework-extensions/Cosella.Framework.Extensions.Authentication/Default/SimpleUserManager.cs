@@ -1,5 +1,6 @@
 ﻿using Cosella.Framework.Extensions.Authentication.Interfaces;
 using Ninject;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
@@ -27,12 +28,13 @@ namespace Cosella.Framework.Extensions.Authentication.Default
 
         private string[] EnumerateAllRoles()
         {
-            return Assembly
-                .GetExecutingAssembly()
-                .GetTypes()
-                .SelectMany(type => type.GetMethods())
-                .SelectMany(method => method.GetCustomAttributes<AuthenticationAttribute>())
-                .SelectMany(attrib => attrib.Roles)
+            return AppDomain.CurrentDomain
+                .GetAssemblies()
+                .SelectMany(a => a
+                    .GetTypes()
+                    .SelectMany(type => type.GetMethods())
+                    .SelectMany(method => method.GetCustomAttributes<AuthenticationAttribute>())
+                    .SelectMany(attrib => attrib.Roles))
                 .Distinct()
                 .ToArray();
         }

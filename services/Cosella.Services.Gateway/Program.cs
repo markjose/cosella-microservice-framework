@@ -44,7 +44,7 @@ namespace Cosella.Services.Gateway
                     config.SimpleUserManagerSeedUsers = new List<User>()
                     {
                         // The "User:Admin" and "User" roles are necessary to administer users
-                        new User("admin", "admin", new [] {"User:Admin", "User"})
+                        new User("admin", "admin", new [] {"user:admin", "user"})
                     };
                 })
                 .Run();

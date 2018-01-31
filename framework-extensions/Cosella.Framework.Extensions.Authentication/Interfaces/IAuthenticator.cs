@@ -1,6 +1,4 @@
-﻿using System.Collections.Generic;
-
-namespace Cosella.Framework.Extensions.Authentication.Interfaces
+﻿namespace Cosella.Framework.Extensions.Authentication.Interfaces
 {
     public interface IAuthenticator
     {

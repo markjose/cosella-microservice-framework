@@ -1,6 +1,8 @@
 ﻿using Cosella.Framework.Extensions.Authentication.Interfaces;
 using Newtonsoft.Json;
+using System;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace Cosella.Framework.Extensions.Authentication.Default
 {
@@ -24,7 +26,7 @@ namespace Cosella.Framework.Extensions.Authentication.Default
         public List<string> Roles => _roles;
         public bool IsInRole(string role)
         {
-            return _roles.Contains(role);
+            return _roles.Any(r => r.Equals(role, StringComparison.InvariantCultureIgnoreCase));
         }
     }
 }

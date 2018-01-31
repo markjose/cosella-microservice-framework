@@ -34,8 +34,8 @@
     <Reference Include="Castle.Core, Version=4.0.0.0, Culture=neutral, PublicKeyToken=407dd0808d44fbdc, processorArchitecture=MSIL">
       <HintPath>..\..\packages\Castle.Core.4.2.1\lib\net45\Castle.Core.dll</HintPath>
     </Reference>
-    <Reference Include="Cosella.Framework.Client, Version=1.0.2.12, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\..\packages\Cosella.Framework.Client.1.0.2.12\lib\net471\Cosella.Framework.Client.dll</HintPath>
+    <Reference Include="Cosella.Framework.Client, Version=1.0.2.13, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\Cosella.Framework.Client.1.0.2.13\lib\net471\Cosella.Framework.Client.dll</HintPath>
     </Reference>
     <Reference Include="Cosella.Framework.Core, Version=1.0.2.39, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\..\packages\Cosella.Framework.Core.1.0.2.39\lib\net471\Cosella.Framework.Core.dll</HintPath>
@@ -127,10 +127,8 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="EmbeddedWebResource.cs" />
     <Compile Include="ErrorResponse.cs" />
     <Compile Include="GatewayConfiguration.cs" />
-    <Compile Include="GatewayController.cs" />
     <Compile Include="GatewayExtensions.cs" />
     <Compile Include="GatewayExtensionsModule.cs" />
     <Compile Include="IServiceManager.cs" />
@@ -142,33 +140,6 @@
     <Compile Include="ServiceNotFoundException.cs" />
     <Compile Include="ServiceProxyRequest.cs" />
     <Compile Include="ServiceProxyResponse.cs" />
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="Console\asset-manifest.json" />
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="Console\index.html" />
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="Console\manifest.json" />
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="Console\service-worker.js" />
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="Console\static\css\main.b9218c20.css" />
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="Console\static\css\main.b9218c20.css.map" />
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="Console\static\js\main.be3d9ceb.js" />
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="Console\static\js\main.be3d9ceb.js.map" />
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="Console\static\media\logo.f1de11db.svg" />
   </ItemGroup>
   <ItemGroup>
     <None Include="app.config" />

@@ -1,16 +1,30 @@
-﻿using Newtonsoft.Json;
+﻿using Cosella.Framework.Extensions.Authentication.Interfaces;
+using Newtonsoft.Json;
 using System.Collections.Generic;
 
 namespace Cosella.Framework.Extensions.Authentication.Default
 {
-    public class User
+    public class User : IUser
     {
+        private List<string> _roles = new List<string>();
 
-        public string Username { get; set; }
+        public User(string identity, string secret, string[] roles)
+        {
+            Identity = identity;
+            Secret = secret;
+            _roles = new List<string>(roles);
+        }
+
+        public string Identity { get; set; }
         [JsonIgnore]
-        public string Password { get; set; }
-        [JsonProperty("password")]
-        public string PasswordSetter { set { Password = value; } }
-        public IEnumerable<string> Roles { get; set; } = new string[0];
+        public string Secret { get; set; }
+        [JsonProperty("secret")]
+        public string SecretSetter { set { Secret = value; } }
+
+        public List<string> Roles => _roles;
+        public bool IsInRole(string role)
+        {
+            return _roles.Contains(role);
+        }
     }
 }

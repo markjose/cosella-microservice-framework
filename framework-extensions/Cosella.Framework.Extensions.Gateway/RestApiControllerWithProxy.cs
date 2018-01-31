@@ -22,7 +22,7 @@ namespace Cosella.Framework.Extensions.Gateway
             _discovery = kernel.Get<IServiceDiscovery>();
         }
 
-        protected async Task<IHttpActionResult> ProxyGetStream(string serviceName, int serviceVersion, string apiPath)
+        protected async Task<IHttpActionResult> ProxyStreamGet(string serviceName, int serviceVersion, string apiPath)
         {
             var client = await GetClient(serviceName);
             if (client == null)
@@ -43,7 +43,28 @@ namespace Cosella.Framework.Extensions.Gateway
             }
         }
 
-        protected async Task<IHttpActionResult> ProxyGetFor<TResult>(string serviceName, int serviceVersion, string apiPath)
+        protected async Task<IHttpActionResult> ProxyStreamPost(string serviceName, int serviceVersion, string apiPath, object data)
+        {
+            var client = await GetClient(serviceName);
+            if (client == null)
+            {
+                return Content(HttpStatusCode.ServiceUnavailable, $"The service '{serviceName}' is currently unavailable.");
+            }
+
+            var url = $"{BaseUrl}{serviceVersion}/{apiPath}";
+            try
+            {
+                var response = await client.PostStream(url, data);
+                var contentStream = await response.Content.ReadAsStreamAsync();
+                return new ProxyStreamResult(contentStream, response.Content.Headers.ContentType.MediaType);
+            }
+            catch (Exception ex)
+            {
+                return Content(HttpStatusCode.InternalServerError, ex);
+            }
+        }
+
+        protected async Task<IHttpActionResult> ProxyRestGet<TResult>(string serviceName, int serviceVersion, string apiPath)
         {
             var client = await GetClient(serviceName);
             if (client == null)
@@ -57,7 +78,7 @@ namespace Cosella.Framework.Extensions.Gateway
             return HandleResponse(response);
         }
 
-        protected async Task<IHttpActionResult> ProxyDeleteFor<TResult>(string serviceName, int serviceVersion, string apiPath)
+        protected async Task<IHttpActionResult> ProxyRestDelete<TResult>(string serviceName, int serviceVersion, string apiPath)
         {
             var client = await GetClient(serviceName);
             if (client == null)
@@ -71,7 +92,7 @@ namespace Cosella.Framework.Extensions.Gateway
             return HandleResponse(response);
         }
 
-        protected async Task<IHttpActionResult> ProxyPostFor<TRequestData, TResult>(string serviceName, int serviceVersion, string apiPath, TRequestData data) where TRequestData : class
+        protected async Task<IHttpActionResult> ProxyRestPost<TRequestData, TResult>(string serviceName, int serviceVersion, string apiPath, TRequestData data) where TRequestData : class
         {
             var client = await GetClient(serviceName);
             if (client == null)
@@ -85,7 +106,7 @@ namespace Cosella.Framework.Extensions.Gateway
             return HandleResponse(response);
         }
 
-        protected async Task<IHttpActionResult> ProxyPutFor<TRequestData, TResult>(string serviceName, int serviceVersion, string apiPath, TRequestData data) where TRequestData : class
+        protected async Task<IHttpActionResult> ProxyRestPut<TRequestData, TResult>(string serviceName, int serviceVersion, string apiPath, TRequestData data) where TRequestData : class
         {
             var client = await GetClient(serviceName);
             if (client == null)
@@ -99,7 +120,7 @@ namespace Cosella.Framework.Extensions.Gateway
             return HandleResponse(response);
         }
 
-        protected async Task<IHttpActionResult> ProxyPatchFor<TRequestData, TResult>(string serviceName, int serviceVersion, string apiPath, TRequestData data) where TRequestData : class
+        protected async Task<IHttpActionResult> ProxyRestPatch<TRequestData, TResult>(string serviceName, int serviceVersion, string apiPath, TRequestData data) where TRequestData : class
         {
             var client = await GetClient(serviceName);
             if (client == null)

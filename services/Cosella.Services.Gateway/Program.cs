@@ -1,6 +1,8 @@
 ﻿using Cosella.Framework.Core;
 using Cosella.Framework.Extensions.Authentication;
+using Cosella.Framework.Extensions.Authentication.Default;
 using Cosella.Framework.Extensions.Gateway;
+using System.Collections.Generic;
 
 namespace Cosella.Services.Gateway
 {
@@ -32,7 +34,15 @@ namespace Cosella.Services.Gateway
                     config.DisableServiceManager = true;
                 })
                 // Use the built in simple authenticator (inject your IAuthentictaor here)
-                .WithAuthentication()
+                .WithAuthentication(config =>
+                {
+                    config.EnableSimpleTokenController = true;
+                    config.EnableSimpleUserManager = true;
+                    config.SimpleUserManagerSeedUsers = new List<User>()
+                    {
+                        new User("admin", "admin", new [] {"Authentication:Admin", "Authentication" })
+                    };
+                })
                 .Run();
         }
     }

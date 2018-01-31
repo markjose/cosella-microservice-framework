@@ -16,28 +16,28 @@ namespace Cosella.Services.Gateway.ProxyControllers
         [Route("streamed")]
         public async Task<IHttpActionResult> Route1StreamedGet()
         {
-            return await ProxyGetStream(ServiceName, 1, "example/route1");
+            return await ProxyStreamGet(ServiceName, 1, "example/route1");
         }
 
         [HttpGet]
         [Route("")]
         public async Task<IHttpActionResult> Route1Get()
         {
-            return await ProxyGetFor<string>(ServiceName, 1, "example/route1");
+            return await ProxyRestGet<string>(ServiceName, 1, "example/route1");
         }
 
         [HttpGet]
         [Route("{routeName}")]
         public async Task<IHttpActionResult> RouteAnyGet(string routeName)
         {
-            return await ProxyGetFor<string>(ServiceName, 1, $"example/{routeName}");
+            return await ProxyRestGet<string>(ServiceName, 1, $"example/{routeName}");
         }
 
         [HttpPost]
         [Route("{routeName}")]
         public async Task<IHttpActionResult> RouteAnyPost(string routeName, [FromBody] ExampleData data)
         {
-            return await ProxyPostFor<ExampleData, string>(ServiceName, 1, $"example/{routeName}", data);
+            return await ProxyRestPost<ExampleData, string>(ServiceName, 1, $"example/{routeName}", data);
         }
     }
 

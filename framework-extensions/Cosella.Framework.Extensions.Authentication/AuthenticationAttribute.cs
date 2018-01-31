@@ -1,5 +1,5 @@
 ﻿using Cosella.Framework.Core.Logging;
-using Ninject;
+using Cosella.Framework.Extensions.Authentication.Interfaces;
 using System.Linq;
 using System.Web.Http;
 using System.Web.Http.Controllers;
@@ -27,21 +27,21 @@ namespace Cosella.Framework.Extensions.Authentication
             var log = (ILogger)kernel.GetService(typeof(ILogger));
             var authenticator = (IAuthenticator)kernel.GetService(typeof(IAuthenticator));
 
-            var user = actionContext.ControllerContext.RequestContext.Principal;
-
-            if (user == null)
+            var principle = actionContext.ControllerContext.RequestContext.Principal;
+            if (principle == null)
             {
                 log.Warn($"Unauthenticated session failed to access protected endpoint '{actionContext.Request.RequestUri}'");
                 return false;
             }
 
+            var user = authenticator.UserFromIdentity(principle.Identity.Name);
             var result = authenticator == null
                 ? _roles.Any(role => user.IsInRole(role))
                 : authenticator.AuthenticateInRole(user, _roles);
 
             if (result == false)
             {
-                log.Warn($"Unauthenticated user '{user.Identity.Name}' failed to access protected endpoint '{actionContext.Request.RequestUri}'");
+                log.Warn($"Unauthenticated user '{user.Identity}' failed to access protected endpoint '{actionContext.Request.RequestUri}'");
             }
 
             return result;

@@ -1,37 +1,41 @@
 ﻿using Cosella.Framework.Core.Controllers;
 using Cosella.Framework.Core.Hosting;
+using Cosella.Framework.Extensions.Authentication.Interfaces;
 using System.Linq;
 using System.Web.Http;
 
 namespace Cosella.Framework.Extensions.Authentication.Default
 {
     [ControllerDependsOn(typeof(IUserManager))]
-    [RoutePrefix("authentication")]
-    public class AuthenticationController : RestApiController
+    [RoutePrefix("user")]
+    public class SimpleUserController : RestApiController
     {
         private IUserManager _users;
 
-        public AuthenticationController(IUserManager users)
+        public SimpleUserController(IUserManager users)
         {
             _users = users;
         }
 
-        [Route("users")]
+        [Route("")]
         [HttpGet]
         [Authentication("Authentication:Admin")]
         public IHttpActionResult ListUsers()
         {
-            return Ok(_users.List().Select(u => u.Username));
+            return Ok(_users.List().Select(u => u.Identity));
         }
 
-        [Route("users")]
+        [Route("")]
         [HttpPost]
         [Authentication("Authentication:Admin")]
-        public IHttpActionResult AddUser([FromBody] User userRequest)
+        public IHttpActionResult AddUser([FromBody] UserRequest userRequest)
         {
             try
             {
-                return Ok(_users.Add(userRequest));
+                return Ok(_users.Add(
+                    userRequest.Identity,
+                    userRequest.Secret,
+                    userRequest.Roles));
             }
             catch (UserException ex)
             {
@@ -39,14 +43,14 @@ namespace Cosella.Framework.Extensions.Authentication.Default
             }
         }
 
-        [Route("users/{username}")]
+        [Route("{identity}")]
         [HttpDelete]
         [Authentication("Authentication:Admin")]
-        public IHttpActionResult RemoveUser(string username)
+        public IHttpActionResult RemoveUser(string identity)
         {
             try
             {
-                return Ok(_users.Remove(username));
+                return Ok(_users.Remove(identity));
             }
             catch (UserException ex)
             {
@@ -56,7 +60,7 @@ namespace Cosella.Framework.Extensions.Authentication.Default
             }
         }
 
-        [Route("users/roles")]
+        [Route("roles")]
         [HttpGet]
         [Authentication("Authentication")]
         public IHttpActionResult GetAllRoles()
@@ -64,14 +68,14 @@ namespace Cosella.Framework.Extensions.Authentication.Default
             return Ok(_users.ListRoles());
         }
 
-        [Route("users/{username}/roles")]
+        [Route("{identity}/roles")]
         [HttpPatch]
         [Authentication("Authentication:Admin")]
-        public IHttpActionResult SetUserRoles(string username, [FromBody] string[] roles)
+        public IHttpActionResult SetUserRoles(string identity, [FromBody] string[] roles)
         {
             try
             {
-                return Ok(_users.SetRoles(username, roles));
+                return Ok(_users.SetRoles(identity, roles));
             }
             catch (UserException ex)
             {

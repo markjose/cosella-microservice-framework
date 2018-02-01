@@ -26,6 +26,17 @@ namespace Cosella.Framework.Extensions.Authentication.Default
             return Ok(_users.List().Select(u => u.Identity));
         }
 
+        [Route("{identity}")]
+        [HttpGet]
+        [Authentication("user:admin")]
+        public virtual IHttpActionResult Get(string identity)
+        {
+            var user = _users.Get(identity);
+            return user == null
+                ? (IHttpActionResult)NotFound()
+                : Ok(user);
+        }
+
         [Route("")]
         [HttpPost]
         [Authentication("user:admin")]

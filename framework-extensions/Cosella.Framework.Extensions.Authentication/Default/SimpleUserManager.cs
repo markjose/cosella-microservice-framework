@@ -51,7 +51,7 @@ namespace Cosella.Framework.Extensions.Authentication.Default
         public IUser Authenticate(string identity, string secret)
         {
             return _users
-                .Where(u => u.Identity == identity && u.Secret == secret)
+                .Where(u => IdentityMatch(u, identity) && u.Secret == secret)
                 .FirstOrDefault();
         }
 
@@ -60,7 +60,7 @@ namespace Cosella.Framework.Extensions.Authentication.Default
             if (string.IsNullOrWhiteSpace(identity))
                 throw new UserException("You must specify a identity for the user.");
 
-            if (_users.Any(u => u.Identity == identity))
+            if (_users.Any(u => IdentityMatch(u, identity)))
                 throw new UserException($"A user with the identity '{identity}' exists.");
 
             if (string.IsNullOrWhiteSpace(secret))
@@ -75,7 +75,7 @@ namespace Cosella.Framework.Extensions.Authentication.Default
 
         public IUser Remove(string identity)
         {
-            var user = _users.FirstOrDefault(u => u.Identity == identity);
+            var user = _users.FirstOrDefault(u => IdentityMatch(u, identity));
             if (user == null) throw new UserException(); // Not found
 
             _users.Remove(user);
@@ -84,7 +84,7 @@ namespace Cosella.Framework.Extensions.Authentication.Default
 
         public IUser SetRoles(string identity, string[] roles)
         {
-            var user = _users.FirstOrDefault(u => u.Identity == identity);
+            var user = _users.FirstOrDefault(u => IdentityMatch(u, identity));
             if (user == null) throw new UserException(); // Not found
 
             user.Roles.Clear();
@@ -95,7 +95,12 @@ namespace Cosella.Framework.Extensions.Authentication.Default
 
         public IUser Get(string identity)
         {
-            return _users.FirstOrDefault(u => u.Identity == identity);
+            return _users.FirstOrDefault(u => IdentityMatch(u, identity));
+        }
+
+        private bool IdentityMatch(User user, string identity)
+        {
+            return user.Identity.Equals(identity, StringComparison.InvariantCultureIgnoreCase);
         }
     }
 }

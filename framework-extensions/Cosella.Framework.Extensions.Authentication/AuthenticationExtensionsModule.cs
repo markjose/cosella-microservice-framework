@@ -1,5 +1,6 @@
 ﻿using Cosella.Framework.Extensions.Authentication.Default;
 using Cosella.Framework.Extensions.Authentication.Interfaces;
+using Cosella.Framework.Extensions.Authentication.UserCache;
 using Ninject.Modules;
 using System;
 
@@ -36,6 +37,7 @@ namespace Cosella.Framework.Extensions.Authentication
             else Bind<ITokenHandler>().To<DefaultTokenHandler>().InSingletonScope();
 
             Bind<AuthenticationConfiguration>().ToMethod(context => _config);
+            Bind<IAsyncCacheFactory>().To<AsyncCacheFactory>().InSingletonScope();
             Bind<IUserManager>().To<SimpleUserManager>().InSingletonScope();
 
             if (_config.EnableSimpleUserManager) Bind<SimpleUserController>().To<SimpleUserController>();

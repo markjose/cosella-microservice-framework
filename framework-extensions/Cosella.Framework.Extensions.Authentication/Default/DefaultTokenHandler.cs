@@ -6,6 +6,7 @@ using JWT.Serializers;
 using Ninject;
 using System;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 using System.Web.Security;
 
 namespace Cosella.Framework.Extensions.Authentication.Default
@@ -47,15 +48,15 @@ namespace Cosella.Framework.Extensions.Authentication.Default
             },
         };
 
-        public virtual string CreateToken(Dictionary<string, object> claims)
+        public virtual Task<string> CreateToken(Dictionary<string, object> claims)
         {
             IJwtAlgorithm algorithm = new HMACSHA256Algorithm();
             IJwtEncoder encoder = new JwtEncoder(algorithm, _serializer, _urlEncoder);
 
-            return encoder.Encode(claims, _secret);
+            return Task.FromResult(encoder.Encode(claims, _secret));
         }
 
-        public virtual Dictionary<string, object> ClaimsFromToken(string token)
+        public virtual Task<Dictionary<string, object>> ClaimsFromToken(string token)
         {
             try
             {
@@ -63,7 +64,7 @@ namespace Cosella.Framework.Extensions.Authentication.Default
                 IJwtValidator validator = new JwtValidator(_serializer, provider);
                 IJwtDecoder decoder = new JwtDecoder(_serializer, validator, _urlEncoder);
 
-                return decoder.DecodeToObject<Dictionary<string, object>>(token, _secret, verify: true);
+                return Task.FromResult(decoder.DecodeToObject<Dictionary<string, object>>(token, _secret, verify: true));
             }
             catch (TokenExpiredException)
             {
@@ -77,16 +78,16 @@ namespace Cosella.Framework.Extensions.Authentication.Default
             {
                 _log.Warn("An invalid Token was passed to the decoder");
             }
-            return null;
+            return Task.FromResult(new Dictionary<string, object>());
         }
 
-        public virtual string IdentityFromClaims(Dictionary<string, object> claims)
+        public virtual Task<string> IdentityFromClaims(Dictionary<string, object> claims)
         {
             if (claims == null) return null;
 
-            return claims.ContainsKey("identity")
+            return Task.FromResult(claims.ContainsKey("identity")
                 ? claims["identity"].ToString()
-                : null;
+                : null);
         }
     }
 }

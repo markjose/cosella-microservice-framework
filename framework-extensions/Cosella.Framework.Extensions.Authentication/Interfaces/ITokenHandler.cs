@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Threading.Tasks;
 
 namespace Cosella.Framework.Extensions.Authentication.Interfaces
 {
@@ -6,8 +7,8 @@ namespace Cosella.Framework.Extensions.Authentication.Interfaces
     {
         IEnumerable<AuthenticationTokenSource> TokenSources { get; }
 
-        Dictionary<string, object> ClaimsFromToken(string token);
-        string CreateToken(Dictionary<string, object> claims);
-        string IdentityFromClaims(Dictionary<string, object> claims);
+        Task<Dictionary<string, object>> ClaimsFromToken(string token);
+        Task<string> CreateToken(Dictionary<string, object> claims);
+        Task<string> IdentityFromClaims(Dictionary<string, object> claims);
     }
 }

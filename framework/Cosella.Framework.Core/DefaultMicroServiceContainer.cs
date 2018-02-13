@@ -35,10 +35,15 @@ namespace Cosella.Framework.Core
             {
                 config.UseLog4Net();
 
-                config.SetServiceName(_configuration.ServiceName ?? _defaultConfiguration.ServiceName);
-                config.SetDisplayName(_configuration.ServiceDisplayName ?? _defaultConfiguration.ServiceDisplayName);
-                config.SetInstanceName(_configuration.ServiceInstanceName ?? _defaultConfiguration.ServiceInstanceName);
-                config.SetDescription(_configuration.ServiceDescription ?? _defaultConfiguration.ServiceDescription);
+                if (_configuration.ServiceName == null) _configuration.ServiceName = _defaultConfiguration.ServiceName;
+                if (_configuration.ServiceDisplayName == null) _configuration.ServiceDisplayName = _defaultConfiguration.ServiceDisplayName;
+                if (_configuration.ServiceInstanceName == null) _configuration.ServiceInstanceName = _defaultConfiguration.ServiceInstanceName;
+                if (_configuration.ServiceDescription == null) _configuration.ServiceDescription = _defaultConfiguration.ServiceDescription;
+
+                config.SetServiceName(_configuration.ServiceName);
+                config.SetDisplayName(_configuration.ServiceDisplayName);
+                config.SetInstanceName(_configuration.ServiceInstanceName);
+                config.SetDescription(_configuration.ServiceDescription);
 
                 config.Service<HostedService>(service =>
                 {

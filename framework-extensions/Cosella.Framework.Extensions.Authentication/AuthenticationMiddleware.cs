@@ -27,11 +27,11 @@ namespace Cosella.Framework.Extensions.Authentication
             var token = GetTokenFromRequest(context.Request);
             if (string.IsNullOrWhiteSpace(token) == false)
             {
-                var claims = _tokenHandler.ClaimsFromToken(token);
-                var identity = _tokenHandler.IdentityFromClaims(claims);
+                var claims = await _tokenHandler.ClaimsFromToken(token);
+                var identity = await _tokenHandler.IdentityFromClaims(claims);
                 if (string.IsNullOrWhiteSpace(identity) == false)
                 {
-                    var user = _authenticator.UserFromIdentity(identity);
+                    var user = await _authenticator.UserFromIdentity(identity);
                     if (user != null) context.Authentication.User = PrincipleFromUser(user);
                 }
             }

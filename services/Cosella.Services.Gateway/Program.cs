@@ -34,7 +34,7 @@ namespace Cosella.Services.Gateway
                     config.DisableServiceManager = true;
                 })
                 // Use the built in simple authenticator (inject your IAuthenticator and ITokenHandler here)
-                .WithAuthentication(config =>
+                .WithAuthentication<Authenticator>(config =>
                 {
                     // Turning on the Simple Token controller will give you a token issuing endpoint
                     config.EnableSimpleTokenController = true;

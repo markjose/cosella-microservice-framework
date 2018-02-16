@@ -8,16 +8,16 @@ using System.Web.Http;
 
 namespace Cosella.Framework.Extensions.Authentication.Default
 {
-    [ControllerDependsOn(typeof(IUserManager), typeof(SimpleTokenController))]
+    [ControllerDependsOn(typeof(IAuthenticator), typeof(SimpleTokenController))]
     [RoutePrefix("token")]
     public class SimpleTokenController : RestApiController
     {
-        private IUserManager _users;
+        private IAuthenticator _auth;
         private ITokenHandler _tokens;
 
         public SimpleTokenController(IKernel kernel)
         {
-            _users = kernel.Get<IUserManager>();
+            _auth = kernel.Get<IAuthenticator>();
             _tokens = kernel.Get<ITokenHandler>();
         }
 
@@ -25,7 +25,7 @@ namespace Cosella.Framework.Extensions.Authentication.Default
         [HttpPost]
         public virtual async Task<IHttpActionResult> CreateToken([FromBody] TokenRequest tokenRequest)
         {
-            var user = _users.Authenticate(tokenRequest.Identity, tokenRequest.Secret);
+            var user = await _auth.AuthenticateUser(tokenRequest.Identity, tokenRequest.Secret);
             if (user == null) return Unauthorized();
 
             var claims = new Dictionary<string, object>()

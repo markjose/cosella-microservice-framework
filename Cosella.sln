@@ -42,7 +42,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Documentation", "Documentat
 		documentation\restclient.md = documentation\restclient.md
 	EndProjectSection
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Cosella.Services.MinimumConfig", "Cosella.Services.MinimumConfig\Cosella.Services.MinimumConfig.csproj", "{FC72E1AC-973F-4BEA-9C5F-E6BBE4EFA23B}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Cosella.Services.MinimumConfig", "services\Cosella.Services.MinimumConfig\Cosella.Services.MinimumConfig.csproj", "{FC72E1AC-973F-4BEA-9C5F-E6BBE4EFA23B}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

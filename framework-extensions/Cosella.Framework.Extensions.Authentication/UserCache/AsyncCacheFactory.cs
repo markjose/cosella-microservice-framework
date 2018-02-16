@@ -7,21 +7,21 @@ namespace Cosella.Framework.Extensions.Authentication.UserCache
     public class AsyncCacheFactory : IAsyncCacheFactory
     {
         private readonly Dictionary<Type, object> _caches;
-        private readonly IKernel _kernel;
 
-        public AsyncCacheFactory(IKernel kernel)
+        public AsyncCacheFactory()
         {
             _caches = new Dictionary<Type, object>();
-            _kernel = kernel;
         }
 
-        public IAsyncCache<T> Get<T>()
+        public IAsyncCache<T> Create<T>(
+            Func<IEnumerable<string>, IEnumerable<T>> fetchItemsFunc,
+            Func<T, string> getKeyFunc)
         {
-            if(_caches.TryGetValue(typeof(T), out object cache))
+            if(_caches.TryGetValue(typeof(T), out object cacheObj))
             {
-                return cache as IAsyncCache<T>;
+                return cacheObj as IAsyncCache<T>;
             }
-            cache = _kernel.Get<IAsyncCache<T>>();
+            var cache = new AsyncCache<T>(fetchItemsFunc, getKeyFunc);
             _caches.Add(typeof(T), cache);
 
             return cache as IAsyncCache<T>;

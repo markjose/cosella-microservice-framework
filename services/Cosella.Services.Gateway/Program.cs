@@ -24,8 +24,8 @@ namespace Cosella.Services.Gateway
                     config.RestApiPort = 5000;
 
                     // Turn off service discovery
-                    //config.DisableRegistration = true;
-                    //config.DisableServiceDiscovery = true;
+                    config.DisableRegistration = true;
+                    config.DisableServiceDiscovery = true;
                 })
                 // Use default gateway (No configuration available yet)
                 .WithGateway(config =>

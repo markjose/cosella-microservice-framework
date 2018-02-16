@@ -1,6 +1,8 @@
 ﻿using Cosella.Framework.Extensions.Authentication.Interfaces;
 using Cosella.Framework.Extensions.Authentication.UserCache;
 using Ninject;
+using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -14,7 +16,17 @@ namespace Cosella.Framework.Extensions.Authentication.Default
         public DefaultAuthenticator(IKernel kernel)
         {
             _users = kernel.Get<IUserManager>();
-            _asyncCache = kernel.Get<IAsyncCacheFactory>().Get<IUser>();
+            _asyncCache = kernel.Get<IAsyncCacheFactory>().Create(fetchUsersFunc, getUserKey);
+        }
+
+        private string getUserKey(IUser user)
+        {
+            return user.Identity;
+        }
+
+        private IEnumerable<IUser> fetchUsersFunc(IEnumerable<string> identities)
+        {
+            return identities.Select(i => _users.Get(i));
         }
 
         public virtual Task<bool> AuthenticateInRole(IUser user, string[] roles, dynamic contextData = null)

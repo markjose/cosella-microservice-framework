@@ -4,15 +4,15 @@ using System.Collections.Generic;
 
 namespace Cosella.Framework.Extensions.Authentication.UserCache
 {
-    public class AsyncCache<TResult> where TResult : class, IAsyncCache<TResult>
+    public class AsyncCache<T> : IAsyncCache<T>
     {
         private readonly ConcurrentDictionary<string, AsyncCacheItem> _cache;
-        private readonly Func<IEnumerable<string>, IEnumerable<TResult>> _fetchItemsFunc;
-        private readonly Func<TResult, string> _getKeyFunc;
+        private readonly Func<IEnumerable<string>, IEnumerable<T>> _fetchItemsFunc;
+        private readonly Func<T, string> _getKeyFunc;
 
         public AsyncCache(
-            Func<IEnumerable<string>, IEnumerable<TResult>> fetchItemsFunc,
-            Func<TResult, string> getKeyFunc)
+            Func<IEnumerable<string>, IEnumerable<T>> fetchItemsFunc,
+            Func<T, string> getKeyFunc)
         {
             _cache = new ConcurrentDictionary<string, AsyncCacheItem>();
             _fetchItemsFunc = fetchItemsFunc;
